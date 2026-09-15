@@ -29,6 +29,132 @@
 </head>
 <body class="bg-brandDark text-slate-100 font-sans antialiased">
 
+    <!-- Cookie Consent Banner -->
+    <div id="cookieBanner" class="fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-t-2 border-brandPrimary shadow-2xl transform transition-all duration-300 ease-in-out translate-y-full" style="display: none;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex-1">
+                    <h3 class="text-sm font-bold text-brandPrimary mb-2">🍪 Cookie & Tracking Consent</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        We use cookies and analytics to improve your experience, understand how you use our site, and deliver better content. By clicking "Accept All," you consent to our use of cookies. You can customize your preferences or reject non-essential cookies.
+                    </p>
+                </div>
+                <div class="flex gap-3 flex-shrink-0">
+                    <button id="cookieReject" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-700 text-slate-200 hover:bg-slate-600 transition-colors duration-200 whitespace-nowrap">
+                        Reject All
+                    </button>
+                    <button id="cookieSettings" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-600 text-slate-100 hover:bg-slate-500 transition-colors duration-200 whitespace-nowrap border border-slate-500">
+                        Customize
+                    </button>
+                    <button id="cookieAccept" class="px-4 py-2 text-xs font-semibold rounded-lg bg-gradient-to-r from-brandPrimary to-brandSecondary text-white hover:from-brandPrimary/90 hover:to-brandSecondary/90 transition-colors duration-200 whitespace-nowrap">
+                        Accept All
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Settings Modal -->
+    <div id="cookieModal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 rounded-2xl border-2 border-brandPrimary/50 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div class="sticky top-0 bg-gradient-to-r from-slate-900 to-slate-800 border-b border-brandPrimary/30 p-6 flex items-center justify-between">
+                <div>
+                    <h2 class="text-xl font-bold text-white">Cookie Preferences</h2>
+                    <p class="text-xs text-slate-400 mt-1">Customize which cookies we can use</p>
+                </div>
+                <button id="modalClose" class="text-slate-400 hover:text-white text-2xl font-light transition-colors">
+                    ✕
+                </button>
+            </div>
+
+            <div class="p-6 space-y-6">
+                <!-- Essential Cookies (Always On) -->
+                <div class="bg-slate-800/40 rounded-lg border border-slate-700/60 p-4">
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <h3 class="font-bold text-white text-sm">✓ Essential Cookies</h3>
+                            <p class="text-xs text-slate-400 mt-1">Required for basic site functionality</p>
+                        </div>
+                        <div class="relative inline-flex items-center">
+                            <input type="checkbox" id="essentialToggle" class="sr-only" checked disabled>
+                            <label for="essentialToggle" class="inline-flex items-center cursor-not-allowed bg-brandSuccess/30 rounded-full p-1 w-12">
+                                <span class="inline-block w-5 h-5 transform rounded-full bg-brandSuccess transition-transform duration-200"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400">Session data, security, form processing. These cannot be disabled.</p>
+                </div>
+
+                <!-- Analytics Cookies -->
+                <div class="bg-slate-800/40 rounded-lg border border-slate-700/60 p-4">
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <h3 class="font-bold text-white text-sm">📊 Analytics & Performance</h3>
+                            <p class="text-xs text-slate-400 mt-1">Help us understand how you use our site</p>
+                        </div>
+                        <div class="relative inline-flex items-center">
+                            <input type="checkbox" id="analyticsToggle" class="sr-only" checked>
+                            <label for="analyticsToggle" class="inline-flex items-center cursor-pointer bg-brandPrimary/30 rounded-full p-1 w-12 hover:bg-brandPrimary/40 transition-colors">
+                                <span class="inline-block w-5 h-5 transform rounded-full bg-brandPrimary transition-transform duration-200"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400">Google Analytics, page views, user interactions, performance metrics.</p>
+                </div>
+
+                <!-- Marketing Cookies -->
+                <div class="bg-slate-800/40 rounded-lg border border-slate-700/60 p-4">
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <h3 class="font-bold text-white text-sm">🎯 Marketing & Advertising</h3>
+                            <p class="text-xs text-slate-400 mt-1">Personalize content and ads</p>
+                        </div>
+                        <div class="relative inline-flex items-center">
+                            <input type="checkbox" id="marketingToggle" class="sr-only">
+                            <label for="marketingToggle" class="inline-flex items-center cursor-pointer bg-slate-700/50 rounded-full p-1 w-12 hover:bg-slate-700 transition-colors">
+                                <span class="inline-block w-5 h-5 transform rounded-full bg-slate-600 transition-transform duration-200"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400">Retargeting pixels, affiliate tracking, promotional content optimization.</p>
+                </div>
+
+                <!-- Preferences Cookies -->
+                <div class="bg-slate-800/40 rounded-lg border border-slate-700/60 p-4">
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <h3 class="font-bold text-white text-sm">⚙️ Preferences & Features</h3>
+                            <p class="text-xs text-slate-400 mt-1">Remember your choices and settings</p>
+                        </div>
+                        <div class="relative inline-flex items-center">
+                            <input type="checkbox" id="preferencesToggle" class="sr-only" checked>
+                            <label for="preferencesToggle" class="inline-flex items-center cursor-pointer bg-brandSecondary/30 rounded-full p-1 w-12 hover:bg-brandSecondary/40 transition-colors">
+                                <span class="inline-block w-5 h-5 transform rounded-full bg-brandSecondary transition-transform duration-200"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400">Language preferences, theme settings, saved choices.</p>
+                </div>
+
+                <!-- Privacy Policy Link -->
+                <div class="bg-slate-800/20 rounded-lg border border-slate-700/40 p-4">
+                    <p class="text-xs text-slate-400">
+                        For more details, see our <a href="#" class="text-brandPrimary hover:text-brandPrimary/80 transition-colors underline">Privacy Policy</a> and <a href="#" class="text-brandPrimary hover:text-brandPrimary/80 transition-colors underline">Terms of Service</a>.
+                    </p>
+                </div>
+            </div>
+
+            <div class="sticky bottom-0 bg-gradient-to-r from-slate-900 to-slate-800 border-t border-brandPrimary/30 p-6 flex gap-3 justify-end">
+                <button id="modalReject" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-700 text-slate-200 hover:bg-slate-600 transition-colors duration-200">
+                    Reject All
+                </button>
+                <button id="modalSave" class="px-4 py-2 text-xs font-semibold rounded-lg bg-gradient-to-r from-brandPrimary to-brandSecondary text-white hover:from-brandPrimary/90 hover:to-brandSecondary/90 transition-colors duration-200">
+                    Save Preferences
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- 1. Enhanced Affiliate Disclosure Banner -->
     <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-b-2 border-brandSecondary text-center py-3 px-4 text-xs text-slate-300">
         <p><strong class="text-brandSecondary">⚖️ Advertiser Disclosure:</strong> Sweeps Review Hub is an independent review site. We may receive compensation when you click links or sign up via partners. <strong class="text-brandAccent">18+/21+ Play responsibly.</strong></p>
@@ -339,10 +465,181 @@
                 </div>
             </div>
             <div class="border-t border-slate-800 pt-4 text-center">
-                <p>&copy; 2026 Sweeps Review Hub. All rights reserved.</p>
+                <p>&copy; 2026 Sweeps Review Hub. All rights reserved. <button id="cookiePrefs" class="text-brandPrimary hover:text-brandPrimary/80 transition-colors underline ml-2">Cookie Preferences</button></p>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Cookie Consent Management
+        class CookieConsent {
+            constructor() {
+                this.storageKey = 'sweepsHubCookieConsent';
+                this.banner = document.getElementById('cookieBanner');
+                this.modal = document.getElementById('cookieModal');
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.checkConsent();
+            }
+
+            setupEventListeners() {
+                // Banner buttons
+                document.getElementById('cookieAccept').addEventListener('click', () => this.acceptAll());
+                document.getElementById('cookieReject').addEventListener('click', () => this.rejectAll());
+                document.getElementById('cookieSettings').addEventListener('click', () => this.openModal());
+
+                // Modal buttons
+                document.getElementById('modalClose').addEventListener('click', () => this.closeModal());
+                document.getElementById('modalSave').addEventListener('click', () => this.savePreferences());
+                document.getElementById('modalReject').addEventListener('click', () => this.rejectAll());
+
+                // Footer cookie preferences button
+                document.getElementById('cookiePrefs').addEventListener('click', () => this.openModal());
+
+                // Toggle switches
+                document.getElementById('analyticsToggle').addEventListener('change', (e) => {
+                    this.updateToggleUI(e.target);
+                });
+                document.getElementById('marketingToggle').addEventListener('change', (e) => {
+                    this.updateToggleUI(e.target);
+                });
+                document.getElementById('preferencesToggle').addEventListener('change', (e) => {
+                    this.updateToggleUI(e.target);
+                });
+            }
+
+            updateToggleUI(input) {
+                const label = input.nextElementSibling;
+                const span = label.querySelector('span');
+                if (input.checked) {
+                    label.classList.remove('bg-slate-700/50');
+                    label.classList.add('bg-brandPrimary/30', 'hover:bg-brandPrimary/40');
+                    span.classList.remove('bg-slate-600');
+                    span.classList.add('bg-brandPrimary');
+                } else {
+                    label.classList.add('bg-slate-700/50');
+                    label.classList.remove('bg-brandPrimary/30', 'hover:bg-brandPrimary/40');
+                    span.classList.add('bg-slate-600');
+                    span.classList.remove('bg-brandPrimary');
+                }
+            }
+
+            checkConsent() {
+                const consent = localStorage.getItem(this.storageKey);
+                if (!consent) {
+                    this.showBanner();
+                } else {
+                    this.applyConsent(JSON.parse(consent));
+                }
+            }
+
+            showBanner() {
+                this.banner.style.display = 'block';
+                // Trigger animation
+                setTimeout(() => {
+                    this.banner.style.transform = 'translateY(0)';
+                }, 10);
+            }
+
+            closeBanner() {
+                this.banner.style.transform = 'translateY(100%)';
+                setTimeout(() => {
+                    this.banner.style.display = 'none';
+                }, 300);
+            }
+
+            openModal() {
+                this.modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+
+            closeModal() {
+                this.modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+
+            acceptAll() {
+                const consent = {
+                    analytics: true,
+                    marketing: true,
+                    preferences: true,
+                    timestamp: new Date().toISOString()
+                };
+                this.saveConsent(consent);
+            }
+
+            rejectAll() {
+                const consent = {
+                    analytics: false,
+                    marketing: false,
+                    preferences: false,
+                    timestamp: new Date().toISOString()
+                };
+                this.saveConsent(consent);
+                this.closeModal();
+            }
+
+            savePreferences() {
+                const consent = {
+                    analytics: document.getElementById('analyticsToggle').checked,
+                    marketing: document.getElementById('marketingToggle').checked,
+                    preferences: document.getElementById('preferencesToggle').checked,
+                    timestamp: new Date().toISOString()
+                };
+                this.saveConsent(consent);
+                this.closeModal();
+            }
+
+            saveConsent(consent) {
+                localStorage.setItem(this.storageKey, JSON.stringify(consent));
+                this.applyConsent(consent);
+                this.closeBanner();
+            }
+
+            applyConsent(consent) {
+                // Load analytics only if consent given
+                if (consent.analytics) {
+                    this.loadAnalytics();
+                }
+
+                // Load marketing pixels only if consent given
+                if (consent.marketing) {
+                    this.loadMarketingPixels();
+                }
+
+                // Save preferences
+                if (consent.preferences) {
+                    console.log('Preferences cookies enabled');
+                }
+            }
+
+            loadAnalytics() {
+                // Google Analytics 4 snippet
+                const script = document.createElement('script');
+                script.async = true;
+                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX';
+                document.head.appendChild(script);
+
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-XXXXXXXXXX', { 'anonymize_ip': true });
+            }
+
+            loadMarketingPixels() {
+                console.log('Marketing pixels loaded');
+                // Add your marketing pixel code here
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            new CookieConsent();
+        });
+    </script>
 
 </body>
 </html>
