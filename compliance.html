@@ -3,641 +3,514 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compliance & Responsible Gaming - Sweeps Review Hub</title>
+    <meta name="description" content="Legal compliance information, gambling support resources, and privacy policies for Sweeps Review Hub.">
+    <meta name="keywords" content="compliance, legal, sweepstakes laws, gambling support, responsible gaming, privacy">
+    <title>Compliance & Legal Information - Sweeps Review Hub</title>
+    
+    <!-- Google Analytics 4 (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX', { 'anonymize_ip': true });
+    </script>
+
     <!-- Tailwind CSS CDN -->
-    <script src="https://tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        brandDark: '#08111f',
-                        brandPrimary: '#0ea5e9',
-                        brandSecondary: '#06b6d4',
-                        brandAccent: '#f59e0b',
-                        brandSuccess: '#10b981',
-                        brandWarning: '#ef4444',
-                    },
-                    boxShadow: {
-                        'card': '0 10px 30px rgba(0, 0, 0, 0.3)',
-                        'card-hover': '0 15px 40px rgba(14, 165, 233, 0.15)',
+                        brandDark: '#0f172a',
+                        brandAccent: '#3b82f6',
+                        brandGold: '#f59e0b',
                     }
                 }
             }
         }
     </script>
 </head>
-<body class="bg-brandDark text-slate-100 font-sans antialiased">
+<body class="bg-slate-900 text-slate-100 font-sans antialiased">
 
-    <!-- Cookie Consent Banner -->
-    <div id="cookieBanner" class="fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-t-2 border-brandPrimary shadow-2xl transform transition-all duration-300 ease-in-out translate-y-full" style="display: none;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                <div class="flex-1">
-                    <h3 class="text-sm font-bold text-brandPrimary mb-2">🍪 Cookie & Tracking Consent</h3>
-                    <p class="text-xs text-slate-300 leading-relaxed">
-                        We use cookies and analytics to improve your experience, understand how you use our site, and deliver better content. By clicking "Accept All," you consent to our use of cookies. You can customize your preferences or reject non-essential cookies.
-                    </p>
-                </div>
-                <div class="flex gap-3 flex-shrink-0">
-                    <button id="cookieReject" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-700 text-slate-200 hover:bg-slate-600 transition-colors duration-200 whitespace-nowrap">
-                        Reject All
-                    </button>
-                    <button id="cookieSettings" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-600 text-slate-100 hover:bg-slate-500 transition-colors duration-200 whitespace-nowrap border border-slate-500">
-                        Customize
-                    </button>
-                    <button id="cookieAccept" class="px-4 py-2 text-xs font-semibold rounded-lg bg-gradient-to-r from-brandPrimary to-brandSecondary text-white hover:from-brandPrimary/90 hover:to-brandSecondary/90 transition-colors duration-200 whitespace-nowrap">
-                        Accept All
-                    </button>
-                </div>
-            </div>
-        </div>
+    <!-- 1. Affiliate Disclosure Banner -->
+    <div class="bg-slate-800 border-b border-slate-700 text-center py-2 px-4 text-xs text-slate-400" role="banner">
+        <p><strong>Advertiser Disclosure:</strong> Sweeps Review Hub is an independent review site. We may receive compensation or commissions when you click on links or sign up via our partner platforms. This does not affect our editorial integrity.</p>
     </div>
 
-    <!-- Cookie Settings Modal -->
-    <div id="cookieModal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-slate-900 rounded-2xl border-2 border-brandPrimary/50 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-            <div class="sticky top-0 bg-gradient-to-r from-slate-900 to-slate-800 border-b border-brandPrimary/30 p-6 flex items-center justify-between">
-                <div>
-                    <h2 class="text-xl font-bold text-white">Cookie Preferences</h2>
-                    <p class="text-xs text-slate-400 mt-1">Customize which cookies we can use</p>
-                </div>
-                <button id="modalClose" class="text-slate-400 hover:text-white text-2xl font-light transition-colors">
-                    ✕
-                </button>
-            </div>
-
-            <div class="p-6 space-y-6">
-                <!-- Essential Cookies (Always On) -->
-                <div class="bg-slate-800/40 rounded-lg border border-slate-700/60 p-4">
-                    <div class="flex items-start justify-between mb-3">
-                        <div>
-                            <h3 class="font-bold text-white text-sm">✓ Essential Cookies</h3>
-                            <p class="text-xs text-slate-400 mt-1">Required for basic site functionality</p>
-                        </div>
-                        <div class="relative inline-flex items-center">
-                            <input type="checkbox" id="essentialToggle" class="sr-only" checked disabled>
-                            <label for="essentialToggle" class="inline-flex items-center cursor-not-allowed bg-brandSuccess/30 rounded-full p-1 w-12">
-                                <span class="inline-block w-5 h-5 transform rounded-full bg-brandSuccess transition-transform duration-200"></span>
-                            </label>
-                        </div>
-                    </div>
-                    <p class="text-xs text-slate-400">Session data, security, form processing. These cannot be disabled.</p>
-                </div>
-
-                <!-- Analytics Cookies -->
-                <div class="bg-slate-800/40 rounded-lg border border-slate-700/60 p-4">
-                    <div class="flex items-start justify-between mb-3">
-                        <div>
-                            <h3 class="font-bold text-white text-sm">📊 Analytics & Performance</h3>
-                            <p class="text-xs text-slate-400 mt-1">Help us understand how you use our site</p>
-                        </div>
-                        <div class="relative inline-flex items-center">
-                            <input type="checkbox" id="analyticsToggle" class="sr-only" checked>
-                            <label for="analyticsToggle" class="inline-flex items-center cursor-pointer bg-brandPrimary/30 rounded-full p-1 w-12 hover:bg-brandPrimary/40 transition-colors">
-                                <span class="inline-block w-5 h-5 transform rounded-full bg-brandPrimary transition-transform duration-200"></span>
-                            </label>
-                        </div>
-                    </div>
-                    <p class="text-xs text-slate-400">Google Analytics, page views, user interactions, performance metrics.</p>
-                </div>
-
-                <!-- Marketing Cookies -->
-                <div class="bg-slate-800/40 rounded-lg border border-slate-700/60 p-4">
-                    <div class="flex items-start justify-between mb-3">
-                        <div>
-                            <h3 class="font-bold text-white text-sm">🎯 Marketing & Advertising</h3>
-                            <p class="text-xs text-slate-400 mt-1">Personalize content and ads</p>
-                        </div>
-                        <div class="relative inline-flex items-center">
-                            <input type="checkbox" id="marketingToggle" class="sr-only">
-                            <label for="marketingToggle" class="inline-flex items-center cursor-pointer bg-slate-700/50 rounded-full p-1 w-12 hover:bg-slate-700 transition-colors">
-                                <span class="inline-block w-5 h-5 transform rounded-full bg-slate-600 transition-transform duration-200"></span>
-                            </label>
-                        </div>
-                    </div>
-                    <p class="text-xs text-slate-400">Retargeting pixels, affiliate tracking, promotional content optimization.</p>
-                </div>
-
-                <!-- Preferences Cookies -->
-                <div class="bg-slate-800/40 rounded-lg border border-slate-700/60 p-4">
-                    <div class="flex items-start justify-between mb-3">
-                        <div>
-                            <h3 class="font-bold text-white text-sm">⚙️ Preferences & Features</h3>
-                            <p class="text-xs text-slate-400 mt-1">Remember your choices and settings</p>
-                        </div>
-                        <div class="relative inline-flex items-center">
-                            <input type="checkbox" id="preferencesToggle" class="sr-only" checked>
-                            <label for="preferencesToggle" class="inline-flex items-center cursor-pointer bg-brandSecondary/30 rounded-full p-1 w-12 hover:bg-brandSecondary/40 transition-colors">
-                                <span class="inline-block w-5 h-5 transform rounded-full bg-brandSecondary transition-transform duration-200"></span>
-                            </label>
-                        </div>
-                    </div>
-                    <p class="text-xs text-slate-400">Language preferences, theme settings, saved choices.</p>
-                </div>
-
-                <!-- Privacy Policy Link -->
-                <div class="bg-slate-800/20 rounded-lg border border-slate-700/40 p-4">
-                    <p class="text-xs text-slate-400">
-                        For more details, see our <a href="#" class="text-brandPrimary hover:text-brandPrimary/80 transition-colors underline">Privacy Policy</a> and <a href="#" class="text-brandPrimary hover:text-brandPrimary/80 transition-colors underline">Terms of Service</a>.
-                    </p>
-                </div>
-            </div>
-
-            <div class="sticky bottom-0 bg-gradient-to-r from-slate-900 to-slate-800 border-t border-brandPrimary/30 p-6 flex gap-3 justify-end">
-                <button id="modalReject" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-700 text-slate-200 hover:bg-slate-600 transition-colors duration-200">
-                    Reject All
-                </button>
-                <button id="modalSave" class="px-4 py-2 text-xs font-semibold rounded-lg bg-gradient-to-r from-brandPrimary to-brandSecondary text-white hover:from-brandPrimary/90 hover:to-brandSecondary/90 transition-colors duration-200">
-                    Save Preferences
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 1. Enhanced Affiliate Disclosure Banner -->
-    <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-b-2 border-brandSecondary text-center py-3 px-4 text-xs text-slate-300">
-        <p><strong class="text-brandSecondary">⚖️ Advertiser Disclosure:</strong> Sweeps Review Hub is an independent review site. We may receive compensation when you click links or sign up via partners. <strong class="text-brandAccent">18+/21+ Play responsibly.</strong></p>
-    </div>
-
-    <!-- 2. Enhanced Navigation Bar -->
-    <nav class="bg-brandDark border-b border-slate-800 sticky top-0 z-50 backdrop-blur-sm bg-opacity-95">
+    <!-- 2. Navigation Bar -->
+    <nav class="bg-slate-900 border-b border-slate-800 sticky top-0 z-40" aria-label="Main navigation">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <div class="flex items-center gap-3">
-                    <div class="text-3xl font-bold">
-                        <span class="bg-gradient-to-r from-brandPrimary via-brandSecondary to-brandAccent bg-clip-text text-transparent">⚖️</span>
-                        <a href="index.html" class="bg-gradient-to-r from-brandPrimary to-brandSecondary bg-clip-text text-transparent ml-2 inline">Sweeps Review Hub</a>
-                    </div>
+                <div class="flex items-center gap-2">
+                    <a href="index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-500 to-amber-500 bg-clip-text text-transparent hover:opacity-80 transition-opacity">Sweeps Review Hub</a>
                 </div>
-                <div class="flex space-x-8 text-sm font-medium">
-                    <a href="index.html" class="text-slate-400 hover:text-brandPrimary transition-colors duration-200 flex items-center gap-2">
-                        ← Back to Home
-                    </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
+                    <a href="index.html#reviews" class="hover:text-blue-500 transition-colors">Casino Reviews</a>
+                    <a href="index.html#how-it-works" class="hover:text-blue-500 transition-colors">How It Works</a>
+                    <a href="#legal-framework" class="hover:text-blue-500 transition-colors">Legal Framework</a>
+                    <a href="#responsible-gaming" class="hover:text-blue-500 transition-colors">Support Resources</a>
                 </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-slate-300 hover:text-blue-500 transition-colors" aria-label="Toggle mobile menu" aria-expanded="false" id="mobileMenuBtn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div id="mobileMenu" class="hidden md:hidden pb-4 space-y-2">
+                <a href="index.html#reviews" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">Casino Reviews</a>
+                <a href="index.html#how-it-works" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">How It Works</a>
+                <a href="#legal-framework" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">Legal Framework</a>
+                <a href="#responsible-gaming" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">Support Resources</a>
             </div>
         </div>
     </nav>
 
-    <!-- 3. Enhanced Page Header with Gradient -->
+    <!-- 3. Page Header -->
     <header class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
-        <div class="space-y-2">
-            <div class="flex items-center gap-2">
-                <span class="text-4xl">🛡️</span>
-                <h1 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-                    Legal Disclosures & <span class="bg-gradient-to-r from-brandPrimary to-brandSecondary bg-clip-text text-transparent">Responsible Gaming</span>
-                </h1>
-            </div>
-            <p class="text-slate-400 text-lg max-w-2xl">Your comprehensive guide to safe, informed sweepstakes participation with full transparency and support resources.</p>
-        </div>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
+            Compliance & <span class="text-amber-500">Legal Information</span>
+        </h1>
+        <p class="text-lg text-slate-400 max-w-2xl">
+            Comprehensive legal disclosures, regulatory frameworks, privacy policies, and gambling support resources for Sweeps Review Hub users.
+        </p>
     </header>
 
-    <!-- 4. Main Content Framework -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        <!-- Left & Center Columns: Legal Sections -->
-        <div class="lg:col-span-2 space-y-8">
-            
-            <!-- Section 1: Comprehensive Advertiser Disclosure -->
-            <section id="advertiser-disclosure" class="group">
-                <div class="bg-gradient-to-br from-slate-800/80 to-slate-900/60 rounded-2xl border-2 border-brandSecondary/30 p-6 md:p-8 space-y-5 shadow-card hover:shadow-card-hover transition-all duration-300 hover:border-brandSecondary/60">
-                    <div class="flex items-start gap-3">
-                        <div class="text-3xl flex-shrink-0 mt-1">📢</div>
-                        <div class="flex-1">
-                            <h2 class="text-2xl font-bold text-white mb-4">Full Advertiser Disclosure</h2>
-                            <div class="space-y-4">
-                                <p class="text-sm text-slate-300 leading-relaxed">
-                                    Sweeps Review Hub functions strictly as an <strong class="text-brandPrimary">independent, authority-driven digital review directory</strong>. This platform provides objective informational overviews, gameplay analysis, and bonus evaluation matrices for US sweepstakes and social gaming applications.
-                                </p>
-                                
-                                <div class="bg-slate-900/70 rounded-lg border-l-4 border-brandAccent p-4">
-                                    <h3 class="text-sm font-bold text-brandAccent mb-2">💰 Commission Framework</h3>
-                                    <p class="text-xs text-slate-300 leading-relaxed">
-                                        To maintain entirely free consumer availability and eliminate user fees, we participate in affiliate performance networks. When visitors click "Play Now" buttons, register accounts, or engage in promotional activities on external sites, we receive direct marketing compensation from operators.
-                                    </p>
-                                </div>
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-                                <div class="bg-slate-900/70 rounded-lg border-l-4 border-brandSuccess p-4">
-                                    <h3 class="text-sm font-bold text-brandSuccess mb-2">✓ Editorial Independence</h3>
-                                    <p class="text-xs text-slate-300 leading-relaxed">
-                                        While compensation influences placement sequence in our comparison grids, it does not impact factual accuracy (game availability, terms compliance, payout structures). We actively decline partnerships with operators who fail to honor regional entry methods or player verification standards.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Section 2: Responsible Social Gaming Framework -->
-            <section id="responsible-gaming" class="group">
-                <div class="space-y-6">
-                    <div class="bg-gradient-to-br from-slate-800/80 to-slate-900/60 rounded-2xl border-2 border-brandPrimary/30 p-6 md:p-8 space-y-6 shadow-card hover:shadow-card-hover transition-all duration-300 hover:border-brandPrimary/60">
-                        <div class="flex items-start gap-3">
-                            <div class="text-3xl flex-shrink-0 mt-1">🛡️</div>
-                            <div class="flex-1">
-                                <h2 class="text-2xl font-bold text-white mb-2">Responsible Social Gaming Standards</h2>
-                                <p class="text-sm text-slate-300 leading-relaxed">
-                                    Social gaming and sweepstakes platforms are structured exclusively for <strong class="text-brandSecondary">casual recreational amusement</strong>. Because these systems deploy a <strong class="text-brandAccent">"No Purchase Necessary"</strong> distribution model, players should leverage free daily allocation tools as their primary interactive route.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Self-Assessment Checklist -->
-                    <div class="bg-gradient-to-br from-brandWarning/10 to-brandAccent/5 rounded-2xl border-2 border-brandWarning/30 p-6 md:p-8 space-y-4 shadow-card">
-                        <div class="flex items-center gap-2 mb-4">
-                            <span class="text-2xl">❓</span>
-                            <h3 class="text-lg font-bold text-white">Self-Evaluation Checklist</h3>
-                        </div>
-                        <p class="text-xs text-slate-300 mb-4">Ask yourself these questions to maintain healthy gaming habits:</p>
-                        <ul class="space-y-3">
-                            <li class="flex gap-3 text-sm text-slate-300">
-                                <span class="text-brandWarning">✕</span>
-                                <span>Do you engage with social coins to escape interpersonal tension or daily stress?</span>
-                            </li>
-                            <li class="flex gap-3 text-sm text-slate-300">
-                                <span class="text-brandWarning">✕</span>
-                                <span>Are you bypassing daily log-in bonuses in favor of continuous optional pack purchases?</span>
-                            </li>
-                            <li class="flex gap-3 text-sm text-slate-300">
-                                <span class="text-brandWarning">✕</span>
-                                <span>Is your session duration exceeding your predetermined recreational time budget limits?</span>
-                            </li>
-                            <li class="flex gap-3 text-sm text-slate-300">
-                                <span class="text-brandWarning">✕</span>
-                                <span>Are you spending money you hadn't budgeted for gaming activities?</span>
-                            </li>
-                        </ul>
-                        <div class="mt-4 p-3 bg-brandWarning/20 rounded-lg border border-brandWarning/40">
-                            <p class="text-xs text-brandWarning font-semibold">💡 If you answered yes to any of these, consider reaching out to support resources below.</p>
-                        </div>
-                    </div>
-
-                    <!-- Practical Management Protocols -->
-                    <div class="space-y-4">
-                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                            <span class="text-2xl">⚙️</span> Practical Management Protocols
-                        </h3>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <!-- Protocol Card 1 -->
-                            <div class="bg-gradient-to-br from-slate-800/60 to-slate-900/40 rounded-xl border-2 border-brandPrimary/40 p-5 hover:border-brandPrimary/70 transition-all duration-300 shadow-card hover:shadow-card-hover">
-                                <div class="flex items-start gap-3 mb-3">
-                                    <span class="text-2xl flex-shrink-0">⏱️</span>
-                                    <h4 class="font-bold text-white text-sm">Session Auditing</h4>
-                                </div>
-                                <p class="text-xs text-slate-300 leading-relaxed">
-                                    Set separate reminders or system timers before launching an interactive profile to track total active screen engagement time. Consider using device-native parental controls to enforce hard limits.
-                                </p>
-                            </div>
-
-                            <!-- Protocol Card 2 -->
-                            <div class="bg-gradient-to-br from-slate-800/60 to-slate-900/40 rounded-xl border-2 border-brandSecondary/40 p-5 hover:border-brandSecondary/70 transition-all duration-300 shadow-card hover:shadow-card-hover">
-                                <div class="flex items-start gap-3 mb-3">
-                                    <span class="text-2xl flex-shrink-0">🚫</span>
-                                    <h4 class="font-bold text-white text-sm">Voluntary Exclusion</h4>
-                                </div>
-                                <p class="text-xs text-slate-300 leading-relaxed">
-                                    Every verified operator provides user dashboards supporting purchase caps, cooling-off blocks, or permanent profile locks. Use these tools proactively if you notice unhealthy patterns.
-                                </p>
-                            </div>
-
-                            <!-- Protocol Card 3 -->
-                            <div class="bg-gradient-to-br from-slate-800/60 to-slate-900/40 rounded-xl border-2 border-brandSuccess/40 p-5 hover:border-brandSuccess/70 transition-all duration-300 shadow-card hover:shadow-card-hover">
-                                <div class="flex items-start gap-3 mb-3">
-                                    <span class="text-2xl flex-shrink-0">💳</span>
-                                    <h4 class="font-bold text-white text-sm">Budget Management</h4>
-                                </div>
-                                <p class="text-xs text-slate-300 leading-relaxed">
-                                    Set a monthly spending limit before you begin playing. Never chase losses, and treat any money spent as gone. Use prepaid cards to enforce hard spending caps.
-                                </p>
-                            </div>
-
-                            <!-- Protocol Card 4 -->
-                            <div class="bg-gradient-to-br from-slate-800/60 to-slate-900/40 rounded-xl border-2 border-brandAccent/40 p-5 hover:border-brandAccent/70 transition-all duration-300 shadow-card hover:shadow-card-hover">
-                                <div class="flex items-start gap-3 mb-3">
-                                    <span class="text-2xl flex-shrink-0">👥</span>
-                                    <h4 class="font-bold text-white text-sm">Support & Accountability</h4>
-                                </div>
-                                <p class="text-xs text-slate-300 leading-relaxed">
-                                    Tell trusted friends or family about your gaming habits. Peer accountability and regular check-ins can help maintain healthy boundaries and prevent problem gambling.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Section 3: Warning Signs -->
-            <section id="warning-signs" class="group">
-                <div class="bg-gradient-to-br from-brandWarning/15 to-brandAccent/10 rounded-2xl border-2 border-brandWarning/40 p-6 md:p-8 space-y-5 shadow-card">
-                    <div class="flex items-start gap-3">
-                        <div class="text-3xl flex-shrink-0">⚠️</div>
-                        <div class="flex-1">
-                            <h2 class="text-2xl font-bold text-white mb-4">Warning Signs to Watch For</h2>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                <div class="flex gap-2 text-sm text-slate-300">
-                                    <span class="text-brandWarning">✕</span>
-                                    <span>Thinking about gambling constantly</span>
-                                </div>
-                                <div class="flex gap-2 text-sm text-slate-300">
-                                    <span class="text-brandWarning">✕</span>
-                                    <span>Increasing amounts of time/money spent</span>
-                                </div>
-                                <div class="flex gap-2 text-sm text-slate-300">
-                                    <span class="text-brandWarning">✕</span>
-                                    <span>Lying to friends or family about habits</span>
-                                </div>
-                                <div class="flex gap-2 text-sm text-slate-300">
-                                    <span class="text-brandWarning">✕</span>
-                                    <span>Chasing losses with larger bets</span>
-                                </div>
-                                <div class="flex gap-2 text-sm text-slate-300">
-                                    <span class="text-brandWarning">✕</span>
-                                    <span>Neglecting work, school, or relationships</span>
-                                </div>
-                                <div class="flex gap-2 text-sm text-slate-300">
-                                    <span class="text-brandWarning">✕</span>
-                                    <span>Using gambling to escape problems</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <!-- Table of Contents -->
+        <div class="bg-slate-800/40 border border-slate-700 rounded-lg p-6 mb-12">
+            <h2 class="text-xl font-bold text-white mb-4">Quick Navigation</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <a href="#legal-disclaimer" class="text-blue-400 hover:text-blue-300 underline flex items-center">
+                    <span class="mr-2">→</span> Legal Disclaimer
+                </a>
+                <a href="#sweepstakes-laws" class="text-blue-400 hover:text-blue-300 underline flex items-center">
+                    <span class="mr-2">→</span> Sweepstakes Laws & Regulations
+                </a>
+                <a href="#no-purchase-necessary" class="text-blue-400 hover:text-blue-300 underline flex items-center">
+                    <span class="mr-2">→</span> No-Purchase-Necessary Structure
+                </a>
+                <a href="#state-specific" class="text-blue-400 hover:text-blue-300 underline flex items-center">
+                    <span class="mr-2">→</span> State-Specific Guidelines
+                </a>
+                <a href="#responsible-gaming" class="text-blue-400 hover:text-blue-300 underline flex items-center">
+                    <span class="mr-2">→</span> Responsible Gaming Resources
+                </a>
+                <a href="#privacy-cookies" class="text-blue-400 hover:text-blue-300 underline flex items-center">
+                    <span class="mr-2">→</span> Privacy & Cookies Policy
+                </a>
+            </div>
         </div>
 
-        <!-- Right Column: Support Resources Sidebar -->
-        <div class="space-y-6">
+        <!-- Section 1: Legal Disclaimer -->
+        <section id="legal-disclaimer" class="mb-12">
+            <h2 class="text-3xl font-bold text-white mb-6 border-l-4 border-blue-500 pl-4">Legal Disclaimer</h2>
             
-            <!-- Immediate Help Assets Card - Primary -->
-            <div class="sticky top-20">
-                <div class="bg-gradient-to-br from-brandPrimary/20 to-brandSecondary/10 rounded-2xl border-2 border-brandPrimary/50 p-6 shadow-card space-y-5">
-                    <div class="border-b border-brandPrimary/30 pb-3">
-                        <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                            <span class="text-2xl">🆘</span> Need Help?
-                        </h2>
-                        <p class="text-xs text-slate-300 mt-2 leading-relaxed">
-                            Independent support resources available 24/7. Free, confidential, and judgment-free.
-                        </p>
-                    </div>
-                    
-                    <div class="space-y-3">
-                        <!-- Resource 1 -->
-                        <a href="https://ncpgambling.org" target="_blank" rel="noopener" class="block p-4 bg-slate-900/70 rounded-xl border-l-4 border-brandAccent hover:bg-slate-800/80 transition-all duration-200 group/resource">
-                            <span class="text-sm font-bold text-brandAccent block mb-1 group-hover/resource:text-amber-300 transition-colors">National Council on Problem Gambling</span>
-                            <p class="text-[11px] text-slate-400 mb-2">Domestic US Support Network</p>
-                            <span class="text-xs text-brandPrimary underline">www.ncpgambling.org →</span>
-                        </a>
-                        
-                        <!-- Resource 2 -->
-                        <a href="https://gambleaware.org" target="_blank" rel="noopener" class="block p-4 bg-slate-900/70 rounded-xl border-l-4 border-brandSecondary hover:bg-slate-800/80 transition-all duration-200 group/resource">
-                            <span class="text-sm font-bold text-brandSecondary block mb-1 group-hover/resource:text-cyan-300 transition-colors">GambleAware Portal</span>
-                            <p class="text-[11px] text-slate-400 mb-2">Global Treatment & Analysis</p>
-                            <span class="text-xs text-brandPrimary underline">www.gambleaware.org →</span>
-                        </a>
+            <div class="space-y-4 text-slate-400">
+                <div class="bg-slate-800/40 border border-slate-700 rounded-lg p-6">
+                    <h3 class="font-bold text-blue-400 mb-3 text-lg">General Information</h3>
+                    <p class="mb-3">Sweeps Review Hub ("we," "us," "our," or the "Site") is an informational resource that provides independent reviews and educational content about social gaming platforms and sweepstakes. We do not provide legal advice, gambling advice, or financial recommendations.</p>
+                    <p class="mb-3"><strong>Important:</strong> The content on this website is for informational purposes only. We are not lawyers, accountants, or financial advisors. Always consult qualified professionals regarding your specific circumstances.</p>
+                </div>
 
-                        <!-- Resource 3 -->
-                        <a href="https://www.samhsa.gov/find-help/national-helpline" target="_blank" rel="noopener" class="block p-4 bg-slate-900/70 rounded-xl border-l-4 border-brandSuccess hover:bg-slate-800/80 transition-all duration-200 group/resource">
-                            <span class="text-sm font-bold text-brandSuccess block mb-1 group-hover/resource:text-emerald-300 transition-colors">SAMHSA National Helpline</span>
-                            <p class="text-[11px] text-slate-400 mb-2">1-800-662-4357 (Free & Confidential)</p>
-                            <span class="text-xs text-brandPrimary underline">Available 24/7 →</span>
-                        </a>
+                <div class="bg-slate-800/40 border border-slate-700 rounded-lg p-6">
+                    <h3 class="font-bold text-amber-400 mb-3 text-lg">Affiliate Relationships & Compensation</h3>
+                    <p class="mb-3">Sweeps Review Hub may earn affiliate commissions when you click on links or complete sign-up forms for featured platforms. This compensation does not influence our editorial opinions, reviews, or recommendations.</p>
+                    <p><strong>Transparency:</strong> All affiliate relationships are disclosed. Your decision to use our links is entirely voluntary and does not affect the content quality or independence of our reviews.</p>
+                </div>
+
+                <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-6 mt-4">
+                    <h3 class="font-bold text-red-400 mb-3 text-lg">⚠️ No Guarantee of Outcomes</h3>
+                    <p>Sweeps Review Hub does not guarantee specific outcomes, winnings, bonuses, or redemption success on any platform. All gaming results are determined by chance and platform algorithms. Use social casinos strictly for entertainment purposes. Sweeps Review Hub is not responsible for any losses, legal issues, or consequences resulting from your use of social gaming platforms.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Sweepstakes Laws & Regulations -->
+        <section id="sweepstakes-laws" class="mb-12">
+            <h2 class="text-3xl font-bold text-white mb-6 border-l-4 border-blue-500 pl-4">Sweepstakes Laws & Regulations</h2>
+            
+            <div class="space-y-4 text-slate-400">
+                <div class="bg-slate-800/40 border border-slate-700 rounded-lg p-6">
+                    <h3 class="font-bold text-blue-400 mb-3 text-lg">Federal Framework</h3>
+                    <p className="mb-3">In the United States, sweepstakes are regulated at both federal and state levels. Social casinos operating in the US typically rely on the "no-purchase-necessary" legal framework, which allows players to participate without making purchases through alternative entry methods.</p>
+                    <ul class="list-disc list-inside space-y-2 ml-2">
+                        <li><strong>FTC Regulations:</strong> Federal Trade Commission oversees sweepstakes advertising and promotional practices</li>
+                        <li><strong>No Consideration Rule:</strong> Legitimate sweepstakes allow free entry without purchase requirements</li>
+                        <li><strong>Clear Odds Disclosure:</strong> Platforms must disclose odds of winning and official rules</li>
+                        <li><strong>Age Restrictions:</strong> Sweepstakes participation typically requires 18+ years of age (21+ in some states)</li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-800/40 border border-slate-700 rounded-lg p-6">
+                    <h3 class="font-bold text-emerald-400 mb-3 text-lg">State Regulations</h3>
+                    <p class="mb-3">Sweepstakes laws vary significantly by state. Some states have more restrictive regulations than others. Always verify your state's specific requirements before participating in any sweepstakes or social casino gaming.</p>
+                    <p class="text-sm text-slate-500 italic">Note: Several states including Washington, Idaho, and Nevada have more restrictive approaches to certain types of social gaming. Consult your state's gaming commission for current regulations.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: No-Purchase-Necessary Structure -->
+        <section id="no-purchase-necessary" class="mb-12">
+            <h2 class="text-3xl font-bold text-white mb-6 border-l-4 border-blue-500 pl-4">No-Purchase-Necessary Structure</h2>
+            
+            <div class="space-y-4 text-slate-400">
+                <div class="bg-slate-800/40 border border-slate-700 rounded-lg p-6">
+                    <h3 class="font-bold text-blue-400 mb-4 text-lg">How It Works</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-slate-900/50 p-4 rounded border border-slate-700">
+                            <h4 class="font-bold text-blue-300 mb-2">Gold Coins</h4>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Non-redeemable</li>
+                                <li>Entertainment only</li>
+                                <li>Earned through gameplay</li>
+                                <li>No real-money value</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-900/50 p-4 rounded border border-slate-700">
+                            <h4 class="font-bold text-amber-300 mb-2">Sweeps Coins</h4>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Redeemable for prizes</li>
+                                <li>Free-entry method</li>
+                                <li>Earned through gameplay/bonuses</li>
+                                <li>Represents sweepstakes entries</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Regional Compliance Card -->
-                <div class="bg-slate-800/40 rounded-2xl border-2 border-slate-700/60 p-5 mt-6 space-y-3">
-                    <h3 class="font-bold text-slate-300 uppercase tracking-wider text-xs flex items-center gap-2">
-                        <span class="text-lg">📋</span> Verification Parameters
-                    </h3>
-                    <ul class="space-y-2 text-xs text-slate-400 leading-relaxed">
-                        <li class="flex gap-2">
-                            <span class="text-brandSecondary flex-shrink-0">✓</span>
-                            <span>No downloadable software clients distributed</span>
+                <div class="bg-slate-800/40 border border-slate-700 rounded-lg p-6">
+                    <h3 class="font-bold text-emerald-400 mb-3 text-lg">Legal Compliance Requirements</h3>
+                    <p class="mb-3">Platforms using this structure must comply with:</p>
+                    <ul class="space-y-2 ml-4 text-sm">
+                        <li class="flex items-start">
+                            <span class="text-emerald-400 mr-3">✓</span>
+                            <span><strong>Clear Disclosure:</strong> Explicitly state that sweepstakes are free-entry and no purchase is necessary</span>
                         </li>
-                        <li class="flex gap-2">
-                            <span class="text-brandSecondary flex-shrink-0">✓</span>
-                            <span>No currency exchanges facilitated</span>
+                        <li class="flex items-start">
+                            <span class="text-emerald-400 mr-3">✓</span>
+                            <span><strong>Official Rules:</strong> Provide comprehensive official rules accessible to all players</span>
                         </li>
-                        <li class="flex gap-2">
-                            <span class="text-brandSecondary flex-shrink-0">✓</span>
-                            <span>Secondary age validation (18+/21+) required</span>
+                        <li class="flex items-start">
+                            <span class="text-emerald-400 mr-3">✓</span>
+                            <span><strong>Odds Publication:</strong> Clearly display odds of winning prizes</span>
                         </li>
-                        <li class="flex gap-2">
-                            <span class="text-brandSecondary flex-shrink-0">✓</span>
-                            <span>US residence verification enforced</span>
+                        <li class="flex items-start">
+                            <span class="text-emerald-400 mr-3">✓</span>
+                            <span><strong>Age Verification:</strong> Implement robust age verification (18+ or 21+ depending on state)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-emerald-400 mr-3">✓</span>
+                            <span><strong>Geographic Restrictions:</strong> Block access from restricted states and enforce state-specific limitations</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: State-Specific Guidelines -->
+        <section id="state-specific" class="mb-12">
+            <h2 class="text-3xl font-bold text-white mb-6 border-l-4 border-blue-500 pl-4">State-Specific Guidelines</h2>
+            
+            <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-6 mb-6">
+                <p class="text-blue-300 font-semibold">⚠️ Important:</p>
+                <p class="text-sm text-slate-400 mt-2">Sweepstakes regulations are constantly evolving. We recommend checking your state's gaming commission website for the most current regulations. The information below is general guidance and not legal advice.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-slate-800/40 border border-slate-700 rounded-lg p-6">
+                    <h3 class="font-bold text-green-400 mb-3">Generally Favorable States</h3>
+                    <p class="text-sm text-slate-400 mb-3">These states typically allow social casino gaming with clear no-purchase-necessary structures:</p>
+                    <ul class="space-y-1 text-sm text-slate-400 ml-2">
+                        <li>• California</li>
+                        <li>• Texas</li>
+                        <li>• Florida</li>
+                        <li>• New York</li>
+                        <li>• Pennsylvania</li>
+                        <li>• Ohio</li>
+                        <li>• Virginia</li>
+                        <li>• Most other states</li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-800/40 border border-slate-700 rounded-lg p-6">
+                    <h3 class="font-bold text-red-400 mb-3">Restricted States</h3>
+                    <p class="text-sm text-slate-400 mb-3">These states have more restrictive regulations. Social casino access may be limited or prohibited:</p>
+                    <ul class="space-y-1 text-sm text-slate-400 ml-2">
+                        <li>• Washington State</li>
+                        <li>• Idaho</li>
+                        <li>• Nevada (restricted)</li>
+                        <li>• Connecticut (restricted)</li>
+                        <li>• New Jersey (specific rules)</li>
+                        <li>• West Virginia</li>
+                        <li>• Maryland</li>
+                        <li>• Check current status</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-slate-800/40 border border-slate-700 rounded-lg p-6 mt-6">
+                <h3 class="font-bold text-blue-400 mb-3 text-lg">Verification Resources</h3>
+                <p class="text-sm text-slate-400 mb-3">To verify regulations for your specific state:</p>
+                <ul class="space-y-2 text-sm">
+                    <li>• Visit your state's Gaming Commission or Attorney General website</li>
+                    <li>• Contact the state consumer protection office</li>
+                    <li>• Review platform-specific terms for state availability</li>
+                    <li>• Consult with a local attorney if needed</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 5: Responsible Gaming Resources -->
+        <section id="responsible-gaming" class="mb-12">
+            <h2 class="text-3xl font-bold text-white mb-6 border-l-4 border-blue-500 pl-4">Responsible Gaming Resources & Support</h2>
+            
+            <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-6 mb-6">
+                <h3 class="font-bold text-red-400 mb-3 text-lg">⚠️ If You're Struggling with Gaming</h3>
+                <p class="text-sm text-slate-300 mb-4">
+                    If you or someone you know is struggling with gaming habits, please reach out to one of these confidential resources immediately. Help is available 24/7.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-slate-800 border border-slate-700 rounded-lg p-6">
+                    <h3 class="font-bold text-blue-400 mb-4">National Helplines</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-white">National Council on Problem Gambling (NCPG)</h4>
+                            <p class="text-amber-400 font-semibold text-lg mb-1">1-800-522-4700</p>
+                            <p class="text-xs text-slate-400">24/7 • Free • Confidential • Multilingual</p>
+                            <a href="https://www.ncpgambling.org/" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 underline text-sm">Visit NCPG →</a>
+                        </div>
+                        <div class="border-t border-slate-700 pt-4">
+                            <h4 class="font-bold text-white">SAMHSA National Helpline</h4>
+                            <p class="text-amber-400 font-semibold text-lg mb-1">1-800-662-4357</p>
+                            <p class="text-xs text-slate-400">24/7 • Free • Confidential • Addiction Support</p>
+                            <a href="https://www.samhsa.gov/" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 underline text-sm">Visit SAMHSA →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 border border-slate-700 rounded-lg p-6">
+                    <h3 class="font-bold text-emerald-400 mb-4">International & Online Resources</h3>
+                    <div class="space-y-3">
+                        <a href="https://www.gambleaware.org/" target="_blank" rel="noopener noreferrer" class="block hover:bg-slate-700/50 p-3 rounded transition-colors">
+                            <h4 class="font-bold text-white">GambleAware (UK-based, Global Resources)</h4>
+                            <p class="text-xs text-slate-400">Comprehensive gambling support information and tools</p>
+                        </a>
+                        <a href="https://www.gamcare.org.uk/" target="_blank" rel="noopener noreferrer" class="block hover:bg-slate-700/50 p-3 rounded transition-colors">
+                            <h4 class="font-bold text-white">GamCare</h4>
+                            <p class="text-xs text-slate-400">Counseling and support services for problem gambling</p>
+                        </a>
+                        <a href="https://www.ncadd.org/" target="_blank" rel="noopener noreferrer" class="block hover:bg-slate-700/50 p-3 rounded transition-colors">
+                            <h4 class="font-bold text-white">NCADD - Addiction Support</h4>
+                            <p class="text-xs text-slate-400">National Council on Alcoholism and Drug Dependence</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-800/40 border border-slate-700 rounded-lg p-6">
+                <h3 class="font-bold text-blue-400 mb-4 text-lg">Responsible Gaming Practices</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-slate-900/50 p-4 rounded border border-slate-700">
+                        <h4 class="font-bold text-amber-300 mb-3">✓ Set Limits</h4>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Set time limits for gameplay</li>
+                            <li>• Establish spending boundaries</li>
+                            <li>• Use platform limit tools if available</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-900/50 p-4 rounded border border-slate-700">
+                        <h4 class="font-bold text-emerald-300 mb-3">✓ Track Activity</h4>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Monitor gameplay hours</li>
+                            <li>• Track wins and losses</li>
+                            <li>• Review spending regularly</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-900/50 p-4 rounded border border-slate-700">
+                        <h4 class="font-bold text-blue-300 mb-3">✓ Take Breaks</h4>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Schedule regular breaks</li>
+                            <li>• Don't play when stressed</li>
+                            <li>• Balance gaming with other activities</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-900/50 p-4 rounded border border-slate-700">
+                        <h4 class="font-bold text-pink-300 mb-3">✓ Seek Support</h4>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Talk to trusted friends/family</li>
+                            <li>• Use professional counseling</li>
+                            <li>• Contact helplines if struggling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Privacy & Cookies Policy -->
+        <section id="privacy-cookies" class="mb-12">
+            <h2 class="text-3xl font-bold text-white mb-6 border-l-4 border-blue-500 pl-4">Privacy & Cookies Policy</h2>
+            
+            <div class="space-y-4 text-slate-400">
+                <div class="bg-slate-800/40 border border-slate-700 rounded-lg p-6">
+                    <h3 class="font-bold text-blue-400 mb-3 text-lg">Information We Collect</h3>
+                    <p class="mb-3">Sweeps Review Hub may collect the following information:</p>
+                    <ul class="space-y-2 ml-4 text-sm">
+                        <li class="flex items-start">
+                            <span class="text-blue-400 mr-3">•</span>
+                            <span><strong>Usage Data:</strong> Pages visited, time spent, clicks, referral sources</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-400 mr-3">•</span>
+                            <span><strong>Device Information:</strong> Browser type, IP address, device type, operating system</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-400 mr-3">•</span>
+                            <span><strong>Cookie Data:</strong> Tracking and personalization cookies (with consent)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-400 mr-3">•</span>
+                            <span><strong>Analytics Data:</strong> Google Analytics tracking for site improvement</span>
                         </li>
                     </ul>
                 </div>
 
-                <!-- Quick Stats -->
-                <div class="grid grid-cols-2 gap-3 mt-6">
-                    <div class="bg-slate-800/40 rounded-xl border border-slate-700/60 p-4 text-center">
-                        <div class="text-2xl font-bold text-brandPrimary">24/7</div>
-                        <p class="text-xs text-slate-400 mt-1">Support Available</p>
-                    </div>
-                    <div class="bg-slate-800/40 rounded-xl border border-slate-700/60 p-4 text-center">
-                        <div class="text-2xl font-bold text-brandSuccess">100%</div>
-                        <p class="text-xs text-slate-400 mt-1">Confidential</p>
-                    </div>
+                <div class="bg-slate-800/40 border border-slate-700 rounded-lg p-6">
+                    <h3 class="font-bold text-emerald-400 mb-3 text-lg">Cookie Usage</h3>
+                    <p class="mb-3">We use cookies to:</p>
+                    <ul class="space-y-2 ml-4 text-sm">
+                        <li>• Remember user preferences and settings</li>
+                        <li>• Analyze site traffic and user behavior</li>
+                        <li>• Improve website functionality and experience</li>
+                        <li>• Track marketing campaign performance</li>
+                        <li>• Comply with user consent preferences</li>
+                    </ul>
+                    <p class="mt-4 text-sm"><strong>Cookie Consent:</strong> We respect your privacy choices. You can accept or decline cookies via our cookie consent banner on first visit.</p>
+                </div>
+
+                <div class="bg-slate-800/40 border border-slate-700 rounded-lg p-6">
+                    <h3 class="font-bold text-amber-400 mb-3 text-lg">Third-Party Services</h3>
+                    <p class="mb-3">Sweeps Review Hub uses third-party services that may collect data:</p>
+                    <ul class="space-y-2 ml-4 text-sm">
+                        <li><strong>Google Analytics:</strong> Site traffic analysis and user behavior tracking</li>
+                        <li><strong>Affiliate Networks:</strong> Commission tracking for partner links</li>
+                        <li><strong>CDN Services:</strong> Tailwind CSS and content delivery networks</li>
+                    </ul>
+                    <p class="mt-4 text-xs text-slate-500">These services have their own privacy policies. We recommend reviewing them.</p>
+                </div>
+
+                <div class="bg-slate-800/40 border border-slate-700 rounded-lg p-6">
+                    <h3 class="font-bold text-blue-400 mb-3 text-lg">Your Privacy Rights</h3>
+                    <p class="mb-3">You have the right to:</p>
+                    <ul class="space-y-2 ml-4 text-sm">
+                        <li>• Opt-out of cookies and tracking</li>
+                        <li>• Request information about data collected</li>
+                        <li>• Request deletion of your data</li>
+                        <li>• Decline third-party tracking</li>
+                        <li>• Contact us with privacy concerns</li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-800/40 border border-slate-700 rounded-lg p-6">
+                    <h3 class="font-bold text-emerald-400 mb-3 text-lg">Data Security</h3>
+                    <p>Sweeps Review Hub takes reasonable measures to protect your information. However, no online platform is completely secure. We recommend not sharing sensitive personal or financial information.</p>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Section 7: Contact & Changes -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-white mb-6 border-l-4 border-blue-500 pl-4">Questions & Policy Updates</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-slate-800/40 border border-slate-700 rounded-lg p-6">
+                    <h3 class="font-bold text-blue-400 mb-3 text-lg">Contact Us</h3>
+                    <p class="text-sm text-slate-400 mb-4">
+                        For questions about our compliance policies, legal information, or privacy practices, please contact us at:
+                    </p>
+                    <p class="text-blue-400 font-semibold">info@sweepsreviewhub.com</p>
+                    <p class="text-xs text-slate-500 mt-3">Response time: 2-3 business days</p>
+                </div>
+
+                <div class="bg-slate-800/40 border border-slate-700 rounded-lg p-6">
+                    <h3 class="font-bold text-emerald-400 mb-3 text-lg">Policy Changes</h3>
+                    <p class="text-sm text-slate-400">
+                        We may update these policies to reflect legal changes, platform updates, or regulatory requirements. Changes will be posted on this page with an updated date. Continued use of the site indicates acceptance of updated policies.
+                    </p>
+                    <p class="text-xs text-slate-500 mt-4">Last Updated: September 2026</p>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <!-- 5. Enhanced Footer -->
-    <footer class="bg-gradient-to-b from-slate-900 to-brandDark border-t-2 border-slate-800 py-8 text-slate-500 text-xs mt-12">
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-800 py-12 mt-12 text-slate-500 text-xs">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                 <div>
-                    <h4 class="text-slate-300 font-bold mb-2 text-sm">About</h4>
-                    <p class="text-[11px] leading-relaxed text-slate-600">Independent Performance Review Directory for US sweepstakes and social gaming platforms.</p>
+                    <h4 class="font-bold text-slate-300 mb-3">About Sweeps Review Hub</h4>
+                    <p class="text-xs leading-relaxed">
+                        Independent reviews and information about US social casinos and sweepstakes platforms. Committed to compliance, transparency, and responsible gaming advocacy.
+                    </p>
                 </div>
                 <div>
-                    <h4 class="text-slate-300 font-bold mb-2 text-sm">Quick Links</h4>
-                    <a href="index.html" class="text-[11px] text-slate-400 hover:text-brandPrimary transition-colors">← Back to Home</a>
+                    <h4 class="font-bold text-slate-300 mb-3">Important Links</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="index.html" class="text-blue-400 hover:text-blue-300 underline">Home</a></li>
+                        <li><a href="index.html#reviews" class="text-blue-400 hover:text-blue-300 underline">Casino Reviews</a></li>
+                        <li><a href="#responsible-gaming" class="text-blue-400 hover:text-blue-300 underline">Support Resources</a></li>
+                        <li><a href="#privacy-cookies" class="text-blue-400 hover:text-blue-300 underline">Privacy Policy</a></li>
+                    </ul>
                 </div>
                 <div>
-                    <h4 class="text-slate-300 font-bold mb-2 text-sm">Compliance</h4>
-                    <p class="text-[11px]">All data verified across 2026 iGaming network framework standards.</p>
+                    <h4 class="font-bold text-slate-300 mb-3">Disclaimer</h4>
+                    <p class="text-xs leading-relaxed">
+                        Sweeps Review Hub is not affiliated with reviewed platforms. We provide information only, not legal, financial, or gambling advice. Always verify local laws before participation.
+                    </p>
                 </div>
             </div>
-            <div class="border-t border-slate-800 pt-4 text-center">
-                <p>&copy; 2026 Sweeps Review Hub. All rights reserved. <button id="cookiePrefs" class="text-brandPrimary hover:text-brandPrimary/80 transition-colors underline ml-2">Cookie Preferences</button></p>
+
+            <div class="border-t border-slate-800 pt-6 text-center">
+                <p class="text-slate-600 text-xs">
+                    &copy; 2026 Sweeps Review Hub. All rights reserved. Compliant with responsible gaming standards and regulations.
+                </p>
+                <p class="text-slate-600 text-xs mt-2">
+                    For gambling support: <strong class="text-blue-400">1-800-522-4700 (NCPG)</strong>
+                </p>
             </div>
         </div>
     </footer>
 
+    <!-- Accessibility: Skip to content link -->
+    <a href="#legal-disclaimer" class="sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-50 bg-blue-600 text-white p-2 rounded">Skip to main content</a>
+
     <script>
-        // Cookie Consent Management
-        class CookieConsent {
-            constructor() {
-                this.storageKey = 'sweepsHubCookieConsent';
-                this.banner = document.getElementById('cookieBanner');
-                this.modal = document.getElementById('cookieModal');
-                this.init();
-            }
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            mobileMenu.classList.toggle('hidden');
+        });
 
-            init() {
-                this.setupEventListeners();
-                this.checkConsent();
-            }
-
-            setupEventListeners() {
-                // Banner buttons
-                document.getElementById('cookieAccept').addEventListener('click', () => this.acceptAll());
-                document.getElementById('cookieReject').addEventListener('click', () => this.rejectAll());
-                document.getElementById('cookieSettings').addEventListener('click', () => this.openModal());
-
-                // Modal buttons
-                document.getElementById('modalClose').addEventListener('click', () => this.closeModal());
-                document.getElementById('modalSave').addEventListener('click', () => this.savePreferences());
-                document.getElementById('modalReject').addEventListener('click', () => this.rejectAll());
-
-                // Footer cookie preferences button
-                document.getElementById('cookiePrefs').addEventListener('click', () => this.openModal());
-
-                // Toggle switches
-                document.getElementById('analyticsToggle').addEventListener('change', (e) => {
-                    this.updateToggleUI(e.target);
-                });
-                document.getElementById('marketingToggle').addEventListener('change', (e) => {
-                    this.updateToggleUI(e.target);
-                });
-                document.getElementById('preferencesToggle').addEventListener('change', (e) => {
-                    this.updateToggleUI(e.target);
-                });
-            }
-
-            updateToggleUI(input) {
-                const label = input.nextElementSibling;
-                const span = label.querySelector('span');
-                if (input.checked) {
-                    label.classList.remove('bg-slate-700/50');
-                    label.classList.add('bg-brandPrimary/30', 'hover:bg-brandPrimary/40');
-                    span.classList.remove('bg-slate-600');
-                    span.classList.add('bg-brandPrimary');
-                } else {
-                    label.classList.add('bg-slate-700/50');
-                    label.classList.remove('bg-brandPrimary/30', 'hover:bg-brandPrimary/40');
-                    span.classList.add('bg-slate-600');
-                    span.classList.remove('bg-brandPrimary');
-                }
-            }
-
-            checkConsent() {
-                const consent = localStorage.getItem(this.storageKey);
-                if (!consent) {
-                    this.showBanner();
-                } else {
-                    this.applyConsent(JSON.parse(consent));
-                }
-            }
-
-            showBanner() {
-                this.banner.style.display = 'block';
-                // Trigger animation
-                setTimeout(() => {
-                    this.banner.style.transform = 'translateY(0)';
-                }, 10);
-            }
-
-            closeBanner() {
-                this.banner.style.transform = 'translateY(100%)';
-                setTimeout(() => {
-                    this.banner.style.display = 'none';
-                }, 300);
-            }
-
-            openModal() {
-                this.modal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            }
-
-            closeModal() {
-                this.modal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }
-
-            acceptAll() {
-                const consent = {
-                    analytics: true,
-                    marketing: true,
-                    preferences: true,
-                    timestamp: new Date().toISOString()
-                };
-                this.saveConsent(consent);
-            }
-
-            rejectAll() {
-                const consent = {
-                    analytics: false,
-                    marketing: false,
-                    preferences: false,
-                    timestamp: new Date().toISOString()
-                };
-                this.saveConsent(consent);
-                this.closeModal();
-            }
-
-            savePreferences() {
-                const consent = {
-                    analytics: document.getElementById('analyticsToggle').checked,
-                    marketing: document.getElementById('marketingToggle').checked,
-                    preferences: document.getElementById('preferencesToggle').checked,
-                    timestamp: new Date().toISOString()
-                };
-                this.saveConsent(consent);
-                this.closeModal();
-            }
-
-            saveConsent(consent) {
-                localStorage.setItem(this.storageKey, JSON.stringify(consent));
-                this.applyConsent(consent);
-                this.closeBanner();
-            }
-
-            applyConsent(consent) {
-                // Load analytics only if consent given
-                if (consent.analytics) {
-                    this.loadAnalytics();
-                }
-
-                // Load marketing pixels only if consent given
-                if (consent.marketing) {
-                    this.loadMarketingPixels();
-                }
-
-                // Save preferences
-                if (consent.preferences) {
-                    console.log('Preferences cookies enabled');
-                }
-            }
-
-            loadAnalytics() {
-                // Google Analytics 4 snippet
-                const script = document.createElement('script');
-                script.async = true;
-                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX';
-                document.head.appendChild(script);
-
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'G-XXXXXXXXXX', { 'anonymize_ip': true });
-            }
-
-            loadMarketingPixels() {
-                console.log('Marketing pixels loaded');
-                // Add your marketing pixel code here
-            }
-        }
-
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            new CookieConsent();
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobileMenu').classList.add('hidden');
+                document.getElementById('mobileMenuBtn').setAttribute('aria-expanded', 'false');
+            });
         });
     </script>
 
