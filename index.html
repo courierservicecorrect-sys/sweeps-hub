@@ -276,6 +276,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
     </main>
 
+    <!-- Public Review Submission Section Layout -->
+<section id="submit-review" class="max-w-xl mx-auto px-4 py-8 bg-slate-800/30 border border-slate-800 rounded-xl my-8 hidden">
+    <h3 class="text-lg font-bold text-white mb-2">Submit Your Social Casino Experience</h3>
+    <p class="text-xs text-slate-400 mb-4">Your submission will be reviewed by our compliance moderators before publishing.</p>
+    
+    <form class="space-y-4">
+        <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Select Brand</label>
+            <select class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-xs text-slate-100">
+                <option>Sportzino</option>
+                <option>Fortune Coins</option>
+                <option>Zula Casino</option>
+            </select>
+        </div>
+        <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Your Review</label>
+            <textarea rows="4" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-xs text-slate-100" placeholder="Detail your verification and alternative entry experience..."></textarea>
+        </div>
+        <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs py-2 px-4 rounded transition-colors">
+            Submit for Approval
+        </button>
+    </form>
+</section>
+
+    
     <!-- Informational Guides Section -->
     <section id="guides" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-slate-800">
         <h2 class="text-2xl font-bold text-white mb-6 border-l-4 border-amber-500 pl-3">Essential US Sweepstakes Learning Guides</h2>
@@ -510,3 +535,109 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 </body>
 </html>
+
+<!-- Supabase Core JavaScript SDK Client CDN Link -->
+<script src="https://jsdelivr.net"></script>
+
+<!-- Public Review Submission Section Matrix -->
+<section id="review-submission-box" class="max-w-xl mx-auto px-6 py-8 bg-slate-800/40 border border-slate-700/60 rounded-xl my-12 shadow-2xl">
+    <h2 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+        <span class="text-amber-500">✍️</span> Share Your Platform Experience
+    </h2>
+    <p class="text-xs text-slate-400 mb-6 leading-relaxed">
+        Help keep our ecosystem transparent. Submit your objective evaluation of verification timelines and entry experiences. Submissions undergo compliance screening before publishing.
+    </p>
+
+    <!-- Feedback Alerts -->
+    <div id="form-success" class="hidden bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4 text-xs text-emerald-400 mb-4">
+        🎉 <strong>Submission Logged Successfully!</strong> Your review has been routed to our compliance queue and will display once verified.
+    </div>
+    <div id="form-error" class="hidden bg-red-500/10 border border-red-500/30 rounded-lg p-4 text-xs text-red-400 mb-4">
+        ⚠️ <strong>Database Connection Timeout:</strong> Unable to dispatch payload. Please verify required fields and try again.
+    </div>
+
+    <!-- Interactive Form Canvas -->
+    <form id="publicReviewForm" onsubmit="handleReviewSubmit(event)" class="space-y-4 text-xs">
+        <div>
+            <label class="block font-semibold text-slate-300 mb-1">Associated Email Address</label>
+            <input type="email" id="userEmail" required class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" placeholder="player@example.com">
+        </div>
+        
+        <div>
+            <label class="block font-semibold text-slate-300 mb-1">Target Social Gaming Platform</label>
+            <select id="brandName" required class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-slate-100 focus:outline-none focus:border-blue-500 transition-colors">
+                <option value="Sportzino">Sportzino</option>
+                <option value="Fortune Coins">Fortune Coins</option>
+                <option value="Zula Casino">Zula Casino</option>
+                <option value="LuckParty">LuckParty</option>
+                <option value="AmericanLuck">AmericanLuck</option>
+                <option value="YayCasino">YayCasino</option>
+            </select>
+        </div>
+
+        <div>
+            <label class="block font-semibold text-slate-300 mb-1">Objective Commentary</label>
+            <textarea id="reviewText" required rows="4" maxlength="600" class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-slate-100 focus:outline-none focus:border-blue-500 transition-colors placeholder:text-slate-600" placeholder="Detail your verification process, mail-in alternative method processing speeds, and interface usability..."></textarea>
+        </div>
+
+        <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 px-4 rounded-lg transition-all shadow-lg shadow-blue-600/20 active:scale-[0.99]">
+            Submit to Compliance Queue
+        </button>
+    </form>
+</section>
+
+<!-- Database Pipeline Logic Engine -->
+<script>
+    // Initialize the Supabase Client Engine using free public tier parameters
+    const SUPABASE_URL = "Your Supabase project URL is `https://ssspyccbehzzvwqgjpkh.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzc3B5Y2NiZWh6enZ3cWdqcGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMDgwMzcsImV4cCI6MjEwNTg4NDAzN30.3dQor84oyf4HR65ZRPSGz13RpESvHNzHVPUM7gh2M6I";
+    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    async function handleReviewSubmit(event) {
+        event.preventDefault(); // Stop standard page refreshing behavior
+        
+        const submitBtn = document.getElementById('submitBtn');
+        const successAlert = document.getElementById('form-success');
+        const errorAlert = document.getElementById('form-error');
+        
+        // Visual Loading State Toggles
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Encrypting & Dispatched Payload...";
+        successAlert.classList.add('hidden');
+        errorAlert.classList.add('hidden');
+
+        // Extracting input parameters
+        const email = document.getElementById('userEmail').value;
+        const brand = document.getElementById('brandName').value;
+        const comment = document.getElementById('reviewText').value;
+
+        // Inject payload directly via safe public client connection rules
+        const { data, error } = await _supabase
+            .from('public_reviews')
+            .insert([
+                { 
+                    brand_name: brand, 
+                    user_email: email, 
+                    review_text: comment,
+                    status: 'pending' // Enforces compliance processing baseline status
+                }
+            ]);
+
+        if (error) {
+            console.error("Supabase Database Error:", error.message);
+            errorAlert.classList.remove('hidden');
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Submit to Compliance Queue";
+        } else {
+            // Success response triggers
+            successAlert.classList.remove('hidden');
+            document.getElementById('publicReviewForm').reset();
+            submitBtn.innerText = "Submission Logged";
+            // Re-enable button after cooldown layout
+            setTimeout(() => {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Submit to Compliance Queue";
+            }, 3000);
+        }
+    }
+</script>
