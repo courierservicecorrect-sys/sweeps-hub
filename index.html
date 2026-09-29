@@ -101,7 +101,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <a href="compliance.html" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">Compliance & Legal</a>
                 <a href="#responsible-gaming" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">Responsible Gaming</a>
             </div>
-        </div>
+            
     </nav>
 
     <!-- 3. Hero Introduction -->
@@ -278,6 +278,53 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
         <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs py-2 px-4 rounded transition-colors">
             Submit for Approval
+        </button>
+    </form>
+</section>
+    
+    <!-- Public Review Submission Section Matrix -->
+<section id="review-submission-box" class="max-w-xl mx-auto px-6 py-8 bg-slate-800/40 border border-slate-700/60 rounded-xl my-12 shadow-2xl">
+    <h2 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+        <span class="text-amber-500">✍️</span> Share Your Platform Experience
+    </h2>
+    <p class="text-xs text-slate-400 mb-6 leading-relaxed">
+        Help keep our ecosystem transparent. Submit your objective evaluation of verification timelines and entry experiences. Submissions undergo compliance screening before publishing.
+    </p>
+
+    <!-- Feedback Alerts -->
+    <div id="form-success" class="hidden bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4 text-xs text-emerald-400 mb-4">
+        🎉 <strong>Submission Logged Successfully!</strong> Your review has been routed to our compliance queue and will display once verified.
+    </div>
+    <div id="form-error" class="hidden bg-red-500/10 border border-red-500/30 rounded-lg p-4 text-xs text-red-400 mb-4">
+        ⚠️ <strong>Database Connection Timeout:</strong> Unable to dispatch payload. Please verify required fields and try again.
+    </div>
+
+    <!-- Interactive Form Canvas -->
+    <form id="publicReviewForm" onsubmit="handleReviewSubmit(event)" class="space-y-4 text-xs">
+        <div>
+            <label class="block font-semibold text-slate-300 mb-1">Associated Email Address</label>
+            <input type="email" id="userEmail" required class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" placeholder="player@example.com">
+        </div>
+        
+        <div>
+            <label class="block font-semibold text-slate-300 mb-1">Target Social Gaming Platform</label>
+            <select id="brandName" required class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-slate-100 focus:outline-none focus:border-blue-500 transition-colors">
+                <option value="Sportzino">Sportzino</option>
+                <option value="Fortune Coins">Fortune Coins</option>
+                <option value="Zula Casino">Zula Casino</option>
+                <option value="LuckParty">LuckParty</option>
+                <option value="AmericanLuck">AmericanLuck</option>
+                <option value="YayCasino">YayCasino</option>
+            </select>
+        </div>
+
+        <div>
+            <label class="block font-semibold text-slate-300 mb-1">Objective Commentary</label>
+            <textarea id="reviewText" required rows="4" maxlength="600" class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-slate-100 focus:outline-none focus:border-blue-500 transition-colors placeholder:text-slate-600" placeholder="Describe your verification process, mail-in alternative method processing speeds, and ease of use..."></textarea>
+        </div>
+
+        <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 px-4 rounded-lg transition-all shadow-lg shadow-blue-600/20 active:scale-[0.99]">
+            Submit to Compliance Queue
         </button>
     </form>
 </section>
@@ -521,52 +568,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- Supabase Core JavaScript SDK Client CDN Link -->
 <script src="https://jsdelivr.net"></script>
 
-<!-- Public Review Submission Section Matrix -->
-<section id="review-submission-box" class="max-w-xl mx-auto px-6 py-8 bg-slate-800/40 border border-slate-700/60 rounded-xl my-12 shadow-2xl">
-    <h2 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
-        <span class="text-amber-500">✍️</span> Share Your Platform Experience
-    </h2>
-    <p class="text-xs text-slate-400 mb-6 leading-relaxed">
-        Help keep our ecosystem transparent. Submit your objective evaluation of verification timelines and entry experiences. Submissions undergo compliance screening before publishing.
-    </p>
 
-    <!-- Feedback Alerts -->
-    <div id="form-success" class="hidden bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4 text-xs text-emerald-400 mb-4">
-        🎉 <strong>Submission Logged Successfully!</strong> Your review has been routed to our compliance queue and will display once verified.
-    </div>
-    <div id="form-error" class="hidden bg-red-500/10 border border-red-500/30 rounded-lg p-4 text-xs text-red-400 mb-4">
-        ⚠️ <strong>Database Connection Timeout:</strong> Unable to dispatch payload. Please verify required fields and try again.
-    </div>
-
-    <!-- Interactive Form Canvas -->
-    <form id="publicReviewForm" onsubmit="handleReviewSubmit(event)" class="space-y-4 text-xs">
-        <div>
-            <label class="block font-semibold text-slate-300 mb-1">Associated Email Address</label>
-            <input type="email" id="userEmail" required class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" placeholder="player@example.com">
-        </div>
-        
-        <div>
-            <label class="block font-semibold text-slate-300 mb-1">Target Social Gaming Platform</label>
-            <select id="brandName" required class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-slate-100 focus:outline-none focus:border-blue-500 transition-colors">
-                <option value="Sportzino">Sportzino</option>
-                <option value="Fortune Coins">Fortune Coins</option>
-                <option value="Zula Casino">Zula Casino</option>
-                <option value="LuckParty">LuckParty</option>
-                <option value="AmericanLuck">AmericanLuck</option>
-                <option value="YayCasino">YayCasino</option>
-            </select>
-        </div>
-
-        <div>
-            <label class="block font-semibold text-slate-300 mb-1">Objective Commentary</label>
-            <textarea id="reviewText" required rows="4" maxlength="600" class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-slate-100 focus:outline-none focus:border-blue-500 transition-colors placeholder:text-slate-600" placeholder="Describe your verification process, mail-in alternative method processing speeds, and ease of use..."></textarea>
-        </div>
-
-        <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 px-4 rounded-lg transition-all shadow-lg shadow-blue-600/20 active:scale-[0.99]">
-            Submit to Compliance Queue
-        </button>
-    </form>
-</section>
 
 <!-- Database Pipeline Logic Engine -->
 <script>
