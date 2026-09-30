@@ -24,21 +24,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </script>
 
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brandDark: '#0f172a',
-                        brandAccent: '#3b82f6',
-                        brandGold: '#f59e0b',
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Preconnect to CDNs to eliminate network delay -->
+<link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
 
+<!-- Tailwind CDN JIT Script -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          brandDark: '#0f172a',
+          brandAccent: '#3b82f6',
+          brandGold: '#f59e0b',
+        }
+      }
+    }
+  }
+</script>
     <!-- Schema.org JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
