@@ -15,29 +15,37 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <title>Sweeps Review Hub - Reliable US Social Casino & Sweepstakes Reviews</title>
     
     <!-- Google Analytics 4 (GA4) Global Site Tag -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=GTM-WK6R8454'"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=GTM-WK6R8454"></script>
 <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} // FIXED: Removed the extra trailing )
-    gtag('js', new Date());
-    gtag('config', 'GTM-WK6R8454', { 'anonymize_ip': true });
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'GTM-WK6R8454', { 'anonymize_ip': true });
 </script>
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com" defer></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brandDark: '#0f172a',
-                        brandAccent: '#3b82f6',
-                        brandGold: '#f59e0b',
-                    }
-                }
-            }
-        }
-    </script>
+<!-- Tailwind CSS CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+
+<!-- Custom Color Utility Classes -->
+<style>
+  /* Dark Backgrounds & Text */
+  .bg-brandDark { background-color: #0f172a; }
+  .text-brandDark { color: #0f172a; }
+  .border-brandDark { border-color: #0f172a; }
+
+  /* Accent Blue */
+  .bg-brandAccent { background-color: #3b82f6; }
+  .text-brandAccent { color: #3b82f6; }
+  .border-brandAccent { border-color: #3b82f6; }
+  .hover\:text-brandAccent:hover { color: #3b82f6; }
+  .hover\:bg-brandAccent:hover { background-color: #3b82f6; }
+
+  /* Gold / Amber */
+  .bg-brandGold { background-color: #f59e0b; }
+  .text-brandGold { color: #f59e0b; }
+  .border-brandGold { border-color: #f59e0b; }
+</style>
+
 
     <!-- Schema.org JSON-LD Structured Data -->
     <script type="application/ld+json">
