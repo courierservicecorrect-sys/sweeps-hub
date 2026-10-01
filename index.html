@@ -254,7 +254,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
             </article>
 
-        </div>
+        
     </main>
     
     <!-- Public Review Submission Section Matrix -->
@@ -451,7 +451,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- Accessibility: Skip to content link (hidden but keyboard-accessible) -->
     <a href="#reviews" class="sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-50 bg-blue-600 text-white p-2 rounded">Skip to main content</a>
 
-    <!-- Cookie Consent Popup -->
+                
+                <!-- Cookie Consent Popup -->
 <div id="cookieConsent" class="fixed bottom-4 right-4 bg-slate-800 border border-slate-700 rounded-lg shadow-2xl p-6 max-w-sm z-50 hidden" role="dialog" aria-labelledby="cookieTitle" aria-describedby="cookieDesc">
     <div class="flex justify-between items-start mb-3">
         <h3 id="cookieTitle" class="font-bold text-white text-sm">Cookie & Privacy Notice</h3>
@@ -486,149 +487,12 @@ document.querySelectorAll('#mobileMenu a').forEach(link => {
     });
 });
 
-// Cookie Consent Management & Local Telemetry Collection
-function initializeCookieConsent() {
-    const cookieConsent = document.getElementById('cookieConsent');
-    const cookieAccept = document.getElementById('cookieAccept');
-    const cookieDecline = document.getElementById('cookieDecline');
-    const cookieClose = document.getElementById('cookieClose');
 
-    // Utility: Set simple first-party cookie
-    function setCookie(name, value, days) {
-        let expires = "";
-        if (days) {
-            const date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = "; expires=" + date.toUTCString();
-        }
-        document.cookie = `${name}=${value || ""}${expires}; path=/; SameSite=Lax`;
-    }
-
-    // Utility: Parse query string parameters (e.g., utm_source, ref)
-    function getQueryParams() {
-        const params = {};
-        const queryString = window.location.search.substring(1);
-        if (!queryString) return params;
-        
-        queryString.split('&').forEach(param => {
-            const [key, value] = param.split('=');
-            if (key) params[decodeURIComponent(key)] = decodeURIComponent(value || '');
-        });
-        return params;
-    }
-
-    // Gather local environment and telemetry data
-    function collectLocalTelemetry(consentChoice) {
-        return {
-            consent: {
-                status: consentChoice,
-                timestamp: new Date().toISOString(),
-                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
-            },
-            session: {
-                pageUrl: window.location.href,
-                referrer: document.referrer || 'Direct',
-                queryParams: getQueryParams()
-            },
-            device: {
-                userAgent: navigator.userAgent,
-                language: navigator.language,
-                screenResolution: `${window.screen.width}x${window.screen.height}`,
-                viewportSize: `${window.innerWidth}x${window.innerHeight}`,
-                touchSupport: 'ontouchend' in document,
-                deviceMemory: navigator.deviceMemory || 'Unknown'
-            }
-        };
-    }
-
-    // Check if prior decision was made
-    const savedConsent = localStorage.getItem('cookieConsent');
-    if (!savedConsent) {
-        cookieConsent.classList.remove('hidden');
-    }
-
-    // Save choice and store full local log
-    const handleConsent = (choice) => {
-        const telemetryPayload = collectLocalTelemetry(choice);
-
-        // 1. Store structured JSON telemetry in localStorage
-        localStorage.setItem('cookieConsent', JSON.stringify(telemetryPayload));
-
-        // 2. Set simple browser status cookie
-        setCookie('user_cookie_consent', choice, 365);
-
-        // 3. Hide banner instantly
-        cookieConsent.classList.add('hidden');
-    };
-
-    if (cookieAccept) cookieAccept.addEventListener('click', () => handleConsent('accepted'));
-    if (cookieDecline) cookieDecline.addEventListener('click', () => handleConsent('declined'));
-    if (cookieClose) cookieClose.addEventListener('click', () => cookieConsent.classList.add('hidden'));
-}
-
-document.addEventListener('DOMContentLoaded', initializeCookieConsent);
-</script>
-                
-        // Mobile Menu Toggle
-        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const isExpanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', !isExpanded);
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Close mobile menu when a link is clicked
-        document.querySelectorAll('#mobileMenu a').forEach(link => {
-            link.addEventListener('click', function() {
-                document.getElementById('mobileMenu').classList.add('hidden');
-                document.getElementById('mobileMenuBtn').setAttribute('aria-expanded', 'false');
-            });
-        });
-
-        // Cookie Consent Management
-        function initializeCookieConsent() {
-            const cookieConsent = document.getElementById('cookieConsent');
-            const cookieAccept = document.getElementById('cookieAccept');
-            const cookieDecline = document.getElementById('cookieDecline');
-            const cookieClose = document.getElementById('cookieClose');
-            
-            // Check if user has already made a choice
-            if (localStorage.getItem('cookieConsent')) {
-                cookieConsent.style.display = 'none';
-                return;
-            }
-
-            // Handle accept
-            cookieAccept.addEventListener('click', function() {
-                localStorage.setItem('cookieConsent', 'accepted');
-                cookieConsent.style.display = 'none';
-                // Enable Google Analytics
-                if (typeof gtag === 'function') {
-                    gtag('consent', 'update', {'analytics_storage': 'granted'});
-                }
-            });
-
-            // Handle decline
-            cookieDecline.addEventListener('click', function() {
-                localStorage.setItem('cookieConsent', 'declined');
-                cookieConsent.style.display = 'none';
-            });
-
-            // Handle close
-            cookieClose.addEventListener('click', function() {
-                localStorage.setItem('cookieConsent', 'dismissed');
-                cookieConsent.style.display = 'none';
-            });
-        }
-
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', initializeCookieConsent);
-    </script>
                 <!-- Include standalone cookie tracker file -->
 <script src="cookie-tracker.js" defer></script>
 
-</body>
-</html>
+
+
 
 <!-- Supabase Core JavaScript SDK Client CDN Link -->
 <script src="https://jsdelivr.net"></script>
@@ -690,53 +554,75 @@ document.addEventListener('DOMContentLoaded', initializeCookieConsent);
         }
     }
 </script>
-                // Retrieve and render approved reviews on page load
-async function loadApprovedReviews() {
-    const container = document.getElementById('publicReviewsContainer');
-    
-    const { data: reviews, error } = await _supabase
-        .from('public_reviews')
-        .select('brand_name, user_email, review_text, created_at')
-        .eq('status', 'approved')
-        .order('created_at', { ascending: false });
+                <script>
+                function escapeHtml(str) {
+            return (str || '').replace(/[&<>"']/g, match => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            })[match]);
+        }
 
-    if (error) {
-        container.innerHTML = '<p class="text-slate-500 text-xs col-span-full">Unable to load community reviews.</p>';
-        return;
-    }
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof loadApprovedReviews === 'function') {
+                loadApprovedReviews();
+            }
+        });
+         </script>
 
-    if (!reviews || reviews.length === 0) {
-        container.innerHTML = '<p class="text-slate-500 text-xs col-span-full">No verified community reviews published yet.</p>';
-        return;
-    }
+                
+<script>
+    // Retrieve and render approved reviews on page load
+    async function loadApprovedReviews() {
+        const container = document.getElementById('publicReviewsContainer');
+        const { data: reviews, error } = await _supabase
+            .from('public_reviews')
+            .select('brand_name, user_email, review_text, created_at')
+            .eq('status', 'approved')
+            .order('created_at', { ascending: false });
 
-    container.innerHTML = reviews.map(review => {
-        // Obfuscate email for privacy (e.g., p***r@example.com)
-        const parts = review.user_email.split('@');
-        const obfuscatedEmail = parts[0].charAt(0) + '***' + parts[0].slice(-1) + '@' + parts[1];
+        if (error) {
+            container.innerHTML = '<p class="text-slate-500 text-xs col-span-full">Unable to load community reviews.</p>';
+            return;
+        }
+        if (!reviews || reviews.length === 0) {
+            container.innerHTML = '<p class="text-slate-500 text-xs col-span-full">No verified community reviews published yet.</p>';
+            return;
+        }
 
-        return `
-            <div class="bg-slate-800/60 p-5 rounded-xl border border-slate-700/80 shadow-lg flex flex-col justify-between">
-                <div>
-                    <div class="flex justify-between items-center mb-3">
-                        <span class="font-bold text-white text-sm">${escapeHtml(review.brand_name)}</span>
-                        <span class="bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded border border-emerald-500/20">Verified Player</span>
+        container.innerHTML = reviews.map(review => {
+            const parts = review.user_email.split('@');
+            const obfuscatedEmail = parts[0].charAt(0) + '***' + parts[0].slice(-1) + '@' + parts[1];
+            return `
+                <div class="bg-slate-800/60 p-5 rounded-xl border border-slate-700/80 shadow-lg flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="font-bold text-white text-sm">${escapeHtml(review.brand_name)}</span>
+                            <span class="bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded border border-emerald-500/20">Verified Player</span>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed mb-4">${escapeHtml(review.review_text)}</p>
                     </div>
-                    <p class="text-xs text-slate-300 leading-relaxed mb-4">${escapeHtml(review.review_text)}</p>
+                    <div class="text-[10px] text-slate-500 border-t border-slate-700/50 pt-2 flex justify-between">
+                        <span>${obfuscatedEmail}</span>
+                        <span>${new Date(review.created_at).toLocaleDateString()}</span>
+                    </div>
                 </div>
-                <div class="text-[10px] text-slate-500 border-t border-slate-700/50 pt-2 flex justify-between">
-                    <span>${obfuscatedEmail}</span>
-                    <span>${new Date(review.created_at).toLocaleDateString()}</span>
-                </div>
-            </div>
-        `;
-    }).join('');
+            `;
+        }).join('');
+    }
+
+    
+
+<!-- External Cookie Tracker Reference -->
+<script src="cookie-tracker.js" defer></script>
+                
+            
 }
 
-function escapeHtml(str) {
-    return (str || '').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
 
-// Trigger load on startup
-document.addEventListener('DOMContentLoaded', loadApprovedReviews);
-
+            </script>
+            </body>
+            </html>
+            
