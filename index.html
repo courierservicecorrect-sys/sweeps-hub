@@ -452,45 +452,123 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="#reviews" class="sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-50 bg-blue-600 text-white p-2 rounded">Skip to main content</a>
 
     <!-- Cookie Consent Popup -->
-    <div id="cookieConsent" class="fixed bottom-4 right-4 bg-slate-800 border border-slate-700 rounded-lg shadow-2xl p-6 max-w-sm z-50 animate-fade-in" role="dialog" aria-labelledby="cookieTitle" aria-describedby="cookieDesc">
-        <div class="flex justify-between items-start mb-3">
-            <h3 id="cookieTitle" class="font-bold text-white text-sm">Cookie & Privacy Notice</h3>
-            <button id="cookieClose" class="text-slate-400 hover:text-white text-lg leading-none" aria-label="Close cookie consent">×</button>
-        </div>
-        <p id="cookieDesc" class="text-xs text-slate-400 mb-4">
-            We use cookies to enhance your experience, analyze site traffic, and serve personalized content. By continuing to browse, you agree to our cookie use and privacy practices.
-        </p>
-        <div class="flex gap-3 mb-3">
-            <button id="cookieAccept" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-medium py-2 px-3 rounded text-xs transition-colors">
-                Accept All
-            </button>
-            <button id="cookieDecline" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-medium py-2 px-3 rounded text-xs transition-colors">
-                Decline
-            </button>
-        </div>
-        <p class="text-xs text-slate-500 text-center">
-            <a href="compliance.html" class="text-blue-400 hover:text-blue-300 underline">Privacy & Cookie Policy</a>
-        </p>
+<div id="cookieConsent" class="fixed bottom-4 right-4 bg-slate-800 border border-slate-700 rounded-lg shadow-2xl p-6 max-w-sm z-50 hidden" role="dialog" aria-labelledby="cookieTitle" aria-describedby="cookieDesc">
+    <div class="flex justify-between items-start mb-3">
+        <h3 id="cookieTitle" class="font-bold text-white text-sm">Cookie & Privacy Notice</h3>
+        <button id="cookieClose" class="text-slate-400 hover:text-white text-lg leading-none" aria-label="Close cookie consent">&times;</button>
     </div>
+    <p id="cookieDesc" class="text-xs text-slate-400 mb-4">
+        We use cookies to enhance your experience, analyze site traffic, and serve personalized content. By continuing to browse, you agree to our cookie use and privacy practices.
+    </p>
+    <div class="flex gap-3 mb-3">
+        <button id="cookieAccept" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-medium py-2 px-3 rounded text-xs transition-colors">Accept All</button>
+        <button id="cookieDecline" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-medium py-2 px-3 rounded text-xs transition-colors">Decline</button>
+    </div>
+    <p class="text-xs text-slate-500 text-center">
+        <a href="compliance.html" class="text-blue-400 hover:text-blue-300 underline">Privacy & Cookie Policy</a>
+    </p>
+</div>
 
-    <style>
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+<script>
+// Mobile Menu Toggle
+document.getElementById('mobileMenuBtn').addEventListener('click', function () {
+    const mobileMenu = document.getElementById('mobileMenu');
+    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', !isExpanded);
+    mobileMenu.classList.toggle('hidden');
+});
+
+// Close mobile menu when a link is clicked
+document.querySelectorAll('#mobileMenu a').forEach(link => {
+    link.addEventListener('click', function () {
+        document.getElementById('mobileMenu').classList.add('hidden');
+        document.getElementById('mobileMenuBtn').setAttribute('aria-expanded', 'false');
+    });
+});
+
+// Cookie Consent Management & Local Telemetry Collection
+function initializeCookieConsent() {
+    const cookieConsent = document.getElementById('cookieConsent');
+    const cookieAccept = document.getElementById('cookieAccept');
+    const cookieDecline = document.getElementById('cookieDecline');
+    const cookieClose = document.getElementById('cookieClose');
+
+    // Utility: Set simple first-party cookie
+    function setCookie(name, value, days) {
+        let expires = "";
+        if (days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
         }
+        document.cookie = `${name}=${value || ""}${expires}; path=/; SameSite=Lax`;
+    }
+
+    // Utility: Parse query string parameters (e.g., utm_source, ref)
+    function getQueryParams() {
+        const params = {};
+        const queryString = window.location.search.substring(1);
+        if (!queryString) return params;
         
-        .animate-fade-in {
-            animation: fadeIn 0.3s ease-in-out;
-        }
-    </style>
+        queryString.split('&').forEach(param => {
+            const [key, value] = param.split('=');
+            if (key) params[decodeURIComponent(key)] = decodeURIComponent(value || '');
+        });
+        return params;
+    }
 
-    <script>
+    // Gather local environment and telemetry data
+    function collectLocalTelemetry(consentChoice) {
+        return {
+            consent: {
+                status: consentChoice,
+                timestamp: new Date().toISOString(),
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+            },
+            session: {
+                pageUrl: window.location.href,
+                referrer: document.referrer || 'Direct',
+                queryParams: getQueryParams()
+            },
+            device: {
+                userAgent: navigator.userAgent,
+                language: navigator.language,
+                screenResolution: `${window.screen.width}x${window.screen.height}`,
+                viewportSize: `${window.innerWidth}x${window.innerHeight}`,
+                touchSupport: 'ontouchend' in document,
+                deviceMemory: navigator.deviceMemory || 'Unknown'
+            }
+        };
+    }
+
+    // Check if prior decision was made
+    const savedConsent = localStorage.getItem('cookieConsent');
+    if (!savedConsent) {
+        cookieConsent.classList.remove('hidden');
+    }
+
+    // Save choice and store full local log
+    const handleConsent = (choice) => {
+        const telemetryPayload = collectLocalTelemetry(choice);
+
+        // 1. Store structured JSON telemetry in localStorage
+        localStorage.setItem('cookieConsent', JSON.stringify(telemetryPayload));
+
+        // 2. Set simple browser status cookie
+        setCookie('user_cookie_consent', choice, 365);
+
+        // 3. Hide banner instantly
+        cookieConsent.classList.add('hidden');
+    };
+
+    if (cookieAccept) cookieAccept.addEventListener('click', () => handleConsent('accepted'));
+    if (cookieDecline) cookieDecline.addEventListener('click', () => handleConsent('declined'));
+    if (cookieClose) cookieClose.addEventListener('click', () => cookieConsent.classList.add('hidden'));
+}
+
+document.addEventListener('DOMContentLoaded', initializeCookieConsent);
+</script>
+                
         // Mobile Menu Toggle
         document.getElementById('mobileMenuBtn').addEventListener('click', function() {
             const mobileMenu = document.getElementById('mobileMenu');
