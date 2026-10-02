@@ -30,20 +30,34 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
 
 <!-- Tailwind CDN JIT Script -->
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          brandDark: '#0f172a',
-          brandAccent: '#3b82f6',
-          brandGold: '#f59e0b',
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brandDark: '#0f172a',
+              brandAccent: '#3b82f6',
+              brandGold: '#f59e0b',
+            }
+          }
         }
       }
-    }
-  }
-</script>
+    </script>
+
+    <!-- ADD CUSTOM CONTRAST OVERRIDES HERE -->
+    <style>
+      /* Primary Text / Headings Override */
+      .text-slate-600 {
+        color: #f1f5f9 !important; /* Equivalent to text-slate-100 */
+      }
+
+      /* Secondary / Muted Body Text Override */
+      .text-slate-500,
+      .text-slate-400 {
+        color: #cbd5e1 !important; /* Equivalent to text-slate-300 */
+      }
+    </style>
 
     <!-- Schema.org JSON-LD Structured Data -->
     <script type="application/ld+json">
