@@ -609,22 +609,13 @@ document.querySelectorAll('#mobileMenu a').forEach(link => {
     });
 });
 
-
-                <!-- Include standalone cookie tracker file -->
-<script src="cookie-tracker.js" defer></script>
-
-
-
-
 <!-- Supabase Core JavaScript SDK Client CDN Link -->
-<script src="https://jsdelivr.net"></script>
-
-
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+                
 <!-- Database Pipeline Logic Engine -->
 <script>
     // Initialize the Supabase Client Engine using free public tier parameters
-    const SUPABASE_URL = "Your Supabase project URL is `https://ssspyccbehzzvwqgjpkh.supabase.co";
+    const SUPABASE_URL = "https://ssspyccbehzzvwqgjpkh.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzc3B5Y2NiZWh6enZ3cWdqcGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMDgwMzcsImV4cCI6MjEwNTg4NDAzN30.3dQor84oyf4HR65ZRPSGz13RpESvHNzHVPUM7gh2M6I";
     const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -711,12 +702,79 @@ document.querySelectorAll('#mobileMenu a').forEach(link => {
         }
         if (!reviews || reviews.length === 0) {
             container.innerHTML = '<p class="text-slate-500 text-xs col-span-full">No verified community reviews published yet.</p>';
+<script>
+    // Initialize Supabase Client
+    const SUPABASE_URL = "https://ssspyccbehzzvwqgjpkh.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzc3B5Y2NiZWh6enZ3cWdqcGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMDgwMzcsImV4cCI6MjEwNTg4NDAzN30.3dQor84oyf4HR65ZRPSGz13RpESvHNzHVPUM7gh2M6I";
+    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Form Submission
+    async function handleReviewSubmit(event) {
+        event.preventDefault();
+        
+        const submitBtn = document.getElementById('submitBtn');
+        const successAlert = document.getElementById('form-success');
+        const errorAlert = document.getElementById('form-error');
+        
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Sending...";
+        successAlert.classList.add('hidden');
+        errorAlert.classList.add('hidden');
+
+        const email = document.getElementById('userEmail').value;
+        const brand = document.getElementById('brandName').value;
+        const comment = document.getElementById('reviewText').value;
+
+        const { data, error } = await _supabase
+            .from('public_reviews')
+            .insert([{ brand_name: brand, user_email: email, review_text: comment, status: 'pending' }]);
+
+        if (error) {
+            console.error("Supabase Database Error:", error.message);
+            errorAlert.classList.remove('hidden');
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Submit to Compliance Queue";
+        } else {
+            successAlert.classList.remove('hidden');
+            document.getElementById('publicReviewForm').reset();
+            submitBtn.innerText = "Submission Logged";
+            setTimeout(() => {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Submit to Compliance Queue";
+            }, 3000);
+        }
+    }
+
+    // Helper to prevent XSS
+    function escapeHtml(str) {
+        return (str || '').replace(/[&<>"']/g, match => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        })[match]);
+    }
+
+    // Load Approved Reviews
+    async function loadApprovedReviews() {
+        const container = document.getElementById('publicReviewsContainer');
+        if (!container) return;
+
+        const { data: reviews, error } = await _supabase
+            .from('public_reviews')
+            .select('brand_name, user_email, review_text, created_at')
+            .eq('status', 'approved')
+            .order('created_at', { ascending: false });
+
+        if (error) {
+            container.innerHTML = '<p class="text-slate-500 text-xs col-span-full">Unable to load community reviews.</p>';
+            return;
+        }
+        if (!reviews || reviews.length === 0) {
+            container.innerHTML = '<p class="text-slate-500 text-xs col-span-full">No verified community reviews published yet.</p>';
             return;
         }
 
         container.innerHTML = reviews.map(review => {
             const parts = review.user_email.split('@');
-            const obfuscatedEmail = parts[0].charAt(0) + '***' + parts[0].slice(-1) + '@' + parts[1];
+            const obfuscatedEmail = parts[0].charAt(0) + '***' + parts[0].slice(-1) + '@' + (parts[1] || '');
             return `
                 <div class="bg-slate-800/60 p-5 rounded-xl border border-slate-700/80 shadow-lg flex flex-col justify-between">
                     <div>
@@ -735,16 +793,10 @@ document.querySelectorAll('#mobileMenu a').forEach(link => {
         }).join('');
     }
 
-    
-
-<!-- External Cookie Tracker Reference -->
+    document.addEventListener('DOMContentLoaded', loadApprovedReviews);
+</script>
 <script src="cookie-tracker.js" defer></script>
-                
-            
-}
 
-
-            </script>
             </body>
             </html>
             
