@@ -1,0 +1,29 @@
+{
+  "redirects": [
+    {
+      "source": "/go/sportzino",
+      "destination": "https://sportzino.com/signup/38f6eadf-c246-40f2-bbb0-a345324e1b48",
+      "permanent": false
+    },
+    {
+      "source": "/go/fortune-wins",
+      "destination": "https://fortunewins.com/signup/d42b0f82-a6af-4700-bb8d-2de48f3c1424",
+      "permanent": false
+    },
+    {
+      "source": "/go/zula-casino",
+      "destination": "https://www.zulacasino.com/signup/782231f7-5f99-480d-8144-a28dd01240a8",
+      "permanent": false
+    },
+    {
+      "source": "/go/luckparty",
+      "destination": "https://luckparty.com/signup/c101a55f-17e0-420c-9c40-625c64ba467c",
+      "permanent": false
+    },
+    {
+      "source": "/go/americanluck",
+      "destination": "https://americanluck.com/signup/7c4d43e2-e791-4ec2-a2b1-7a126ca96eb5",
+      "permanent": false
+    }
+  ]
+}
