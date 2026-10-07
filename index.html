@@ -56,7 +56,13 @@
     </script>
 </head>
 
-<body class="bg-slate-900 text-slate-100 font-sans antialiased"> 
+<body class="bg-slate-900 text-slate-100 font-sans antialiased">
+    
+    <!-- Accessibility: Skip to main content link (MUST BE FIRST IN BODY) -->
+    <a href="#reviews" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 bg-blue-600 text-white p-2 rounded shadow-lg font-medium text-xs">
+      Skip to main content
+    </a>
+
     <!-- 1. Affiliate Disclosure Banner -->
     <div class="bg-slate-800 border-b border-slate-700 text-center py-2 px-4 text-xs text-slate-300" role="banner">
         <p><strong>Advertiser Disclosure:</strong> Sweeps Review Hub is an independent review site. We may receive compensation or commissions when you click on links or sign up via our partner platforms. This does not affect our editorial integrity or review process. All opinions expressed are our own.</p>
@@ -316,47 +322,173 @@
                     <p class="text-sm text-slate-400 mb-4">Features a community-focused casual layout with highly accessible interface options designed primarily for mobile-first web play. Strong emphasis on social features and multiplayer gaming experiences.</p>
                     <div class="bg-slate-900/50 p-3 rounded-lg text-xs text-slate-400 border border-slate-800 mb-4">
                         <span class="text-amber-500 font-bold block text-sm mb-2">🎁 Highlight Offer</span>
-                        <span>Daily login multipliers available. Verification required for full access to standard mechanics and prize redemption.</span>
-                    </div>
-                    <div class="text-xs text-slate-500 space-y-1">
-                        <p><strong>Community Features:</strong> Leaderboards and social events.</p>
-                        <p><strong>Accessibility:</strong> Beginner-friendly interface design.</p>
-                        <p><strong>Bonus:</strong> Up to 250,000 free coins for new players.</p>
-                    </div>
+<!-- 4. Review Grid (Showcasing Featured Platforms) -->
+<main id="reviews" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h2 class="text-2xl font-bold text-white mb-2 border-l-4 border-blue-500 pl-3">
+        Featured Social Gaming Platforms
+    </h2>
+    <h2 class="text-2xl font-bold text-emerald-400 mb-6 pl-3">
+        Free 💲 Offers For Signup
+    </h2>
+    
+    <!-- GRID WRAPPER START -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Card 1: Sportzino -->
+        <article class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden shadow-xl flex flex-col justify-between hover:border-slate-600 transition-all">
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Sportzino</h3>
+                    <span class="bg-blue-500/10 text-blue-400 text-xs font-semibold px-2.5 py-1 rounded border border-blue-500/20" aria-label="Category: Social Sportsbook">Social Sportsbook</span>
                 </div>
-                <div class="p-6 pt-4">
-                    <a href="/go/luckparty?subid=card_luckparty" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors shadow-lg shadow-blue-600/20" aria-label="Play Now at LuckParty">
-                        Play Now at LuckParty
-                    </a>
-                </div>
-            </article>
-
-            <!-- Card 5: AmericanLuck -->
-            <article class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden shadow-xl flex flex-col justify-between hover:border-slate-600 transition-all">
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-white">AmericanLuck</h3>
-                        <span class="bg-pink-500/10 text-pink-400 text-xs font-semibold px-2.5 py-1 rounded border border-pink-500/20" aria-label="Category: Instant Wins">Instant Wins</span>
+                <p class="text-sm text-slate-400 mb-4">A unique, highly-rated dual platform offering prediction mechanics for sports fans and standard social casino titles side-by-side.</p>
+                <div class="bg-slate-900/50 p-3 rounded-lg text-xs text-slate-400 border border-slate-800 mb-4">
+                    <div class="flex items-center justify-between gap-2 mb-1">
+                        <span class="text-amber-500 font-bold block text-sm">🎁 Highlight Offer</span>
+                        <span class="inline-flex items-center gap-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded border border-emerald-500/20">
+                            No Code Required — Auto-Applied
+                        </span>
                     </div>
-                    <p class="text-sm text-slate-400 mb-4">Specializes in fast-paced instant win games with quick payouts and straightforward gameplay mechanics. Excellent for players seeking quick entertainment sessions with immediate gratification.</p>
-                    <div class="bg-slate-900/50 p-3 rounded-lg text-xs text-slate-400 border border-slate-800 mb-4">
-                        <span class="text-amber-500 font-bold block text-sm mb-2">🎁 Highlight Offer</span>
-                        <span>Instant welcome bonus upon signup. Weekly prize drawings for active players. No deposit required for free play.</span>
-                    </div>
-                    <div class="text-xs text-slate-500 space-y-1">
-                        <p><strong>Speed:</strong> Instant game results and quick withdrawals.</p>
-                        <p><strong>Weekly Draws:</strong> Additional prize opportunities every week.</p>
-                        <p><strong>Signup Bonus:</strong> 100,000 free coins immediately.</p>
-                    </div>
+                    <span>Free Gold Coins & Sweeps Coins upon verified registration. Daily log-in rewards apply.</span>
                 </div>
-                <div class="p-6 pt-4">
-                    <a href="/go/americanluck?subid=card_americanluck" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors shadow-lg shadow-blue-600/20" aria-label="Play Now at AmericanLuck">
-                        Play Now at AmericanLuck
-                    </a>
+                <div class="text-xs text-slate-400 space-y-1">
+                    <p><strong class="text-slate-200">Bonus Terms:</strong> 18+ US residents only. Free coins, no deposit required.</p>
+                    <p><strong class="text-slate-200">Redemption:</strong> Sweeps coins redeemable for prizes or entries.</p>
+                    <p><strong class="text-slate-200">Mobile:</strong> Fully optimized for all devices.</p>
                 </div>
-            </article>
             </div>
-    </main>
+            <div class="p-6 pt-0 space-y-3">
+                <a href="sportzino-review.html" class="text-blue-400 font-semibold text-xs hover:underline block">Read Full Review →</a>
+                <a href="/go/sportzino?subid=card_sportzino" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors shadow-lg shadow-blue-600/20" aria-label="Play Now at Sportzino">
+                    Play Now at Sportzino
+                </a>
+            </div>
+        </article>
+
+        <!-- Card 2: Fortune Wins -->
+        <article class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden shadow-xl flex flex-col justify-between hover:border-slate-600 transition-all">
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Fortune Wins</h3>
+                    <span class="bg-amber-500/10 text-amber-400 text-xs font-semibold px-2.5 py-1 rounded border border-amber-500/20" aria-label="Category: Huge Jackpots">Huge Jackpots</span>
+                </div>
+                <p class="text-sm text-slate-400 mb-4">Widely known for massive progressive social jackpot tiers and an expansive collection of engaging slot alternatives.</p>
+                <div class="bg-slate-900/50 p-3 rounded-lg text-xs text-slate-400 border border-slate-800 mb-4">
+                    <div class="flex items-center justify-between gap-2 mb-1">
+                        <span class="text-amber-500 font-bold block text-sm">🎁 Highlight Offer</span>
+                        <span class="inline-flex items-center gap-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded border border-emerald-500/20">
+                            No Code Required — Auto-Applied
+                        </span>
+                    </div>
+                    <span>Massive welcome coin allocation for new US profiles. Alternative methods of entry available.</span>
+                </div>
+                <div class="text-xs text-slate-400 space-y-1">
+                    <p><strong class="text-slate-200">Welcome Package:</strong> Up to 500,000+ free coins on first login.</p>
+                    <p><strong class="text-slate-200">Loyalty:</strong> Progressive jackpot system with daily multiplier bonuses.</p>
+                    <p><strong class="text-slate-200">Support:</strong> 24/7 customer service available.</p>
+                </div>
+            </div>
+            <div class="p-6 pt-4">
+                <a href="/go/fortune-wins?subid=card_fortunewins" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors shadow-lg shadow-blue-600/20" aria-label="Play Now at Fortune Wins">
+                    Play Now at Fortune Wins
+                </a>
+            </div>
+        </article>
+
+        <!-- Card 3: Zula Casino -->
+        <article class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden shadow-xl flex flex-col justify-between hover:border-slate-600 transition-all">
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">Zula Casino</h3>
+                    <span class="bg-emerald-500/10 text-emerald-400 text-xs font-semibold px-2.5 py-1 rounded border border-emerald-500/20" aria-label="Category: Fast Redemption">Fast Redemption</span>
+                </div>
+                <p class="text-sm text-slate-400 mb-4">Features a modern gaming catalog optimized for mobile web layouts with emphasis on fast redemption turnaround.</p>
+                <div class="bg-slate-900/50 p-3 rounded-lg text-xs text-slate-400 border border-slate-800 mb-4">
+                    <div class="flex items-center justify-between gap-2 mb-1">
+                        <span class="text-amber-500 font-bold block text-sm">🎁 Highlight Offer</span>
+                        <span class="inline-flex items-center gap-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded border border-emerald-500/20">
+                            No Code Required — Auto-Applied
+                        </span>
+                    </div>
+                    <span>Competitive daily bonus wheel loops. Terms apply: 18+ valid US identification required.</span>
+                </div>
+                <div class="text-xs text-slate-400 space-y-1">
+                    <p><strong class="text-slate-200">Mobile Optimized:</strong> Seamless experience on all devices.</p>
+                    <p><strong class="text-slate-200">Fast Payouts:</strong> Redemption processed within 3-5 business days.</p>
+                    <p><strong class="text-slate-200">Game Variety:</strong> 500+ verified games in portfolio.</p>
+                </div>
+            </div>
+            <div class="p-6 pt-4">
+                <a href="/go/zula-casino?subid=card_zulacasino" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors shadow-lg shadow-blue-600/20" aria-label="Play Now at Zula Casino">
+                    Play Now at Zula Casino
+                </a>
+            </div>
+        </article>
+
+        <!-- Card 4: LuckParty -->
+        <article class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden shadow-xl flex flex-col justify-between hover:border-slate-600 transition-all">
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">LuckParty</h3>
+                    <span class="bg-purple-500/10 text-purple-400 text-xs font-semibold px-2.5 py-1 rounded border border-purple-500/20" aria-label="Category: Casual Social">Casual Social</span>
+                </div>
+                <p class="text-sm text-slate-400 mb-4">Features a community-focused casual layout with highly accessible interface options designed primarily for mobile play.</p>
+                <div class="bg-slate-900/50 p-3 rounded-lg text-xs text-slate-400 border border-slate-800 mb-4">
+                    <div class="flex items-center justify-between gap-2 mb-1">
+                        <span class="text-amber-500 font-bold block text-sm">🎁 Highlight Offer</span>
+                        <span class="inline-flex items-center gap-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded border border-emerald-500/20">
+                            No Code Required — Auto-Applied
+                        </span>
+                    </div>
+                    <span>Daily login multipliers available. Verification required for prize redemption.</span>
+                </div>
+                <div class="text-xs text-slate-400 space-y-1">
+                    <p><strong class="text-slate-200">Community Features:</strong> Leaderboards and social events.</p>
+                    <p><strong class="text-slate-200">Accessibility:</strong> Beginner-friendly interface design.</p>
+                    <p><strong class="text-slate-200">Bonus:</strong> Up to 250,000 free coins for new players.</p>
+                </div>
+            </div>
+            <div class="p-6 pt-4">
+                <a href="/go/luckparty?subid=card_luckparty" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors shadow-lg shadow-blue-600/20" aria-label="Play Now at LuckParty">
+                    Play Now at LuckParty
+                </a>
+            </div>
+        </article>
+
+        <!-- Card 5: AmericanLuck -->
+        <article class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden shadow-xl flex flex-col justify-between hover:border-slate-600 transition-all">
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white">AmericanLuck</h3>
+                    <span class="bg-pink-500/10 text-pink-400 text-xs font-semibold px-2.5 py-1 rounded border border-pink-500/20" aria-label="Category: Instant Wins">Instant Wins</span>
+                </div>
+                <p class="text-sm text-slate-400 mb-4">Specializes in fast-paced instant win games with quick payouts and straightforward gameplay mechanics.</p>
+                <div class="bg-slate-900/50 p-3 rounded-lg text-xs text-slate-400 border border-slate-800 mb-4">
+                    <div class="flex items-center justify-between gap-2 mb-1">
+                        <span class="text-amber-500 font-bold block text-sm">🎁 Highlight Offer</span>
+                        <span class="inline-flex items-center gap-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded border border-emerald-500/20">
+                            No Code Required — Auto-Applied
+                        </span>
+                    </div>
+                    <span>Instant welcome bonus upon signup. Weekly prize drawings for active players.</span>
+                </div>
+                <div class="text-xs text-slate-400 space-y-1">
+                    <p><strong class="text-slate-200">Speed:</strong> Instant game results and quick withdrawals.</p>
+                    <p><strong class="text-slate-200">Weekly Draws:</strong> Additional prize opportunities every week.</p>
+                    <p><strong class="text-slate-200">Signup Bonus:</strong> 100,000 free coins immediately.</p>
+                </div>
+            </div>
+            <div class="p-6 pt-4">
+                <a href="/go/americanluck?subid=card_americanluck" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors shadow-lg shadow-blue-600/20" aria-label="Play Now at AmericanLuck">
+                    Play Now at AmericanLuck
+                </a>
+            </div>
+        </article>
+
+    </div> 
+    <!-- GRID WRAPPER END -->
+</main>
+
     
     <!-- Public Review Submission Section Matrix -->
 <section id="review-submission-box" class="max-w-xl mx-auto px-6 py-8 bg-slate-800/40 border border-slate-700/60 rounded-xl my-12 shadow-2xl">
@@ -549,261 +681,157 @@
             </div>
         </div>
     </footer>
-
-    <!-- Accessibility: Skip to content link (hidden but keyboard-accessible) -->
-    <a href="#reviews" class="sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-50 bg-blue-600 text-white p-2 rounded">Skip to main content</a>
-
-                
-                <!-- Cookie Consent Popup -->
-<div id="cookieConsent" class="fixed bottom-4 right-4 bg-slate-800 border border-slate-700 rounded-lg shadow-2xl p-6 max-w-sm z-50 hidden" role="dialog" aria-labelledby="cookieTitle" aria-describedby="cookieDesc">
-    <div class="flex justify-between items-start mb-3">
-        <h3 id="cookieTitle" class="font-bold text-white text-sm">Cookie & Privacy Notice</h3>
-        <button id="cookieClose" class="text-slate-400 hover:text-white text-lg leading-none" aria-label="Close cookie consent">&times;</button>
+    <!-- Cookie Consent Modal -->
+    <div id="cookieConsent" class="fixed bottom-4 right-4 bg-slate-800 border border-slate-700 rounded-lg shadow-2xl p-6 max-w-sm z-50 hidden" role="dialog" aria-labelledby="cookieTitle">
+        <div class="flex justify-between items-start mb-3">
+            <h3 id="cookieTitle" class="font-bold text-white text-sm">Cookie & Privacy Notice</h3>
+            <button id="cookieClose" class="text-slate-400 hover:text-white text-lg leading-none" aria-label="Close cookie consent">&times;</button>
+        </div>
+        <p class="text-xs text-slate-400 mb-4">
+            We use cookies to enhance your experience, analyze site traffic, and serve personalized content. By continuing to browse, you agree to our cookie use and privacy practices.
+        </p>
+        <div class="flex gap-3 mb-3">
+            <button id="cookieAccept" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-medium py-2 px-3 rounded text-xs transition-colors">Accept All</button>
+            <button id="cookieDecline" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-medium py-2 px-3 rounded text-xs transition-colors">Decline</button>
+        </div>
+        <p class="text-xs text-slate-500 text-center">
+            <a href="compliance.html" class="text-blue-400 hover:text-blue-300 underline">Privacy & Cookie Policy</a>
+        </p>
     </div>
-    <p id="cookieDesc" class="text-xs text-slate-400 mb-4">
-        We use cookies to enhance your experience, analyze site traffic, and serve personalized content. By continuing to browse, you agree to our cookie use and privacy practices.
-    </p>
-    <div class="flex gap-3 mb-3">
-        <button id="cookieAccept" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-medium py-2 px-3 rounded text-xs transition-colors">Accept All</button>
-        <button id="cookieDecline" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-medium py-2 px-3 rounded text-xs transition-colors">Decline</button>
-    </div>
-    <p class="text-xs text-slate-500 text-center">
-        <a href="compliance.html" class="text-blue-400 hover:text-blue-300 underline">Privacy & Cookie Policy</a>
-    </p>
-</div>
 
-<script>
-// Mobile Menu Toggle
-document.getElementById('mobileMenuBtn').addEventListener('click', function () {
-    const mobileMenu = document.getElementById('mobileMenu');
-    const isExpanded = this.getAttribute('aria-expanded') === 'true';
-    this.setAttribute('aria-expanded', !isExpanded);
-    mobileMenu.classList.toggle('hidden');
-});
+    <!-- External Cookie Tracker Script -->
+    <script src="cookie-tracker.js" defer></script>
 
-// Close mobile menu when a link is clicked
-document.querySelectorAll('#mobileMenu a').forEach(link => {
-    link.addEventListener('click', function () {
-        document.getElementById('mobileMenu').classList.add('hidden');
-        document.getElementById('mobileMenuBtn').setAttribute('aria-expanded', 'false');
-    });
-});
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<!-- Supabase Core JavaScript SDK Client CDN Link -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-                
-<!-- Database Pipeline Logic Engine -->
-<script>
-    // Initialize the Supabase Client Engine using free public tier parameters
-    const SUPABASE_URL = "https://ssspyccbehzzvwqgjpkh.supabase.co";
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzc3B5Y2NiZWh6enZ3cWdqcGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMDgwMzcsImV4cCI6MjEwNTg4NDAzN30.3dQor84oyf4HR65ZRPSGz13RpESvHNzHVPUM7gh2M6I";
-    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    <!-- Unified Application Logic & Tracking Script -->
+    <script>
+        // 1. Mobile Navigation Toggle Logic
+        document.getElementById('mobileMenuBtn')?.addEventListener('click', function () {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            mobileMenu.classList.toggle('hidden');
+        });
 
-    async function handleReviewSubmit(event) {
-        event.preventDefault(); // Stop standard page refreshing behavior
-        
-        const submitBtn = document.getElementById('submitBtn');
-        const successAlert = document.getElementById('form-success');
-        const errorAlert = document.getElementById('form-error');
-        
-        // Visual Loading State Toggles
-        submitBtn.disabled = true;
-        submitBtn.innerText = "Sending...";
-        successAlert.classList.add('hidden');
-        errorAlert.classList.add('hidden');
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.getElementById('mobileMenu')?.classList.add('hidden');
+                document.getElementById('mobileMenuBtn')?.setAttribute('aria-expanded', 'false');
+            });
+        });
 
-        // Extracting input parameters
-        const email = document.getElementById('userEmail').value;
-        const brand = document.getElementById('brandName').value;
-        const comment = document.getElementById('reviewText').value;
+        // 2. Supabase Integration
+        const SUPABASE_URL = "https://ssspyccbehzzvwqgjpkh.supabase.co";
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzc3B5Y2NiZWh6enZ3cWdqcGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMDgwMzcsImV4cCI6MjEwNTg4NDAzN30.3dQor84oyf4HR65ZRPSGz13RpESvHNzHVPUM7gh2M6I";
+        const _supabase = window.supabase ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
-        // Inject payload directly via safe public client connection rules
-        const { data, error } = await _supabase
-            .from('public_reviews')
-            .insert([
-                { 
-                    brand_name: brand, 
-                    user_email: email, 
-                    review_text: comment,
-                    status: 'pending' // Enforces compliance processing baseline status
-                }
-            ]);
+        async function handleReviewSubmit(event) {
+            event.preventDefault();
+            if (!_supabase) return;
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const successAlert = document.getElementById('form-success');
+            const errorAlert = document.getElementById('form-error');
+            
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Sending...";
+            successAlert.classList.add('hidden');
+            errorAlert.classList.add('hidden');
 
-        if (error) {
-            console.error("Supabase Database Error:", error.message);
-            errorAlert.classList.remove('hidden');
-            submitBtn.disabled = false;
-            submitBtn.innerText = "Submit to Compliance Queue";
-        } else {
-            // Success response triggers
-            successAlert.classList.remove('hidden');
-            document.getElementById('publicReviewForm').reset();
-            submitBtn.innerText = "Submission Logged";
-            // Re-enable button after cooldown layout
-            setTimeout(() => {
+            const email = document.getElementById('userEmail').value;
+            const brand = document.getElementById('brandName').value;
+            const comment = document.getElementById('reviewText').value;
+
+            const { data, error } = await _supabase
+                .from('public_reviews')
+                .insert([{ brand_name: brand, user_email: email, review_text: comment, status: 'pending' }]);
+
+            if (error) {
+                console.error("Supabase Error:", error.message);
+                errorAlert.classList.remove('hidden');
                 submitBtn.disabled = false;
                 submitBtn.innerText = "Submit to Compliance Queue";
-            }, 3000);
+            } else {
+                successAlert.classList.remove('hidden');
+                document.getElementById('publicReviewForm').reset();
+                submitBtn.innerText = "Submission Logged";
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "Submit to Compliance Queue";
+                }, 3000);
+            }
         }
-    }
-</script>
-                <script>
-                function escapeHtml(str) {
+
+        function escapeHtml(str) {
             return (str || '').replace(/[&<>"']/g, match => ({
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                '"': '&quot;',
-                "'": '&#39;'
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
             })[match]);
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            if (typeof loadApprovedReviews === 'function') {
-                loadApprovedReviews();
+        async function loadApprovedReviews() {
+            const container = document.getElementById('publicReviewsContainer');
+            if (!container || !_supabase) return;
+
+            const { data: reviews, error } = await _supabase
+                .from('public_reviews')
+                .select('brand_name, user_email, review_text, created_at')
+                .eq('status', 'approved')
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                container.innerHTML = '<p class="text-slate-400 text-xs col-span-full">Unable to load community reviews at this time.</p>';
+                return;
             }
-        });
-         </script>
+            if (!reviews || reviews.length === 0) {
+                container.innerHTML = '<p class="text-slate-400 text-xs col-span-full">No verified community reviews published yet.</p>';
+                return;
+            }
 
-                
-<script>
-    // Retrieve and render approved reviews on page load
-    async function loadApprovedReviews() {
-        const container = document.getElementById('publicReviewsContainer');
-        const { data: reviews, error } = await _supabase
-            .from('public_reviews')
-            .select('brand_name, user_email, review_text, created_at')
-            .eq('status', 'approved')
-            .order('created_at', { ascending: false });
-
-        if (error) {
-            container.innerHTML = '<p class="text-slate-500 text-xs col-span-full">Unable to load community reviews.</p>';
-            return;
-        }
-        if (!reviews || reviews.length === 0) {
-            container.innerHTML = '<p class="text-slate-500 text-xs col-span-full">No verified community reviews published yet.</p>';
-<script>
-    // Initialize Supabase Client
-    const SUPABASE_URL = "https://ssspyccbehzzvwqgjpkh.supabase.co";
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzc3B5Y2NiZWh6enZ3cWdqcGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMDgwMzcsImV4cCI6MjEwNTg4NDAzN30.3dQor84oyf4HR65ZRPSGz13RpESvHNzHVPUM7gh2M6I";
-    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    // Form Submission
-    async function handleReviewSubmit(event) {
-        event.preventDefault();
-        
-        const submitBtn = document.getElementById('submitBtn');
-        const successAlert = document.getElementById('form-success');
-        const errorAlert = document.getElementById('form-error');
-        
-        submitBtn.disabled = true;
-        submitBtn.innerText = "Sending...";
-        successAlert.classList.add('hidden');
-        errorAlert.classList.add('hidden');
-
-        const email = document.getElementById('userEmail').value;
-        const brand = document.getElementById('brandName').value;
-        const comment = document.getElementById('reviewText').value;
-
-        const { data, error } = await _supabase
-            .from('public_reviews')
-            .insert([{ brand_name: brand, user_email: email, review_text: comment, status: 'pending' }]);
-
-        if (error) {
-            console.error("Supabase Database Error:", error.message);
-            errorAlert.classList.remove('hidden');
-            submitBtn.disabled = false;
-            submitBtn.innerText = "Submit to Compliance Queue";
-        } else {
-            successAlert.classList.remove('hidden');
-            document.getElementById('publicReviewForm').reset();
-            submitBtn.innerText = "Submission Logged";
-            setTimeout(() => {
-                submitBtn.disabled = false;
-                submitBtn.innerText = "Submit to Compliance Queue";
-            }, 3000);
-        }
-    }
-
-    // Helper to prevent XSS
-    function escapeHtml(str) {
-        return (str || '').replace(/[&<>"']/g, match => ({
-            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-        })[match]);
-    }
-
-    // Load Approved Reviews
-    async function loadApprovedReviews() {
-        const container = document.getElementById('publicReviewsContainer');
-        if (!container) return;
-
-        const { data: reviews, error } = await _supabase
-            .from('public_reviews')
-            .select('brand_name, user_email, review_text, created_at')
-            .eq('status', 'approved')
-            .order('created_at', { ascending: false });
-
-        if (error) {
-            container.innerHTML = '<p class="text-slate-500 text-xs col-span-full">Unable to load community reviews.</p>';
-            return;
-        }
-        if (!reviews || reviews.length === 0) {
-            container.innerHTML = '<p class="text-slate-500 text-xs col-span-full">No verified community reviews published yet.</p>';
-            return;
-        }
-
-        container.innerHTML = reviews.map(review => {
-            const parts = review.user_email.split('@');
-            const obfuscatedEmail = parts[0].charAt(0) + '***' + parts[0].slice(-1) + '@' + (parts[1] || '');
-            return `
-                <div class="bg-slate-800/60 p-5 rounded-xl border border-slate-700/80 shadow-lg flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="font-bold text-white text-sm">${escapeHtml(review.brand_name)}</span>
-                            <span class="bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded border border-emerald-500/20">Verified Player</span>
+            container.innerHTML = reviews.map(review => {
+                const parts = review.user_email.split('@');
+                const obfuscatedEmail = parts[0].charAt(0) + '***' + parts[0].slice(-1) + '@' + (parts[1] || '');
+                return `
+                    <div class="bg-slate-800/60 p-5 rounded-xl border border-slate-700/80 shadow-lg flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="font-bold text-white text-sm">${escapeHtml(review.brand_name)}</span>
+                                <span class="bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded border border-emerald-500/20">Verified Player</span>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-4">${escapeHtml(review.review_text)}</p>
                         </div>
-                        <p class="text-xs text-slate-300 leading-relaxed mb-4">${escapeHtml(review.review_text)}</p>
+                        <div class="text-[10px] text-slate-400 border-t border-slate-700/50 pt-2 flex justify-between">
+                            <span>${obfuscatedEmail}</span>
+                            <span>${new Date(review.created_at).toLocaleDateString()}</span>
+                        </div>
                     </div>
-                    <div class="text-[10px] text-slate-500 border-t border-slate-700/50 pt-2 flex justify-between">
-                        <span>${obfuscatedEmail}</span>
-                        <span>${new Date(review.created_at).toLocaleDateString()}</span>
-                    </div>
-                </div>
-            `;
-        }).join('');
-    }
+                `;
+            }).join('');
+        }
 
-    document.addEventListener('DOMContentLoaded', loadApprovedReviews);
-</script>
-<script src="cookie-tracker.js" defer></script>
-<!-- Dynamic Traffic Source & SubID Tracking Script -->
-<script>
-  (function () {
-    // Capture acquisition source from landing URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const trafficSource = urlParams.get('utm_source') || urlParams.get('ref') || (document.referrer ? new URL(document.referrer).hostname : 'direct');
+        document.addEventListener('DOMContentLoaded', loadApprovedReviews);
 
-    // Store source in session storage for multi-page browsing
-    if (!sessionStorage.getItem('sh_source')) {
-      sessionStorage.setItem('sh_source', trafficSource.replace(/[^a-zA-Z0-0_-]/g, ''));
-    }
+        // 3. Dynamic SubID & Link Cloaking Parameter Tracking
+        (function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const trafficSource = urlParams.get('utm_source') || urlParams.get('ref') || (document.referrer ? new URL(document.referrer).hostname : 'direct');
 
-    const savedSource = sessionStorage.getItem('sh_source') || 'direct';
+            if (!sessionStorage.getItem('sh_source')) {
+                sessionStorage.setItem('sh_source', trafficSource.replace(/[^a-zA-Z0-9_-]/g, ''));
+            }
 
-    // Automatically enrich all /go/ cloaked affiliate links on page load
-    document.addEventListener('DOMContentLoaded', function () {
-      document.querySelectorAll('a[href^="/go/"]').forEach(function (link) {
-        const linkUrl = new URL(link.getAttribute('href'), window.location.origin);
-        const currentSubId = linkUrl.searchParams.get('subid') || 'general';
+            const savedSource = sessionStorage.getItem('sh_source') || 'direct';
 
-        // Resulting SubID format: "quick_comp_row1_google" or "card_sportzino_reddit"
-        linkUrl.searchParams.set('subid', `${currentSubId}_${savedSource}`);
-        link.setAttribute('href', linkUrl.pathname + linkUrl.search);
-      });
-    });
-  })();
-</script>
-
-            </body>
-            </html>
-            
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelectorAll('a[href^="/go/"]').forEach(function (link) {
+                    const linkUrl = new URL(link.getAttribute('href'), window.location.origin);
+                    const currentSubId = linkUrl.searchParams.get('subid') || 'general';
+                    linkUrl.searchParams.set('subid', `${currentSubId}_${savedSource}`);
+                    link.setAttribute('href', linkUrl.pathname + linkUrl.search);
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
