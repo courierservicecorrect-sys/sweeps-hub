@@ -1,117 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-J9D9QXHKQ0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <meta charset="UTF-8">
+    <!-- Viewport Tag for Proper Mobile Rendering & Responsive Scaling -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  gtag('config', 'G-J9D9QXHKQ0');
-</script>
+    <!-- SEO Meta Tags -->
     <title>Sweeps Review Hub - Reliable US Social Casino & Sweepstakes Reviews and Info Guide</title>
+    <meta name="description" content="Read objective, compliance-focused evaluations of top US social casinos and sweepstakes platforms. Discover free entry mechanics, promo codes, and legally verified reviews.">
+    <meta name="robots" content="index, follow">
+
+    <!-- Canonical URL to Prevent Duplicate Content Penalties -->
+    <link rel="canonical" href="https://sweeps-hub.vercel.app/index.html">
+
+    <!-- Open Graph / Social Sharing Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Sweeps Review Hub - US Social Casino & Sweepstakes Reviews">
+    <meta property="og:description" content="Independent, compliance-focused evaluations of top US social gaming platforms and free sweepstakes entry guides.">
+    <meta property="og:url" content="https://sweeps-hub.vercel.app/index.html">
+    <meta property="og:site_name" content="Sweeps Review Hub">
+
+    <!-- Preconnect to CDNs to eliminate network delay -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Preconnect to CDNs to eliminate network delay -->
-<link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
-<link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
 
-<!-- Tailwind CDN JIT Script -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Tag Manager / Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J9D9QXHKQ0"></script>
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              brandDark: '#0f172a',
-              brandAccent: '#3b82f6',
-              brandGold: '#f59e0b',
-            }
-          }
-        }
-      }
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-J9D9QXHKQ0');
     </script>
 
-    <!-- ADD CUSTOM CONTRAST OVERRIDES HERE -->
-    <style>
-      /* Primary Text / Headings Override */
-      .text-slate-600 {
-        color: #f1f5f9 !important; /* Equivalent to text-slate-100 */
-      }
-
-      /* Secondary / Muted Body Text Override */
-      .text-slate-500,
-      .text-slate-400 {
-        color: #cbd5e1 !important; /* Equivalent to text-slate-300 */
-      }
-    </style>
-
-    <!-- Schema.org JSON-LD Structured Data -->
+    <!-- Schema.org JSON-LD Structured Data (Aligned Domain & Canonical Rules) -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "Sweeps Review Hub",
         "description": "Expert reviews of top US social casinos and sweepstakes platforms",
-        "url": "https://sweepsreviewhub.com",
+        "url": "https://sweeps-hub.vercel.app/index.html",
         "potentialAction": {
             "@type": "SearchAction",
             "target": {
                 "@type": "EntryPoint",
-                "urlTemplate": "https://sweepsreviewhub.com?search={search_term_string}"
-            }
+                "urlTemplate": "https://sweeps-hub.vercel.app/index.html?search={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
         }
     }
     </script>
 </head>
+
 <body class="bg-slate-900 text-slate-100 font-sans antialiased"> 
-    
     <!-- 1. Affiliate Disclosure Banner -->
-    <div class="bg-slate-800 border-b border-slate-700 text-center py-2 px-4 text-xs text-slate-400" role="banner">
+    <div class="bg-slate-800 border-b border-slate-700 text-center py-2 px-4 text-xs text-slate-300" role="banner">
         <p><strong>Advertiser Disclosure:</strong> Sweeps Review Hub is an independent review site. We may receive compensation or commissions when you click on links or sign up via our partner platforms. This does not affect our editorial integrity or review process. All opinions expressed are our own.</p>
     </div>
-
-    <!-- 2. Navigation Bar -->
-    <nav class="bg-slate-900 border-b border-slate-800 sticky top-0 z-40" aria-label="Main navigation">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center gap-2">
-                    <span class="text-2xl font-bold bg-gradient-to-r from-blue-500 to-amber-500 bg-clip-text text-transparent">Sweeps Review Hub</span>
-                </div>
-                <!-- Mobile Menu Button -->
-<button class="md:hidden text-slate-300 hover:text-blue-500 transition-colors" aria-label="Toggle mobile menu" aria-expanded="false" id="mobileMenuBtn">
-  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-  </svg>
-</button>
-                
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
-                    <a href="#reviews" class="hover:text-blue-500 transition-colors" aria-label="Navigate to casino reviews">Casino Reviews</a>
-                    <a href="#how-it-works" class="hover:text-blue-500 transition-colors" aria-label="Learn how sweepstakes work">How It Works</a>
-                    <a href="compliance.html" class="hover:text-blue-500 transition-colors" aria-label="Compliance and legal information">Compliance & Legal</a>
-                    <a href="#responsible-gaming" class="hover:text-blue-500 transition-colors" aria-label="Responsible gaming resources">Responsible Gaming</a>
-                </div>
-
-            <!-- Mobile Navigation Menu -->
-            <div id="mobileMenu" class="hidden md:hidden pb-4 space-y-2">
-                <a href="#reviews" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">Casino Reviews</a>
-                <a href="#how-it-works" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">How It Works</a>
-                <a href="compliance.html" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">Compliance & Legal</a>
-                <a href="#responsible-gaming" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">Responsible Gaming</a>
+    <!-- ✅ CORRECTION FOR NAV SECTION -->
+<nav class="bg-slate-900 border-b border-slate-800 sticky top-0 z-40" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl font-bold bg-gradient-to-r from-blue-500 to-amber-500 bg-clip-text text-transparent">Sweeps Review Hub</span>
             </div>
-            
-    </nav>
-
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-slate-300 hover:text-blue-500 transition-colors" aria-label="Toggle mobile menu" aria-expanded="false" id="mobileMenuBtn">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
+                <a href="#reviews" class="hover:text-blue-500 transition-colors">Casino Reviews</a>
+                <a href="#how-it-works" class="hover:text-blue-500 transition-colors">How It Works</a>
+                <a href="compliance.html" class="hover:text-blue-500 transition-colors">Compliance & Legal</a>
+                <a href="#responsible-gaming" class="hover:text-blue-500 transition-colors">Responsible Gaming</a>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="hidden md:hidden pb-4 space-y-2">
+            <a href="#reviews" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">Casino Reviews</a>
+            <a href="#how-it-works" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">How It Works</a>
+            <a href="compliance.html" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">Compliance & Legal</a>
+            <a href="#responsible-gaming" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">Responsible Gaming</a>
+        </div>
+    </div>
+</nav>
     <!-- 3. Hero Introduction -->
     <header class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8 text-center">
         <h1 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
             Top-Rated US <span class="text-amber-500">Sweepstakes & Social Casinos</span>
         </h1>
-        <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-6">
+        <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-6">
             Read objective, compliance-focused evaluations of top social gaming platforms. Discover legal ways to play across the United States using free entry alternatives.
         </p>
         <a href="#reviews" class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 px-8 rounded-lg transition-colors shadow-lg shadow-blue-600/30" aria-label="Jump to featured casinos">
@@ -123,9 +108,8 @@
   <h2 class="text-2xl font-bold text-slate-100 flex items-center gap-2">
     <span>🔥</span> Top-Rated Fast-Claim Offers
   </h2>
-  <p class="text-sm text-slate-400">Quick side-by-side evaluation of high-payout social casino platforms.</p>
+  <p class="text-sm text-slate-300">Quick side-by-side evaluation of high-payout social casino platforms.</p>
 </div>
-
   <div class="overflow-x-auto rounded-xl border border-gray-200 shadow-sm bg-white">
     <table class="w-full text-left border-collapse min-w-[640px]">
       <thead class="bg-slate-900 text-white text-xs uppercase tracking-wider">
@@ -158,8 +142,7 @@
             Free Gold Coins & Sweeps Coins upon verified registration
           </td>
           <td class="px-5 py-4 text-center">
-            <a 
-              href="https://sportzino.com/signup/38f6eadf-c246-40f2-bbb0-a345324e1b48?subid=quick_comp_row1" 
+               <a href="/go/sportzino?subid=quick_comp_row1" ...>
               target="_blank" 
               rel="noopener noreferrer" 
               class="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-5 rounded-lg shadow-sm hover:shadow text-sm transition-all transform active:scale-95"
@@ -190,8 +173,7 @@
             Up to 500,000+ free coins on first login allocation
           </td>
           <td class="px-5 py-4 text-center">
-            <a 
-              href="https://fortunewins.com/signup/d42b0f82-a6af-4700-bb8d-2de48f3c1424?subid=quick_comp_row2" 
+            <a href="/go/fortune-wins?subid=quick_comp_row2" ...>
               target="_blank" 
               rel="noopener noreferrer" 
               class="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-5 rounded-lg shadow-sm hover:shadow text-sm transition-all transform active:scale-95"
@@ -222,8 +204,7 @@
             Competitive daily bonus wheel loop + 500+ verified slots
           </td>
           <td class="px-5 py-4 text-center">
-            <a 
-              href="https://www.zulacasino.com/signup/782231f7-5f99-480d-8144-a28dd01240a8?subid=quick_comp_row3" 
+            <a href="/go/zula-casino?subid=quick_comp_row3" ...>
               target="_blank" 
               rel="noopener noreferrer" 
               class="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-5 rounded-lg shadow-sm hover:shadow text-sm transition-all transform active:scale-95"
@@ -269,7 +250,7 @@
                 <a href="sportzino-review.html" class="text-blue-400 font-semibold text-medium hover:underline block pt-2">Read Full Review →</a>
             </div>
                 <div class="p-6 pt-4">
-                    <a href="https://sportzino.com/signup/38f6eadf-c246-40f2-bbb0-a345324e1b48" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors shadow-lg shadow-blue-600/20" aria-label="Play Now at Sportzino">
+                    <a href="/go/sportzino?subid=card_sportzino"  target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors shadow-lg shadow-blue-600/20" aria-label="Play Now at Sportzino">
                         Play Now at Sportzino
                     </a>
                 </div>
@@ -294,7 +275,7 @@
                     </div>
                 </div>
                 <div class="p-6 pt-4">
-                    <a href="https://fortunewins.com/signup/d42b0f82-a6af-4700-bb8d-2de48f3c1424" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors shadow-lg shadow-blue-600/20" aria-label="Play Now at Fortune Wins">
+                    <a href="/go/fortune-wins?subid=card_fortunewins" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors shadow-lg shadow-blue-600/20" aria-label="Play Now at Fortune Wins">
                         Play Now at Fortune Wins
                     </a>
                 </div>
@@ -319,7 +300,7 @@
                     </div>
                 </div>
                 <div class="p-6 pt-4">
-                    <a href="https://www.zulacasino.com/signup/782231f7-5f99-480d-8144-a28dd01240a8" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors shadow-lg shadow-blue-600/20" aria-label="Play Now at Zula Casino">
+                    <a href="/go/zula-casino?subid=card_zulacasino" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors shadow-lg shadow-blue-600/20" aria-label="Play Now at Zula Casino">
                         Play Now at Zula Casino
                     </a>
                 </div>
@@ -344,7 +325,7 @@
                     </div>
                 </div>
                 <div class="p-6 pt-4">
-                    <a href="https://luckparty.com/signup/c101a55f-17e0-420c-9c40-625c64ba467c" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors shadow-lg shadow-blue-600/20" aria-label="Play Now at LuckParty">
+                    <a href="/go/luckparty?subid=card_luckparty" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors shadow-lg shadow-blue-600/20" aria-label="Play Now at LuckParty">
                         Play Now at LuckParty
                     </a>
                 </div>
@@ -369,13 +350,12 @@
                     </div>
                 </div>
                 <div class="p-6 pt-4">
-                    <a href="https://americanluck.com/signup/7c4d43e2-e791-4ec2-a2b1-7a126ca96eb5" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors shadow-lg shadow-blue-600/20" aria-label="Play Now at AmericanLuck">
+                    <a href="/go/americanluck?subid=card_americanluck" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors shadow-lg shadow-blue-600/20" aria-label="Play Now at AmericanLuck">
                         Play Now at AmericanLuck
                     </a>
                 </div>
             </article>
-
-        
+            </div>
     </main>
     
     <!-- Public Review Submission Section Matrix -->
@@ -796,6 +776,33 @@ document.querySelectorAll('#mobileMenu a').forEach(link => {
     document.addEventListener('DOMContentLoaded', loadApprovedReviews);
 </script>
 <script src="cookie-tracker.js" defer></script>
+<!-- Dynamic Traffic Source & SubID Tracking Script -->
+<script>
+  (function () {
+    // Capture acquisition source from landing URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const trafficSource = urlParams.get('utm_source') || urlParams.get('ref') || (document.referrer ? new URL(document.referrer).hostname : 'direct');
+
+    // Store source in session storage for multi-page browsing
+    if (!sessionStorage.getItem('sh_source')) {
+      sessionStorage.setItem('sh_source', trafficSource.replace(/[^a-zA-Z0-0_-]/g, ''));
+    }
+
+    const savedSource = sessionStorage.getItem('sh_source') || 'direct';
+
+    // Automatically enrich all /go/ cloaked affiliate links on page load
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('a[href^="/go/"]').forEach(function (link) {
+        const linkUrl = new URL(link.getAttribute('href'), window.location.origin);
+        const currentSubId = linkUrl.searchParams.get('subid') || 'general';
+
+        // Resulting SubID format: "quick_comp_row1_google" or "card_sportzino_reddit"
+        linkUrl.searchParams.set('subid', `${currentSubId}_${savedSource}`);
+        link.setAttribute('href', linkUrl.pathname + linkUrl.search);
+      });
+    });
+  })();
+</script>
 
             </body>
             </html>
