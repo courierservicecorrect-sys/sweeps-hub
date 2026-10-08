@@ -117,7 +117,7 @@ messageEl.className = "text-xs mt-3 text-emerald-400 block"></p>
             } else {
                 showDashboard();
             }
-        }
+        
         async function handlePasswordReset() {
   const email = document.getElementById('adminEmail').value.trim();
   const authError = document.getElementById('authError');
@@ -126,10 +126,8 @@ messageEl.className = "text-xs mt-3 text-emerald-400 block"></p>
     authError.innerText = "Please enter your admin email address first.";
     authError.classList.remove('hidden');
     return;
-  }
-
-  authError.innerText = "Sending password reset link...";
-  authError.classList.remove('hidden');
+    authError.innerText = "Sending password reset link...";
+    authError.classList.remove('hidden');
 
   const { error } = await _supabase.auth.resetPasswordForEmail(email, {
     redirectTo: `${window.location.origin}/admin.html#reset`
