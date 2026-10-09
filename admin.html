@@ -87,51 +87,78 @@
 
   // Check active session on page load
   const { data: { session } } = await _supabase.auth.getSession();
-  if (session) {
-    showDashboard();
-  }
-});
+  <script>
+    const SUPABASE_URL = "https://ssspyccbehzzvwqgjpkh.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzc3B5Y2NiZWh6enZ3cWdqcGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMDgwMzcsImV4cCI6MjEwNTg4NDAzN30.3dQor84oyf4HR65ZRPSGz13RpESvHNzHVPUM7gh2M6I";
+    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        async function handleLogin(e) {
-            e.preventDefault();
-            const email = document.getElementById('adminEmail').value;
-            const password = document.getElementById('adminPassword').value;
-            const authError = document.getElementById('authError');
-            
-            authError.classList.add('hidden');
-
-            const { data, error } = await _supabase.auth.signInWithPassword({ email, password });
-
-            if (error) {
-                authError.innerText = error.message;
-                authError.classList.remove('hidden');
-            } else {
-                showDashboard();
+    // Check active session on page load
+    document.addEventListener('DOMContentLoaded', async () => {
+        // Listen for password recovery links clicked from email
+        _supabase.auth.onAuthStateChange(async (event, session) => {
+            if (event === 'PASSWORD_RECOVERY') {
+                const newPassword = prompt("Enter your new admin password:");
+                if (newPassword) {
+                    const { error } = await _supabase.auth.updateUser({ password: newPassword });
+                    if (error) {
+                        alert("Error updating password: " + error.message);
+                    } else {
+                        alert("Password updated successfully!");
+                        showDashboard();
+                    }
+                }
             }
+        });
+
+        const { data: { session } } = await _supabase.auth.getSession();
+        if (session) {
+            showDashboard();
         }
-        async function handlePasswordReset() {
-  const email = document.getElementById('adminEmail').value.trim();
-  const authError = document.getElementById('authError');
+    });
 
-  if (!email) {
-    authError.innerText = "Please enter your admin email address first.";
-    authError.classList.remove('hidden');
-    return;
-    authError.innerText = "Sending password reset link...";
-    authError.classList.remove('hidden');
+    async function handleLogin(e) {
+        e.preventDefault();
+        const email = document.getElementById('adminEmail').value;
+        const password = document.getElementById('adminPassword').value;
+        const authError = document.getElementById('authError');
 
-  const { error } = await _supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${window.location.origin}/admin.html#reset`
-  });
+        authError.classList.add('hidden');
 
-  if (error) {
-    authError.innerText = error.message;
-    authError.classList.remove('hidden');
-  } else {
-    authError.innerText = "Password reset link sent! Check your inbox.";
-    authError.classList.remove('hidden');
-  } 
-}
+        const { data, error } = await _supabase.auth.signInWithPassword({ email, password });
+
+        if (error) {
+            authError.innerText = error.message;
+            authError.classList.remove('hidden');
+        } else {
+            showDashboard();
+        }
+    }
+
+    async function handlePasswordReset() {
+        const email = document.getElementById('adminEmail').value.trim();
+        const authError = document.getElementById('authError');
+
+        if (!email) {
+            authError.innerText = "Please enter your admin email address first.";
+            authError.classList.remove('hidden');
+            return;
+        }
+
+        authError.innerText = "Sending password reset link...";
+        authError.classList.remove('hidden');
+
+        const { error } = await _supabase.auth.resetPasswordForEmail(email, {
+            redirectTo: `${window.location.origin}/admin.html#reset`
+        });
+
+        if (error) {
+            authError.innerText = error.message;
+            authError.classList.remove('hidden');
+        } else {
+            authError.innerText = "Password reset link sent! Check your inbox.";
+            authError.classList.remove('hidden');
+        }
+    }
         async function handleLogout() {
             await _supabase.auth.signOut();
             document.getElementById('authSection').classList.remove('hidden');
