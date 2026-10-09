@@ -44,8 +44,9 @@
                 <button type="submit" id="loginBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 px-4 rounded text-xs transition-colors">Log In</button>
                 <div class="text-right mt-2">
                     <button type="button" onclick="handlePasswordReset()" class="text-[11px] text-blue-400 hover:underline focus:outline-none">Forgot Password?</button>
-                <p id="authError" class="text-xs mt-3 text-emerald-400 block hidden"></p>    
-            </form>
+                </div>
+                <p id="authError" class="text-xs mt-3 text-emerald-400 block hidden"></p>
+           </form>
         </div>  
         <!-- Moderation Queue (Shown when authenticated) -->
         <div id="dashboardSection" class="hidden space-y-6">
@@ -140,6 +141,59 @@
 
         if (!email) {
             authError.innerText = "Please enter your admin email address first.";
+            auth<script>
+    const SUPABASE_URL = "https://ssspyccbehzzvwqgjpkh.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzc3B5Y2NiZWh6enZ3cWdqcGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMDgwMzcsImV4cCI6MjEwNTg4NDAzN30.3dQor84oyf4HR65ZRPSGz13RpESvHNzHVPUM7gh2M6I";
+    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        // Listen for password recovery links clicked from email
+        _supabase.auth.onAuthStateChange(async (event, session) => {
+            if (event === 'PASSWORD_RECOVERY') {
+                const newPassword = prompt("Enter your new admin password:");
+                if (newPassword) {
+                    const { error } = await _supabase.auth.updateUser({ password: newPassword });
+                    if (error) {
+                        alert("Error updating password: " + error.message);
+                    } else {
+                        alert("Password updated successfully!");
+                        showDashboard();
+                    }
+                }
+            }
+        });
+
+        // Check active session on page load
+        const { data: { session } } = await _supabase.auth.getSession();
+        if (session) {
+            showDashboard();
+        }
+    });
+
+    async function handleLogin(e) {
+        e.preventDefault();
+        const email = document.getElementById('adminEmail').value;
+        const password = document.getElementById('adminPassword').value;
+        const authError = document.getElementById('authError');
+
+        authError.classList.add('hidden');
+
+        const { data, error } = await _supabase.auth.signInWithPassword({ email, password });
+
+        if (error) {
+            authError.innerText = error.message;
+            authError.classList.remove('hidden');
+        } else {
+            showDashboard();
+        }
+    }
+
+    async function handlePasswordReset() {
+        const email = document.getElementById('adminEmail').value.trim();
+        const authError = document.getElementById('authError');
+
+        if (!email) {
+            authError.innerText = "Please enter your admin email address first.";
             authError.classList.remove('hidden');
             return;
         }
@@ -158,7 +212,7 @@
             authError.innerText = "Password reset link sent! Check your inbox.";
             authError.classList.remove('hidden');
         }
-    }
+    }  
         async function handleLogout() {
             await _supabase.auth.signOut();
             document.getElementById('authSection').classList.remove('hidden');
