@@ -38,13 +38,14 @@
             <div>
                 <div class="flex justify-between items-center mb-1">
                     <label class="block text-xs font-semibold text-slate-300">Password</label>
-                    <button type="button" onclick="handlePasswordReset()" class="text-[11px] text-blue-400 hover:underline focus:outline-none">Forgot Password?</button>
                 </div>
                 <input type="password" id="adminPassword" required class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500">
+                </div>
+                <button type="submit" id="loginBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 px-4 rounded text-xs transition-colors">Log In</button>
             </div>
-            <button type="submit" id="loginBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 px-4 rounded text-xs transition-colors">Log In</button>
-            <p id="authMessage" class="text-xs mt-3 text-emerald-400 block hidden"></p>    
-        </form>
+                <button type="button" onclick="handlePasswordReset()" class="text-[11px] text-blue-400 hover:underline focus:outline-none">Forgot Password?</button>
+                <p id="authMessage" class="text-xs mt-3 text-emerald-400 block hidden"></p>    
+            </form>
         </div>  
         <!-- Moderation Queue (Shown when authenticated) -->
         <div id="dashboardSection" class="hidden space-y-6">
