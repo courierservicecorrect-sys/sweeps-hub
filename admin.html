@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Review Moderation - Sweeps Review Hub</title>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-J9D9QXHKQ0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    
+    <!-- Google Analytics GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J9D9QXHKQ0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-J9D9QXHKQ0');
+    </script>
 
-  gtag('config', 'G-J9D9QXHKQ0');
-</script>
+    <!-- Tailwind CSS & Supabase JS v2 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -22,37 +24,36 @@
         <!-- Header -->
         <header class="flex justify-between items-center border-b border-slate-800 pb-4 mb-8">
             <h1 class="text-2xl font-bold text-white">Review Moderation Dashboard</h1>
-            <button id="logoutBtn" onclick="handleLogout()" class="hidden bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 py-2 px-4 rounded border border-slate-700">
+            <button id="logoutBtn" onclick="handleLogout()" class="hidden bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 py-2 px-4 rounded border border-slate-700 transition-colors">
                 Log Out
             </button>
         </header>
 
-      <!-- Auth Form (Shown when logged out) -->
+        <!-- Auth Form (Shown when logged out) -->
         <div id="authSection" class="max-w-md mx-auto bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl">
             <h2 class="text-lg font-bold text-white mb-4">Admin Authentication</h2>
             <form onsubmit="handleLogin(event)" class="space-y-4">
                 <div>
-                <label class="block text-xs font-semibold text-slate-300 mb-1">Admin Email</label>
-                <input type="email" id="adminEmail" required class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500">
-            </div>
-            <div>
-                <div class="flex justify-between items-center mb-1">
-                    <label class="block text-xs font-semibold text-slate-300">Password</label>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1" for="adminEmail">Admin Email</label>
+                    <input type="email" id="adminEmail" required class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500">
                 </div>
-                <input type="password" id="adminPassword" required class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1" for="adminPassword">Password</label>
+                    <input type="password" id="adminPassword" required class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500">
                 </div>
                 <button type="submit" id="loginBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 px-4 rounded text-xs transition-colors">Log In</button>
                 <div class="text-right mt-2">
                     <button type="button" onclick="handlePasswordReset()" class="text-[11px] text-blue-400 hover:underline focus:outline-none">Forgot Password?</button>
                 </div>
-                <p id="authError" class="text-xs mt-3 text-emerald-400 block hidden"></p>
-           </form>
+                <p id="authMessage" class="text-xs mt-3 hidden"></p>
+            </form>
         </div>  
+
         <!-- Moderation Queue (Shown when authenticated) -->
         <div id="dashboardSection" class="hidden space-y-6">
-            <div class="flex justify-between itms-center">
+            <div class="flex justify-between items-center">
                 <h2 class="text-xl font-semibold text-white">Pending Submissions Queue</h2>
-                <button onclick="fetchPendingReviews()" class="bg-blue-600/20 text-blue-400 hover:bg-blue-600/30 text-xs py-1.5 px-3 rounded border border-blue-500/30">
+                <button onclick="fetchPendingReviews()" class="bg-blue-600/20 text-blue-400 hover:bg-blue-600/30 text-xs py-1.5 px-3 rounded border border-blue-500/30 transition-colors">
                     ↻ Refresh Queue
                 </button>
             </div>
@@ -63,174 +64,162 @@
         </div>
     </div>
 
+    <!-- Application Script Logic -->
     <script>
         const SUPABASE_URL = "https://ssspyccbehzzvwqgjpkh.supabase.co";
         const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzc3B5Y2NiZWh6enZ3cWdqcGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMDgwMzcsImV4cCI6MjEwNTg4NDAzN30.3dQor84oyf4HR65ZRPSGz13RpESvHNzHVPUM7gh2M6I";
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // Check active session on page load
         document.addEventListener('DOMContentLoaded', async () => {
-  // Listen for password recovery links clicked from email
-  _supabase.auth.onAuthStateChange(async (event, session) => {
-    if (event === 'PASSWORD_RECOVERY') {
-      const newPassword = prompt("Enter your new admin password:");
-      if (newPassword) {
-        
-        if (error) {
-          alert("Error updating password: " + error.message);
-        } else {
-          alert("Password updated successfully!");
-          showDashboard();
-        }
-      }
-    }
-  });
-
-  // Check active session on page load
-    const SUPABASE_URL = "https://ssspyccbehzzvwqgjpkh.supabase.co";
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzc3B5Y2NiZWh6enZ3cWdqcGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMDgwMzcsImV4cCI6MjEwNTg4NDAzN30.3dQor84oyf4HR65ZRPSGz13RpESvHNzHVPUM7gh2M6I";
-    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    document.addEventListener('DOMContentLoaded', async () => {
-        // Listen for password recovery links clicked from email
-        _supabase.auth.onAuthStateChange(async (event, session) => {
-            if (event === 'PASSWORD_RECOVERY') {
-                const newPassword = prompt("Enter your new admin password:");
-                if (newPassword) {
-                    const { error } = await _supabase.auth.updateUser({ password: newPassword });
-                    if (error) {
-                        alert("Error updating password: " + error.message);
-                    } else {
-                        alert("Password updated successfully!");
-                        showDashboard();
+            // Handle Password Recovery flow from email link
+            _supabase.auth.onAuthStateChange(async (event, session) => {
+                if (event === 'PASSWORD_RECOVERY') {
+                    const newPassword = prompt("Enter your new admin password:");
+                    if (newPassword) {
+                        const { error } = await _supabase.auth.updateUser({ password: newPassword });
+                        if (error) {
+                            alert("Error updating password: " + error.message);
+                        } else {
+                            alert("Password updated successfully!");
+                            showDashboard();
+                        }
                     }
                 }
+            });
+
+            // Check active session on page load
+            const { data: { session } } = await _supabase.auth.getSession();
+            if (session) {
+                showDashboard();
             }
         });
 
-        // Check active session on page load
-        const { data: { session } } = await _supabase.auth.getSession();
-        if (session) {
-            showDashboard();
-        }
-    });
+        async function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('adminEmail').value.trim();
+            const password = document.getElementById('adminPassword').value;
+            const authMessage = document.getElementById('authMessage');
 
-    async function handleLogin(e) {
-        e.preventDefault();
-        const email = document.getElementById('adminEmail').value;
-        const password = document.getElementById('adminPassword').value;
-        const authError = document.getElementById('authError');
+            displayAuthMessage("", false);
 
-        authError.classList.add('hidden');
+            const { data, error } = await _supabase.auth.signInWithPassword({ email, password });
 
-        const { data, error } = await _supabase.auth.signInWithPassword({ email, password });
-
-        if (error) {
-            authError.innerText = error.message;
-            authError.classList.remove('hidden');
-        } else {
-            showDashboard();
-        }
-    }
-
-    async function handlePasswordReset() {
-        const email = document.getElementById('adminEmail').value.trim();
-        const authError = document.getElementById('authError');
-
-        if (!email) {
-            authError.innerText = "Please enter your admin email address first.";
-            authError.classList.remove('hidden');
-            return;
+            if (error) {
+                displayAuthMessage(error.message, true);
+            } else {
+                showDashboard();
+            }
         }
 
-        authError.innerText = "Sending password reset link...";
-        authError.classList.remove('hidden');
+        async function handlePasswordReset() {
+            const email = document.getElementById('adminEmail').value.trim();
 
-        const { error } = await _supabase.auth.resetPasswordForEmail(email, {
-            redirectTo: `${window.location.origin}/admin.html#reset`
-        });
+            if (!email) {
+                displayAuthMessage("Please enter your admin email address first.", true);
+                return;
+            }
 
-        if (error) {
-            authError.innerText = error.message;
-            authError.classList.remove('hidden');
-        } else {
-            authError.innerText = "Password reset link sent! Check your inbox.";
-            authError.classList.remove('hidden');
-        }
-    }
+            displayAuthMessage("Sending password reset link...", false);
 
-    async function handleLogout() {
-        await _supabase.auth.signOut();
-        document.getElementById('authSection').classList.remove('hidden');
-        document.getElementById('dashboardSection').classList.add('hidden');
-        document.getElementById('logoutBtn').classList.add('hidden');
-    }
+            const { error } = await _supabase.auth.resetPasswordForEmail(email, {
+                redirectTo: `${window.location.origin}/admin.html`
+            });
 
-    function showDashboard() {
-        document.getElementById('authSection').classList.add('hidden');
-        document.getElementById('dashboardSection').classList.remove('hidden');
-        document.getElementById('logoutBtn').classList.remove('hidden');
-        fetchPendingReviews();
-    }
-
-    async function fetchPendingReviews() {
-        const container = document.getElementById('reviewsContainer');
-        container.innerHTML = '<p class="text-slate-400 text-xs">Fetching queue...</p>';
-
-        const { data: reviews, error } = await _supabase
-            .from('public_reviews')
-            .select('*')
-            .eq('status', 'pending')
-            .order('created_at', { ascending: false });
-
-        if (error) {
-            container.innerHTML = `<p class="text-red-400 text-xs">Error fetching reviews: ${error.message}</p>`;
-            return;
+            if (error) {
+                displayAuthMessage(error.message, true);
+            } else {
+                displayAuthMessage("Password reset link sent! Check your inbox.", false);
+            }
         }
 
-        if (!reviews || reviews.length === 0) {
-            container.innerHTML = '<div class="bg-slate-800/50 p-6 rounded-lg text-center text-slate-400 text-xs border border-slate-800">No pending reviews in queue.</div>';
-            return;
+        async function handleLogout() {
+            await _supabase.auth.signOut();
+            document.getElementById('authSection').classList.remove('hidden');
+            document.getElementById('dashboardSection').classList.add('hidden');
+            document.getElementById('logoutBtn').classList.add('hidden');
+            displayAuthMessage("", false);
         }
 
-        container.innerHTML = reviews.map(review => `
-            <div class="bg-slate-800 p-5 rounded-lg border border-slate-700 flex flex-col md:flex-row justify-between gap-4">
-                <div class="space-y-2 text-xs">
-                    <div class="flex items-center gap-2">
-                        <span class="font-bold text-amber-400">${escapeHtml(review.brand_name)}</span>
-                        <span class="text-slate-500">•</span>
-                        <span class="text-slate-400">${escapeHtml(review.user_email)}</span>
-                    </div>
-                    <p class="text-slate-200 leading-relaxed bg-slate-900/50 p-3 rounded border border-slate-800">${escapeHtml(review.review_text)}</p>
-                </div>
-                <div class="flex md:flex-col gap-2 justify-end min-w-[120px]">
-                    <button onclick="updateStatus('${review.id}', 'approved')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-2 px-3 rounded transition-colors">
-                        Approve
-                    </button>
-                    <button onclick="updateStatus('${review.id}', 'rejected')" class="bg-red-600/20 hover:bg-red-600/30 text-red-400 text-xs font-bold py-2 px-3 rounded border border-red-500/30 transition-colors">
-                        Reject
-                    </button>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    async function updateStatus(id, newStatus) {
-        const { error } = await _supabase
-            .from('public_reviews')
-            .update({ status: newStatus })
-            .eq('id', id);
-
-        if (error) {
-            alert('Failed to update review: ' + error.message);
-        } else {
+        function showDashboard() {
+            document.getElementById('authSection').classList.add('hidden');
+            document.getElementById('dashboardSection').classList.remove('hidden');
+            document.getElementById('logoutBtn').classList.remove('hidden');
             fetchPendingReviews();
         }
-    }
 
-    function escapeHtml(str) {
-        return (str || '').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace/>/g, "&gt;");
-    }
-</script>
+        async function fetchPendingReviews() {
+            const container = document.getElementById('reviewsContainer');
+            container.innerHTML = '<p class="text-slate-400 text-xs">Fetching queue...</p>';
+
+            const { data: reviews, error } = await _supabase
+                .from('public_reviews')
+                .select('*')
+                .eq('status', 'pending')
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                container.innerHTML = `<p class="text-red-400 text-xs">Error fetching reviews: ${escapeHtml(error.message)}</p>`;
+                return;
+            }
+
+            if (!reviews || reviews.length === 0) {
+                container.innerHTML = '<div class="bg-slate-800/50 p-6 rounded-lg text-center text-slate-400 text-xs border border-slate-800">No pending reviews in queue.</div>';
+                return;
+            }
+
+            container.innerHTML = reviews.map(review => `
+                <div class="bg-slate-800 p-5 rounded-lg border border-slate-700 flex flex-col md:flex-row justify-between gap-4">
+                    <div class="space-y-2 text-xs flex-1">
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-amber-400">${escapeHtml(review.brand_name)}</span>
+                            <span class="text-slate-500">•</span>
+                            <span class="text-slate-400">${escapeHtml(review.user_email)}</span>
+                        </div>
+                        <p class="text-slate-200 leading-relaxed bg-slate-900/50 p-3 rounded border border-slate-800">${escapeHtml(review.review_text)}</p>
+                    </div>
+                    <div class="flex md:flex-col gap-2 justify-end min-w-[120px]">
+                        <button onclick="updateStatus('${review.id}', 'approved')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-2 px-3 rounded transition-colors">
+                            Approve
+                        </button>
+                        <button onclick="updateStatus('${review.id}', 'rejected')" class="bg-red-600/20 hover:bg-red-600/30 text-red-400 text-xs font-bold py-2 px-3 rounded border border-red-500/30 transition-colors">
+                            Reject
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function updateStatus(id, newStatus) {
+            const { error } = await _supabase
+                .from('public_reviews')
+                .update({ status: newStatus })
+                .eq('id', id);
+
+            if (error) {
+                alert('Failed to update review status: ' + error.message);
+            } else {
+                fetchPendingReviews();
+            }
+        }
+
+        function displayAuthMessage(msg, isError) {
+            const authMessage = document.getElementById('authMessage');
+            if (!msg) {
+                authMessage.classList.add('hidden');
+                return;
+            }
+            authMessage.innerText = msg;
+            authMessage.className = `text-xs mt-3 block ${isError ? 'text-red-400' : 'text-emerald-400'}`;
+        }
+
+        function escapeHtml(str) {
+            return (str || '')
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
 </body>
 </html>
