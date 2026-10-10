@@ -1,4 +1,7 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
     {
       "source": "/go/sportzino",
@@ -24,6 +27,51 @@
       "source": "/go/americanluck",
       "destination": "https://americanluck.com/signup/7c4d43e2-e791-4ec2-a2b1-7a126ca96eb5",
       "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/sportzino-review",
+      "destination": "/sportzino-review.html"
+    },
+    {
+      "source": "/fortunewins-review",
+      "destination": "/fortunewins-review.html"
+    },
+    {
+      "source": "/zula-review",
+      "destination": "/zula-review.html"
+    },
+    {
+      "source": "/compliance",
+      "destination": "/compliance.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
     }
   ]
 }
