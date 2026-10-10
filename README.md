@@ -18,7 +18,7 @@ Unlike traditional real-money gambling platforms, social casinos operate under f
 ## 📂 Educational Site Architecture
 
 - **index.html**: Primary directory featuring verified social gaming platforms, live community review cards, and consent-driven tracking.
-- **Zula-review.html**: Dedicated platform review and analysis page for Zula Casino (2026 edition).
+- **zula-review.html**: Dedicated platform review and analysis page for Zula Casino (2026 edition).
 - **winbonanza-review.html**: Dedicated platform review page for Win Bonanza with integrated referral tracking.
 - **free-entry-mechanics.html**: Comprehensive educational guide breaking down "No Purchase Necessary" (NPN) rules, mail-in sweepstakes requests (AMOEs), and daily coin claim schedules.
 - **prize-redemption-rules.html**: Transparent analysis of Know Your Customer (KYC) identity verification, playthrough multipliers, redemption thresholds, and payout timelines.
