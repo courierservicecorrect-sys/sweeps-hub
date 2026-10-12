@@ -27,6 +27,11 @@
       "source": "/go/americanluck",
       "destination": "https://americanluck.com/signup/7c4d43e2-e791-4ec2-a2b1-7a126ca96eb5",
       "permanent": false
+    },
+    {
+      "source": "/go/win-bonanza",
+      "destination": "https://winbonanza.com/register/7903b9f9-1929-4f2b-926e-34b30b9c5daf",
+      "permanent": false
     }
   ],
   "rewrites": [
