@@ -588,44 +588,45 @@
         }
 
         async function loadApprovedReviews() {
-            const container = document.getElementById('publicReviewsContainer');
-            if (!container || !_supabase) return;
+    const container = document.getElementById('publicReviewsContainer');
+    if (!container || !_supabase) return;
 
-            const { data: reviews, error } = await _supabase
-                .from('public_reviews')
-                .select('brand_name, user_email, review_text, created_at')
-                .eq('status', 'approved')
-                .order('created_at', { ascending: false });
+    const { data: reviews, error } = await _supabase
+        .from('public_reviews')
+        .select('brand_name, user_email, review_text, created_at')
+        .eq('status', 'approved')
+        .order('created_at', { ascending: false });
 
-            if (error) {
-                container.innerHTML = '<p class="text-slate-400 text-xs col-span-full">Unable to load community reviews at this time.</p>';
-                return;
-            }
-            if (!reviews || reviews.length === 0) {
-                container.innerHTML = '<p class="text-slate-400 text-xs col-span-full">No verified community reviews published yet.</p>';
-                return;
-            }
+    if (error) {
+        container.innerHTML = '<p class="text-slate-400 text-xs col-span-full">Unable to load community reviews at this time.</p>';
+        return;
+    }
+    if (!reviews || reviews.length === 0) {
+        container.innerHTML = '<p class="text-slate-400 text-xs col-span-full">No verified community reviews published yet.</p>';
+        return;
+    }
 
-            container.innerHTML = reviews.map(review => {
-                const parts = review.user_email.split('@');
-                const obfuscatedEmail = parts[0].charAt(0) + '***' + parts[0].slice(-1) + '@' + (parts[1] || '');
-                return `
-                    <div class="bg-slate-800/60 p-5 rounded-xl border border-slate-700/80 shadow-lg flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-center mb-3">
-                                <span class="font-bold text-white text-sm">${escapeHtml(review.brand_name)}</span>
-                                <span class="bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded border border-emerald-500/20">Verified Player</span>
-                            </div>
-                            <p class="text-xs text-slate-300 leading-relaxed mb-4">${escapeHtml(review.review_text)}</p>
-                        </div>
-                        <div class="text-[10px] text-slate-400 border-t border-slate-700/50 pt-2 flex justify-between">
-                            <span>${obfuscatedEmail}</span>
-                            <span>${new Date(review.created_at).toLocaleDateString()}</span>
-                        </div>
+    container.innerHTML = reviews.map(review => {
+        const parts = review.user_email.split('@');
+        const obfuscatedEmail = parts[0].charAt(0) + '***' + parts[0].slice(-1) + '@' + (parts[1] || '');
+        return `
+            <div class="bg-slate-800/60 p-5 rounded-xl border border-slate-700/80 shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="font-bold text-white text-sm">${escapeHtml(review.brand_name)}</span>
+                        <span class="bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded border border-emerald-500/20">Verified Player</span>
                     </div>
-                `;
-            }).join('');
-        }
+                    <p class="text-xs text-slate-300 leading-relaxed mb-4">${escapeHtml(review.review_text)}</p>
+                </div>
+                <div class="text-[10px] text-slate-400 border-t border-slate-700/50 pt-2 flex justify-between">
+                    <span>${obfuscatedEmail}</span>
+                    <span>${new Date(review.created_at).toLocaleDateString()}</span>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
 
         document.addEventListener('DOMContentLoaded', loadApprovedReviews);
 
