@@ -6,6 +6,118 @@
     <meta name="theme-color" content="#0f172a">
     <meta name="color-scheme" content="dark">
 
+    <style>
+        :root {
+            --shell-bg: #0b1529;
+            --shell-border: rgba(148, 163, 184, 0.2);
+            --page-surface: #0f1b31;
+            --card-surface: #121f38;
+            --table-surface: #f2f5f9;
+            --header-border: rgba(148, 163, 184, 0.12);
+            --muted: #c7d2ea;
+        }
+
+        body {
+            background: radial-gradient(circle at top, #101d34 0%, #0a1221 45%, #060d1b 100%);
+        }
+
+        .page-shell {
+            background: var(--shell-bg);
+            border: 1px solid var(--shell-border);
+            border-radius: 28px;
+            box-shadow: 0 26px 48px rgba(2, 6, 23, 0.45);
+            overflow: hidden;
+            max-width: 1280px;
+            margin: 28px auto;
+        }
+
+        .browser-strip {
+            background: rgba(214, 219, 227, 0.98);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.12);
+            color: #111827;
+        }
+
+        .browser-pill {
+            background: rgba(148, 163, 184, 0.22);
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+        }
+
+        .browser-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            display: inline-block;
+            background: rgba(15, 23, 42, 0.7);
+        }
+
+        .browser-count {
+            background: #111827;
+            color: #f8fafc;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2);
+        }
+
+        .shell-main {
+            background: var(--page-surface);
+        }
+
+        .promo-table-shell {
+            background: rgba(255,255,255,0.96);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
+        }
+
+        .promo-table thead th {
+            background: #e5e7eb;
+            color: #0f172a;
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .promo-table tbody td {
+            color: #0f172a;
+        }
+
+        .promo-table tbody tr:nth-child(odd) {
+            background: rgba(15, 23, 42, 0.03);
+        }
+
+        .promo-table tbody tr:nth-child(even) {
+            background: rgba(15, 23, 42, 0.01);
+        }
+
+        .promo-table .claim-btn {
+            background: linear-gradient(180deg, #22c55e, #16a34a);
+            color: #fff;
+            box-shadow: 0 8px 20px rgba(34, 197, 94, 0.25);
+        }
+
+        .corp-card {
+            background: rgba(15, 23, 42, 0.66);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+        }
+
+        .corp-card .tag {
+            background: rgba(14, 165, 233, 0.1);
+            color: #7dd3fc;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .corp-card .offer-tag {
+            background: rgba(16, 185, 129, 0.08);
+            color: #86efac;
+            border: 1px solid rgba(52, 211, 153, 0.18);
+        }
+
+        @media (max-width: 640px) {
+            .page-shell {
+                border-radius: 16px;
+                margin: 16px auto;
+            }
+        }
+    </style>
+
     <!-- Google Tag Manager -->
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -85,442 +197,395 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <!-- Accessibility Skip Link -->
-    <a href="#reviews" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 bg-blue-600 text-white p-2 rounded shadow-lg font-medium text-xs">
-        Skip to main content
-    </a>
+    <div class="page-shell">
+        <div class="browser-strip px-4 py-3 md:px-6">
+            <div class="flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <span class="browser-dot bg-slate-500"></span>
+                    <span class="browser-dot bg-slate-500"></span>
+                    <span class="browser-dot bg-slate-500"></span>
+                </div>
+                <div class="flex-1 flex justify-center">
+                    <div class="browser-pill flex items-center gap-3 rounded-full px-4 py-2 text-sm font-medium text-slate-700">
+                        <span class="text-lg">🏠</span>
+                        <span class="text-lg">◌</span>
+                        <span class="truncate max-w-[280px] md:max-w-[420px]">wdv1-team-b-c54c.vercel.app</span>
+                        <span class="browser-count inline-flex items-center justify-center rounded-full h-6 min-w-[1.5rem] px-1 text-[10px] font-bold">16</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 text-slate-700 text-lg">
+                    <span>◉</span>
+                    <span>◍</span>
+                    <span>⋮</span>
+                </div>
+            </div>
+        </div>
 
-    <!-- Affiliate Disclosure Banner -->
-    <div class="bg-slate-800 border-b border-slate-700 text-center py-2 px-4 text-xs text-slate-300" role="banner">
-        <p><strong>Advertiser Disclosure:</strong> Sweeps Review Hub is an independent review site. We may receive compensation or commissions when you click on links or sign up via our partner platforms.</p>
+        <div class="shell-main">
+            <header class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2">
+                <nav class="bg-slate-800/30 border border-slate-700/60 rounded-xl px-4 py-2" aria-label="Main navigation">
+                    <div class="flex items-center justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-black text-white">Sweeps Review Hub</span>
+                        </div>
+                        <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-200">
+                            <a href="#reviews" class="hover:text-blue-400 transition-colors">Casino Reviews</a>
+                            <a href="#how-it-works" class="hover:text-blue-400 transition-colors">How It Works</a>
+                            <a href="compliance.html" class="hover:text-blue-400 transition-colors">Compliance & Legal</a>
+                            <a href="#responsible-gaming" class="hover:text-blue-400 transition-colors">Responsible Gaming</a>
+                        </div>
+                        <button class="md:hidden text-slate-300 hover:text-blue-500 transition-colors" aria-label="Toggle mobile menu" aria-expanded="false" id="mobileMenuBtn">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="mobileMenu" class="hidden md:hidden pt-4 pb-2 space-y-2">
+                        <a href="#reviews" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">Casino Reviews</a>
+                        <a href="#how-it-works" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">How It Works</a>
+                        <a href="compliance.html" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">Compliance & Legal</a>
+                        <a href="#responsible-gaming" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">Responsible Gaming</a>
+                    </div>
+                </nav>
+            </header>
+
+            <main>
+                <header class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6 text-center">
+                    <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold px-3 py-1 rounded-full mb-4">
+                        ✓ Verified 2026 No Purchase Necessary Sweeps Bonuses
+                    </div>
+                    <h1 class="text-4xl md:text-[3.6rem] font-extrabold text-white tracking-tight leading-[1.04] mb-4">
+                        Best Sweepstakes Casino <span class="text-amber-500">Bonuses & Promo Codes</span>
+                    </h1>
+                    <p class="text-lg text-slate-300 max-w-3xl mx-auto mb-6">
+                        Compare verified <strong>No Purchase Necessary sweepstakes platforms</strong>. Claim instant free Gold Coins and Sweeps Coins using exclusive, auto-applied 2026 bonus links.
+                    </p>
+                    <a href="#reviews" class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 px-8 rounded-lg transition-colors shadow-lg shadow-blue-600/30" aria-label="Compare 2026 Sweepstakes promotions">
+                        Claim 2026 Promo Code Offers →
+                    </a>
+                </header>
+
+                <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8" aria-labelledby="promo-offers-heading">
+                    <div class="mb-4">
+                        <h2 id="promo-offers-heading" class="text-2xl font-black text-slate-100 flex items-center gap-2">
+                            <span>🔥</span> Best Sweepstakes Casino Promo Codes & Signup Offers
+                        </h2>
+                        <p class="text-sm text-slate-300">Side-by-side evaluation of high-payout 2026 No Purchase Necessary sweepstakes platforms.</p>
+                    </div>
+                    <div class="promo-table-shell overflow-x-auto rounded-xl">
+                        <table class="promo-table w-full text-left border-collapse min-w-[640px]">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="px-5 py-3.5 text-slate-700">Platform</th>
+                                    <th scope="col" class="px-5 py-3.5 text-slate-700">Category Specialty</th>
+                                    <th scope="col" class="px-5 py-3.5 text-slate-700">Verified 2026 Bonus Code</th>
+                                    <th scope="col" class="px-5 py-3.5 text-center text-slate-700">Direct Claim Link</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 text-sm">
+                                <tr>
+                                    <td class="px-5 py-4">
+                                        <div class="flex items-center gap-2.5">
+                                            <span class="bg-amber-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded uppercase tracking-wide">Editor's Choice</span>
+                                            <div>
+                                                <div class="font-bold text-slate-900 text-base">Sportzino</div>
+                                                <a href="sportzino-review.html" class="text-xs text-blue-600 hover:underline">Sportzino Promo Code Review →</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-5 py-4">
+                                        <span class="inline-flex items-center bg-indigo-100 text-indigo-700 text-xs font-semibold px-2.5 py-1 rounded-md border border-indigo-200">Social Sportsbook</span>
+                                    </td>
+                                    <td class="px-5 py-4 font-medium text-slate-800"><strong>No Code Needed:</strong> Free GC + SC on verified signup</td>
+                                    <td class="px-5 py-4 text-center"><a href="/go/sportzino?subid=quick_comp_row1" target="_blank" rel="noopener noreferrer" class="claim-btn inline-flex items-center justify-center py-2 px-4 rounded-lg font-semibold text-sm">Claim Bonus ⚡</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-5 py-4">
+                                        <div class="flex items-center gap-2.5">
+                                            <span class="bg-emerald-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded uppercase tracking-wide">Highest Bonus</span>
+                                            <div>
+                                                <div class="font-bold text-slate-900 text-base">Fortune Wins</div>
+                                                <a href="fortunewins-review.html" class="text-xs text-blue-600 hover:underline">Fortune Wins Bonus Details →</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-5 py-4"><span class="inline-flex items-center bg-emerald-100 text-emerald-700 text-xs font-semibold px-2.5 py-1 rounded-md border border-emerald-200">Huge Jackpots</span></td>
+                                    <td class="px-5 py-4 font-medium text-slate-800"><strong>Auto-Applied:</strong> Up to 500,000+ free coins first login</td>
+                                    <td class="px-5 py-4 text-center"><a href="/go/fortune-wins?subid=quick_comp_row2" target="_blank" rel="noopener noreferrer" class="claim-btn inline-flex items-center justify-center py-2 px-4 rounded-lg font-semibold text-sm">Claim Bonus ⚡</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-5 py-4">
+                                        <div class="flex items-center gap-2.5">
+                                            <span class="bg-blue-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded uppercase tracking-wide">Fast Payouts</span>
+                                            <div>
+                                                <div class="font-bold text-slate-900 text-base">Zula Casino</div>
+                                                <a href="zula-review.html" class="text-xs text-blue-600 hover:underline">Zula Promo Code Details →</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-5 py-4"><span class="inline-flex items-center bg-blue-100 text-blue-700 text-xs font-semibold px-2.5 py-1 rounded-md border border-blue-200">Fast Redemption</span></td>
+                                    <td class="px-5 py-4 font-medium text-slate-800"><strong>Instant Signup:</strong> Daily bonus wheel loop + 500+ slots</td>
+                                    <td class="px-5 py-4 text-center"><a href="/go/zula-casino?subid=quick_comp_row3" target="_blank" rel="noopener noreferrer" class="claim-btn inline-flex items-center justify-center py-2 px-4 rounded-lg font-semibold text-sm">Claim Bonus ⚡</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <main id="reviews" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                    <h2 class="text-2xl font-black text-white mb-2 border-l-4 border-blue-500 pl-3">Featured Social Gaming Platforms</h2>
+                    <h2 class="text-2xl font-black text-emerald-400 mb-6 pl-3">Free 💲 Offers For Signup</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <article class="corp-card rounded-xl overflow-hidden shadow-xl flex flex-col justify-between">
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-4">
+                                    <h3 class="text-xl font-bold text-white">Sportzino</h3>
+                                    <span class="tag text-xs font-semibold px-2.5 py-1 rounded border">Social Sportsbook</span>
+                                </div>
+                                <p class="text-sm text-slate-400 mb-4">A unique, highly-rated dual platform offering prediction mechanics for sports fans and standard social casino titles side-by-side.</p>
+                                <div class="bg-slate-900/50 p-3 rounded-lg text-xs text-slate-400 border border-slate-800 mb-4">
+                                    <div class="flex items-center justify-between gap-2 mb-1">
+                                        <span class="text-amber-500 font-bold block text-sm">🎁 Highlight Offer</span>
+                                        <span class="offer-tag text-[10px] font-semibold px-2 py-0.5 rounded">No Code Required — Auto-Applied</span>
+                                    </div>
+                                    <span>Free Gold Coins & Sweeps Coins upon verified registration. Daily log-in rewards apply.</span>
+                                </div>
+                                <div class="text-xs text-slate-400 space-y-1">
+                                    <p><strong class="text-slate-200">Bonus Terms:</strong> 18+ US residents only. Free coins, no deposit required.</p>
+                                    <p><strong class="text-slate-200">Redemption:</strong> Sweeps coins redeemable for prizes or entries.</p>
+                                    <p><strong class="text-slate-200">Mobile:</strong> Fully optimized for all devices.</p>
+                                </div>
+                            </div>
+                            <div class="p-6 pt-0 space-y-3">
+                                <a href="sportzino-review.html" class="text-blue-400 font-semibold text-xs hover:underline block">Read Full Review →</a>
+                                <a href="/go/sportzino?subid=card_sportzino" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors">Play Now at Sportzino</a>
+                            </div>
+                        </article>
+
+                        <article class="corp-card rounded-xl overflow-hidden shadow-xl flex flex-col justify-between">
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-4">
+                                    <h3 class="text-xl font-bold text-white">Fortune Wins</h3>
+                                    <span class="tag text-xs font-semibold px-2.5 py-1 rounded border">Huge Jackpots</span>
+                                </div>
+                                <p class="text-sm text-slate-400 mb-4">Widely known for massive progressive social jackpot tiers and an expansive collection of engaging slot alternatives.</p>
+                                <div class="bg-slate-900/50 p-3 rounded-lg text-xs text-slate-400 border border-slate-800 mb-4">
+                                    <div class="flex items-center justify-between gap-2 mb-1">
+                                        <span class="text-amber-500 font-bold block text-sm">🎁 Highlight Offer</span>
+                                        <span class="offer-tag text-[10px] font-semibold px-2 py-0.5 rounded">No Code Required — Auto-Applied</span>
+                                    </div>
+                                    <span>Massive welcome coin allocation for new US profiles. Alternative methods of entry available.</span>
+                                </div>
+                                <div class="text-xs text-slate-400 space-y-1">
+                                    <p><strong class="text-slate-200">Welcome Package:</strong> Up to 500,000+ free coins on first login.</p>
+                                    <p><strong class="text-slate-200">Loyalty:</strong> Progressive jackpot system with daily multiplier bonuses.</p>
+                                    <p><strong class="text-slate-200">Support:</strong> 24/7 customer service available.</p>
+                                </div>
+                            </div>
+                            <div class="p-6 pt-0 space-y-3">
+                                <a href="fortunewins-review.html" class="text-blue-400 font-semibold text-xs hover:underline block">Read Full Review →</a>
+                                <a href="/go/fortune-wins?subid=card_fortunewins" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors">Play Now at Fortune Wins</a>
+                            </div>
+                        </article>
+
+                        <article class="corp-card rounded-xl overflow-hidden shadow-xl flex flex-col justify-between">
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-4">
+                                    <h3 class="text-xl font-bold text-white">Zula Casino</h3>
+                                    <span class="tag text-xs font-semibold px-2.5 py-1 rounded border">Fast Redemption</span>
+                                </div>
+                                <p class="text-sm text-slate-400 mb-4">Features a modern gaming catalog optimized for mobile web layouts with emphasis on fast redemption turnaround.</p>
+                                <div class="bg-slate-900/50 p-3 rounded-lg text-xs text-slate-400 border border-slate-800 mb-4">
+                                    <div class="flex items-center justify-between gap-2 mb-1">
+                                        <span class="text-amber-500 font-bold block text-sm">🎁 Highlight Offer</span>
+                                        <span class="offer-tag text-[10px] font-semibold px-2 py-0.5 rounded">No Code Required — Auto-Applied</span>
+                                    </div>
+                                    <span>Competitive daily bonus wheel loops. Terms apply: 18+ valid US identification required.</span>
+                                </div>
+                                <div class="text-xs text-slate-400 space-y-1">
+                                    <p><strong class="text-slate-200">Mobile Optimized:</strong> Seamless experience on all devices.</p>
+                                    <p><strong class="text-slate-200">Fast Payouts:</strong> Redemption processed within 3-5 business days.</p>
+                                    <p><strong class="text-slate-200">Game Variety:</strong> 500+ verified games in portfolio.</p>
+                                </div>
+                            </div>
+                            <div class="p-6 pt-0 space-y-3">
+                                <a href="zula-review.html" class="text-blue-400 font-semibold text-xs hover:underline block">Read Full Review →</a>
+                                <a href="/go/zula-casino?subid=card_zulacasino" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors">Play Now at Zula Casino</a>
+                            </div>
+                        </article>
+
+                        <article class="corp-card rounded-xl overflow-hidden shadow-xl flex flex-col justify-between">
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-4">
+                                    <h3 class="text-xl font-bold text-white">LuckParty</h3>
+                                    <span class="tag text-xs font-semibold px-2.5 py-1 rounded border">Casual Social</span>
+                                </div>
+                                <p class="text-sm text-slate-400 mb-4">Features a community-focused casual layout with highly accessible interface options designed primarily for mobile play.</p>
+                                <div class="bg-slate-900/50 p-3 rounded-lg text-xs text-slate-400 border border-slate-800 mb-4">
+                                    <div class="flex items-center justify-between gap-2 mb-1">
+                                        <span class="text-amber-500 font-bold block text-sm">🎁 Highlight Offer</span>
+                                        <span class="offer-tag text-[10px] font-semibold px-2 py-0.5 rounded">No Code Required — Auto-Applied</span>
+                                    </div>
+                                    <span>Daily login multipliers available. Verification required for prize redemption.</span>
+                                </div>
+                                <div class="text-xs text-slate-400 space-y-1">
+                                    <p><strong class="text-slate-200">Community Features:</strong> Leaderboards and social events.</p>
+                                    <p><strong class="text-slate-200">Accessibility:</strong> Beginner-friendly interface design.</p>
+                                    <p><strong class="text-slate-200">Bonus:</strong> Up to 250,000 free coins for new players.</p>
+                                </div>
+                            </div>
+                            <div class="p-6 pt-4">
+                                <a href="/go/luckparty?subid=card_luckparty" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors">Play Now at LuckParty</a>
+                            </div>
+                        </article>
+
+                        <article class="corp-card rounded-xl overflow-hidden shadow-xl flex flex-col justify-between">
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-4">
+                                    <h3 class="text-xl font-bold text-white">AmericanLuck</h3>
+                                    <span class="tag text-xs font-semibold px-2.5 py-1 rounded border">Instant Wins</span>
+                                </div>
+                                <p class="text-sm text-slate-400 mb-4">Specializes in fast-paced instant win games with quick payouts and straightforward gameplay mechanics.</p>
+                                <div class="bg-slate-900/50 p-3 rounded-lg text-xs text-slate-400 border border-slate-800 mb-4">
+                                    <div class="flex items-center justify-between gap-2 mb-1">
+                                        <span class="text-amber-500 font-bold block text-sm">🎁 Highlight Offer</span>
+                                        <span class="offer-tag text-[10px] font-semibold px-2 py-0.5 rounded">No Code Required — Auto-Applied</span>
+                                    </div>
+                                    <span>Instant welcome bonus upon signup. Weekly prize drawings for active players.</span>
+                                </div>
+                                <div class="text-xs text-slate-400 space-y-1">
+                                    <p><strong class="text-slate-200">Speed:</strong> Instant game results and quick withdrawals.</p>
+                                    <p><strong class="text-slate-200">Weekly Draws:</strong> Additional prize opportunities every week.</p>
+                                    <p><strong class="text-slate-200">Signup Bonus:</strong> 100,000 free coins immediately.</p>
+                                </div>
+                            </div>
+                            <div class="p-6 pt-4">
+                                <a href="/go/americanluck?subid=card_americanluck" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors">Play Now at AmericanLuck</a>
+                            </div>
+                        </article>
+
+                        <article class="corp-card rounded-xl overflow-hidden shadow-xl flex flex-col justify-between">
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-4">
+                                    <h3 class="text-xl font-bold text-white">Win Bonanza</h3>
+                                    <span class="tag text-xs font-semibold px-2.5 py-1 rounded border">High Multipliers</span>
+                                </div>
+                                <p class="text-sm text-slate-400 mb-4">A fast-growing sweepstakes platform featuring high-volatility slots, rapid redemption processing, and daily bonus drops.</p>
+                                <div class="bg-slate-900/50 p-3 rounded-lg text-xs text-slate-400 border border-slate-800 mb-4">
+                                    <div class="flex items-center justify-between gap-2 mb-1">
+                                        <span class="text-amber-500 font-bold block text-sm">🎁 Highlight Offer</span>
+                                        <span class="offer-tag text-[10px] font-semibold px-2 py-0.5 rounded">Referral Bonus Active</span>
+                                    </div>
+                                    <span>Claim exclusive welcome Gold Coins and Sweeps Coins upon initial registration.</span>
+                                </div>
+                                <div class="text-xs text-slate-400 space-y-1">
+                                    <p><strong class="text-slate-200">Bonus Terms:</strong> 18+ US residents (excl. restricted states).</p>
+                                    <p><strong class="text-slate-200">Redemption:</strong> Secure prize redemption options available.</p>
+                                    <p><strong class="text-slate-200">Game Variety:</strong> 400+ titles with progressive prizes.</p>
+                                </div>
+                            </div>
+                            <div class="p-6 pt-0 space-y-3">
+                                <a href="winbonanza-review.html" class="text-blue-400 font-semibold text-xs hover:underline block">Read Full Review →</a>
+                                <a href="/go/win-bonanza?subid=card_winbonanza" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors">Play Now at Win Bonanza</a>
+                            </div>
+                        </article>
+                    </div>
+                </main>
+
+                <section id="review-submission-box" class="max-w-xl mx-auto px-6 py-8 bg-slate-800/40 border border-slate-700/60 rounded-xl my-12 shadow-2xl" aria-labelledby="review-form-heading">
+                    <h2 id="review-form-heading" class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                        <span class="text-amber-500" aria-hidden="true">✍️</span> Share Your Platform Experience
+                    </h2>
+                    <p class="text-xs text-slate-400 mb-6 leading-relaxed">
+                        Help keep our ecosystem transparent. Submit your objective evaluation of verification timelines and entry experiences. Submissions undergo compliance screening before publishing.
+                    </p>
+
+                    <div id="form-success" class="hidden bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4 text-xs text-emerald-400 mb-4" aria-live="polite">
+                        🎉 <strong>Submission Logged Successfully!</strong> Your review has been routed to our compliance queue and will display once verified.
+                    </div>
+                    <div id="form-error" class="hidden bg-red-500/10 border border-red-500/30 rounded-lg p-4 text-xs text-red-400 mb-4" aria-live="assertive">
+                        ⚠️ <strong>Unable to send review.</strong> Please check the form and try again.
+                    </div>
+
+                    <form id="publicReviewForm" novalidate class="space-y-4 text-xs" aria-label="Submit a public review">
+                        <div>
+                            <label class="block font-semibold text-slate-300 mb-1" for="userEmail">Associated Email Address</label>
+                            <input type="email" id="userEmail" name="userEmail" required autocomplete="email" class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-slate-100 focus:outline-none focus:border-blue-500 transition-colors">
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-slate-300 mb-1" for="brandName">Target Social Gaming Platform</label>
+                            <select id="brandName" name="brandName" required class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-slate-100 focus:outline-none focus:border-blue-500 transition-colors">
+                                <option value="">Select Brand</option>
+                                <option value="Sportzino">Sportzino</option>
+                                <option value="Fortune Coins">Fortune Coins</option>
+                                <option value="Zula Casino">Zula Casino</option>
+                                <option value="LuckParty">LuckParty</option>
+                                <option value="AmericanLuck">AmericanLuck</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-slate-300 mb-1" for="reviewText">Objective Commentary</label>
+                            <textarea id="reviewText" name="reviewText" required rows="4" minlength="25" maxlength="600" class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-slate-100 focus:outline-none focus:border-blue-500 transition-colors"></textarea>
+                        </div>
+                        <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 px-4 rounded-lg transition-all shadow-lg shadow-blue-600/20 active:scale-[0.99] disabled:opacity-70 disabled:cursor-not-allowed">
+                            Submit to Compliance Queue
+                        </button>
+                    </form>
+                </section>
+
+                <section id="approved-reviews-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-slate-800">
+                    <h2 class="text-2xl font-black text-white mb-6 border-l-4 border-emerald-500 pl-3">Verified Player Reviews</h2>
+                    <div id="publicReviewsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <p class="text-slate-400 text-xs col-span-full">Loading verified reviews...</p>
+                    </div>
+                </section>
+
+                <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-slate-800">
+                    <h2 class="text-2xl font-black text-white mb-6 border-l-4 border-amber-500 pl-3">
+                        Top Sweepstakes Casino Bonuses & No Purchase Necessary Rules (2026)
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-300 leading-relaxed">
+                        <div class="bg-slate-800/40 p-5 rounded-xl border border-slate-800">
+                            <h3 class="font-bold text-amber-400 text-sm mb-2">How Sweepstakes Casino Promo Codes Work</h3>
+                            <p>Most modern <strong>No Purchase Necessary sweepstakes platforms</strong> do not require manual bonus coupon entries during registration. Clicking a verified partner claim link automatically attaches the signup offer.</p>
+                        </div>
+                        <div class="bg-slate-800/40 p-5 rounded-xl border border-slate-800">
+                            <h3 class="font-bold text-amber-400 text-sm mb-2">No Purchase Necessary Legal Guarantee</h3>
+                            <p>Under US promotional sweepstakes law, top-rated platforms must offer genuine free entry alternatives (AMOE). Players can earn real prize-redeemable Sweeps Coins via daily login streaks and social engagement.</p>
+                        </div>
+                        <div class="bg-slate-800/40 p-5 rounded-xl border border-slate-800">
+                            <h3 class="font-bold text-amber-400 text-sm mb-2">Maximizing 2026 Signup Offers</h3>
+                            <p>To maximize your initial Sweeps Coin balance, complete all optional account setup steps—including SMS verification and daily login wheel spins—immediately after signing up. Combining free-entry methods often increases your long-term reward profile.</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <footer id="responsible-gaming" class="bg-slate-950 border-t border-slate-800 py-12 text-slate-500 text-xs">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+                    <div class="bg-red-500/10 border border-red-500/30 p-6 rounded-lg">
+                        <p class="max-w-3xl mx-auto leading-relaxed text-sm text-slate-300 mb-4">
+                            <strong>⚠️ Responsible Gaming Notice:</strong> Social casinos are built strictly for entertainment purposes only. Always track your gameplay hours and keep interactions casual, balanced, and in check.
+                        </p>
+                        <p class="text-xs text-slate-400">Remember: You can only play responsibly if you stay in control. Set limits. Take breaks. Seek help if needed.</p>
+                    </div>
+                    <div class="border-t border-slate-800 pt-6 text-center">
+                        <p class="text-slate-500 text-xs">&copy; 2026 Sweeps Review Hub. All rights reserved.</p>
+                        <p class="text-slate-600 text-xs mt-2">
+                            <a href="compliance.html" class="text-blue-400 hover:text-blue-300 underline">Compliance & Legal</a> • <a href="admin.html" class="text-blue-400 hover:text-blue-300 underline">Admin Portal</a> • <a href="#" class="text-blue-400 hover:text-blue-300 underline">Privacy Policy</a> • <a href="#" class="text-blue-400 hover:text-blue-300 underline">Terms of Service</a>
+                        </p>
+                    </div>
+                </div>
+            </footer>
+        </div>
     </div>
 
-    <!-- Navigation Bar -->
-    <nav class="bg-slate-900 border-b border-slate-800 sticky top-0 z-40" aria-label="Main navigation">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center gap-2">
-                    <span class="text-2xl font-bold bg-gradient-to-r from-blue-500 to-amber-500 bg-clip-text text-transparent">Sweeps Review Hub</span>
-                </div>
-                <button class="md:hidden text-slate-300 hover:text-blue-500 transition-colors" aria-label="Toggle mobile menu" aria-expanded="false" id="mobileMenuBtn">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
-                    <a href="#reviews" class="hover:text-blue-500 transition-colors">Casino Reviews</a>
-                    <a href="#how-it-works" class="hover:text-blue-500 transition-colors">How It Works</a>
-                    <a href="compliance.html" class="hover:text-blue-500 transition-colors">Compliance & Legal</a>
-                    <a href="#responsible-gaming" class="hover:text-blue-500 transition-colors">Responsible Gaming</a>
-                </div>
-            </div>
-            <div id="mobileMenu" class="hidden md:hidden pb-4 space-y-2">
-                <a href="#reviews" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">Casino Reviews</a>
-                <a href="#how-it-works" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">How It Works</a>
-                <a href="compliance.html" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">Compliance & Legal</a>
-                <a href="#responsible-gaming" class="block px-4 py-2 text-sm text-slate-300 hover:text-blue-500 hover:bg-slate-800/50 rounded">Responsible Gaming</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8 text-center">
-        <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold px-3 py-1 rounded-full mb-4">
-            ⚡ Verified 2026 No Purchase Necessary Sweeps Bonuses
-        </div>
-        <h1 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
-            Best Sweepstakes Casino <span class="text-amber-500">Bonuses & Promo Codes</span>
-        </h1>
-        <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-6">
-            Compare verified <strong>No Purchase Necessary sweepstakes platforms</strong>. Claim instant free Gold Coins and Sweeps Coins using exclusive, auto-applied 2026 bonus links.
-        </p>
-        <a href="#reviews" class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 px-8 rounded-lg transition-colors shadow-lg shadow-blue-600/30" aria-label="Compare 2026 Sweepstakes promotions">
-            Claim 2026 Promo Code Offers →
-        </a>
-    </header>
-
-    <!-- Top 3 Quick-Comparison Section -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8" aria-labelledby="promo-offers-heading">
-        <div class="mb-4">
-            <h2 id="promo-offers-heading" class="text-2xl font-bold text-slate-100 flex items-center gap-2">
-                <span>🔥</span> Best Sweepstakes Casino Promo Codes & Signup Offers
-            </h2>
-            <p class="text-sm text-slate-300">Side-by-side evaluation of high-payout 2026 No Purchase Necessary sweepstakes platforms.</p>
-        </div>
-        <div class="overflow-x-auto rounded-xl border border-slate-700 shadow-sm bg-slate-800">
-            <table class="w-full text-left border-collapse min-w-[640px]">
-                <thead class="bg-slate-900 text-white text-xs uppercase tracking-wider">
-                    <tr>
-                        <th scope="col" class="px-5 py-3.5">Platform</th>
-                        <th scope="col" class="px-5 py-3.5">Category Specialty</th>
-                        <th scope="col" class="px-5 py-3.5">Verified 2026 Bonus Code</th>
-                        <th scope="col" class="px-5 py-3.5 text-center">Direct Claim Link</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-700 text-sm">
-                    <tr class="hover:bg-slate-700/50 transition-colors">
-                        <td class="px-5 py-4">
-                            <div class="flex items-center gap-2.5">
-                                <span class="bg-amber-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded uppercase tracking-wide">Editor's Choice</span>
-                                <div>
-                                    <div class="font-bold text-white text-base">Sportzino</div>
-                                    <a href="sportzino-review.html" class="text-xs text-blue-400 hover:underline">Sportzino Promo Code Review →</a>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="px-5 py-4">
-                            <span class="inline-flex items-center bg-indigo-500/10 text-indigo-400 text-xs font-semibold px-2.5 py-1 rounded-md border border-indigo-500/20">
-                                Social Sportsbook
-                            </span>
-                        </td>
-                        <td class="px-5 py-4 font-medium text-slate-300">
-                            <strong>No Code Needed:</strong> Free GC + SC on verified signup
-                        </td>
-                        <td class="px-5 py-4 text-center">
-                            <a href="/go/sportzino?subid=quick_comp_row1" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-lg shadow-lg shadow-emerald-600/20 transition-colors">
-                                Claim Bonus ⚡
-                            </a>
-                        </td>
-                    </tr>
-                    <tr class="hover:bg-slate-700/50 transition-colors bg-slate-800/30">
-                        <td class="px-5 py-4">
-                            <div class="flex items-center gap-2.5">
-                                <span class="bg-emerald-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded uppercase tracking-wide">Highest Bonus</span>
-                                <div>
-                                    <div class="font-bold text-white text-base">Fortune Wins</div>
-                                    <a href="fortunewins-review.html" class="text-xs text-blue-400 hover:underline">Fortune Wins Bonus Details →</a>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="px-5 py-4">
-                            <span class="inline-flex items-center bg-emerald-500/10 text-emerald-400 text-xs font-semibold px-2.5 py-1 rounded-md border border-emerald-500/20">
-                                Huge Jackpots
-                            </span>
-                        </td>
-                        <td class="px-5 py-4 font-medium text-slate-300">
-                            <strong>Auto-Applied:</strong> Up to 500,000+ free coins first login
-                        </td>
-                        <td class="px-5 py-4 text-center">
-                            <a href="/go/fortune-wins?subid=quick_comp_row2" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-lg shadow-lg shadow-emerald-600/20 transition-colors">
-                                Claim Bonus ⚡
-                            </a>
-                        </td>
-                    </tr>
-                    <tr class="hover:bg-slate-700/50 transition-colors">
-                        <td class="px-5 py-4">
-                            <div class="flex items-center gap-2.5">
-                                <span class="bg-blue-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded uppercase tracking-wide">Fast Payouts</span>
-                                <div>
-                                    <div class="font-bold text-white text-base">Zula Casino</div>
-                                    <a href="zula-review.html" class="text-xs text-blue-400 hover:underline">Zula Promo Code Details →</a>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="px-5 py-4">
-                            <span class="inline-flex items-center bg-blue-500/10 text-blue-400 text-xs font-semibold px-2.5 py-1 rounded-md border border-blue-500/20">
-                                Fast Redemption
-                            </span>
-                        </td>
-                        <td class="px-5 py-4 font-medium text-slate-300">
-                            <strong>Instant Signup:</strong> Daily bonus wheel loop + 500+ slots
-                        </td>
-                        <td class="px-5 py-4 text-center">
-                            <a href="/go/zula-casino?subid=quick_comp_row3" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-lg shadow-lg shadow-emerald-600/20 transition-colors">
-                                Claim Bonus ⚡
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <!-- Review Grid -->
-    <main id="reviews" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h2 class="text-2xl font-bold text-white mb-2 border-l-4 border-blue-500 pl-3">
-            Featured Social Gaming Platforms
-        </h2>
-        <h2 class="text-2xl font-bold text-emerald-400 mb-6 pl-3">
-            Free 💲 Offers For Signup
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <article class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden shadow-xl flex flex-col justify-between hover:border-slate-600 transition-all">
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-white">Sportzino</h3>
-                        <span class="bg-blue-500/10 text-blue-400 text-xs font-semibold px-2.5 py-1 rounded border border-blue-500/20">Social Sportsbook</span>
-                    </div>
-                    <p class="text-sm text-slate-400 mb-4">A unique, highly-rated dual platform offering prediction mechanics for sports fans and standard social casino titles side-by-side.</p>
-                    <div class="bg-slate-900/50 p-3 rounded-lg text-xs text-slate-400 border border-slate-800 mb-4">
-                        <div class="flex items-center justify-between gap-2 mb-1">
-                            <span class="text-amber-500 font-bold block text-sm">🎁 Highlight Offer</span>
-                            <span class="inline-flex items-center gap-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded border border-emerald-500/20">
-                                No Code Required — Auto-Applied
-                            </span>
-                        </div>
-                        <span>Free Gold Coins & Sweeps Coins upon verified registration. Daily log-in rewards apply.</span>
-                    </div>
-                    <div class="text-xs text-slate-400 space-y-1">
-                        <p><strong class="text-slate-200">Bonus Terms:</strong> 18+ US residents only. Free coins, no deposit required.</p>
-                        <p><strong class="text-slate-200">Redemption:</strong> Sweeps coins redeemable for prizes or entries.</p>
-                        <p><strong class="text-slate-200">Mobile:</strong> Fully optimized for all devices.</p>
-                    </div>
-                </div>
-                <div class="p-6 pt-0 space-y-3">
-                    <a href="sportzino-review.html" class="text-blue-400 font-semibold text-xs hover:underline block">Read Full Review →</a>
-                    <a href="/go/sportzino?subid=card_sportzino" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors">
-                        Play Now at Sportzino
-                    </a>
-                </div>
-            </article>
-
-            <article class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden shadow-xl flex flex-col justify-between hover:border-slate-600 transition-all">
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-white">Fortune Wins</h3>
-                        <span class="bg-amber-500/10 text-amber-400 text-xs font-semibold px-2.5 py-1 rounded border border-amber-500/20">Huge Jackpots</span>
-                    </div>
-                    <p class="text-sm text-slate-400 mb-4">Widely known for massive progressive social jackpot tiers and an expansive collection of engaging slot alternatives.</p>
-                    <div class="bg-slate-900/50 p-3 rounded-lg text-xs text-slate-400 border border-slate-800 mb-4">
-                        <div class="flex items-center justify-between gap-2 mb-1">
-                            <span class="text-amber-500 font-bold block text-sm">🎁 Highlight Offer</span>
-                            <span class="inline-flex items-center gap-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded border border-emerald-500/20">
-                                No Code Required — Auto-Applied
-                            </span>
-                        </div>
-                        <span>Massive welcome coin allocation for new US profiles. Alternative methods of entry available.</span>
-                    </div>
-                    <div class="text-xs text-slate-400 space-y-1">
-                        <p><strong class="text-slate-200">Welcome Package:</strong> Up to 500,000+ free coins on first login.</p>
-                        <p><strong class="text-slate-200">Loyalty:</strong> Progressive jackpot system with daily multiplier bonuses.</p>
-                        <p><strong class="text-slate-200">Support:</strong> 24/7 customer service available.</p>
-                    </div>
-                </div>
-                <div class="p-6 pt-0 space-y-3">
-                    <a href="fortunewins-review.html" class="text-blue-400 font-semibold text-xs hover:underline block">Read Full Review →</a>
-                    <a href="/go/fortune-wins?subid=card_fortunewins" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors">
-                        Play Now at Fortune Wins
-                    </a>
-                </div>
-            </article>
-
-            <article class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden shadow-xl flex flex-col justify-between hover:border-slate-600 transition-all">
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-white">Zula Casino</h3>
-                        <span class="bg-emerald-500/10 text-emerald-400 text-xs font-semibold px-2.5 py-1 rounded border border-emerald-500/20">Fast Redemption</span>
-                    </div>
-                    <p class="text-sm text-slate-400 mb-4">Features a modern gaming catalog optimized for mobile web layouts with emphasis on fast redemption turnaround.</p>
-                    <div class="bg-slate-900/50 p-3 rounded-lg text-xs text-slate-400 border border-slate-800 mb-4">
-                        <div class="flex items-center justify-between gap-2 mb-1">
-                            <span class="text-amber-500 font-bold block text-sm">🎁 Highlight Offer</span>
-                            <span class="inline-flex items-center gap-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded border border-emerald-500/20">
-                                No Code Required — Auto-Applied
-                            </span>
-                        </div>
-                        <span>Competitive daily bonus wheel loops. Terms apply: 18+ valid US identification required.</span>
-                    </div>
-                    <div class="text-xs text-slate-400 space-y-1">
-                        <p><strong class="text-slate-200">Mobile Optimized:</strong> Seamless experience on all devices.</p>
-                        <p><strong class="text-slate-200">Fast Payouts:</strong> Redemption processed within 3-5 business days.</p>
-                        <p><strong class="text-slate-200">Game Variety:</strong> 500+ verified games in portfolio.</p>
-                    </div>
-                </div>
-                <div class="p-6 pt-0 space-y-3">
-                    <a href="zula-review.html" class="text-blue-400 font-semibold text-xs hover:underline block">Read Full Review →</a>
-                    <a href="/go/zula-casino?subid=card_zulacasino" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors">
-                        Play Now at Zula Casino
-                    </a>
-                </div>
-            </article>
-
-            <article class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden shadow-xl flex flex-col justify-between hover:border-slate-600 transition-all">
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-white">LuckParty</h3>
-                        <span class="bg-purple-500/10 text-purple-400 text-xs font-semibold px-2.5 py-1 rounded border border-purple-500/20">Casual Social</span>
-                    </div>
-                    <p class="text-sm text-slate-400 mb-4">Features a community-focused casual layout with highly accessible interface options designed primarily for mobile play.</p>
-                    <div class="bg-slate-900/50 p-3 rounded-lg text-xs text-slate-400 border border-slate-800 mb-4">
-                        <div class="flex items-center justify-between gap-2 mb-1">
-                            <span class="text-amber-500 font-bold block text-sm">🎁 Highlight Offer</span>
-                            <span class="inline-flex items-center gap-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded border border-emerald-500/20">
-                                No Code Required — Auto-Applied
-                            </span>
-                        </div>
-                        <span>Daily login multipliers available. Verification required for prize redemption.</span>
-                    </div>
-                    <div class="text-xs text-slate-400 space-y-1">
-                        <p><strong class="text-slate-200">Community Features:</strong> Leaderboards and social events.</p>
-                        <p><strong class="text-slate-200">Accessibility:</strong> Beginner-friendly interface design.</p>
-                        <p><strong class="text-slate-200">Bonus:</strong> Up to 250,000 free coins for new players.</p>
-                    </div>
-                </div>
-                <div class="p-6 pt-4">
-                    <a href="/go/luckparty?subid=card_luckparty" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors">
-                        Play Now at LuckParty
-                    </a>
-                </div>
-            </article>
-
-            <article class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden shadow-xl flex flex-col justify-between hover:border-slate-600 transition-all">
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-white">AmericanLuck</h3>
-                        <span class="bg-pink-500/10 text-pink-400 text-xs font-semibold px-2.5 py-1 rounded border border-pink-500/20">Instant Wins</span>
-                    </div>
-                    <p class="text-sm text-slate-400 mb-4">Specializes in fast-paced instant win games with quick payouts and straightforward gameplay mechanics.</p>
-                    <div class="bg-slate-900/50 p-3 rounded-lg text-xs text-slate-400 border border-slate-800 mb-4">
-                        <div class="flex items-center justify-between gap-2 mb-1">
-                            <span class="text-amber-500 font-bold block text-sm">🎁 Highlight Offer</span>
-                            <span class="inline-flex items-center gap-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded border border-emerald-500/20">
-                                No Code Required — Auto-Applied
-                            </span>
-                        </div>
-                        <span>Instant welcome bonus upon signup. Weekly prize drawings for active players.</span>
-                    </div>
-                    <div class="text-xs text-slate-400 space-y-1">
-                        <p><strong class="text-slate-200">Speed:</strong> Instant game results and quick withdrawals.</p>
-                        <p><strong class="text-slate-200">Weekly Draws:</strong> Additional prize opportunities every week.</p>
-                        <p><strong class="text-slate-200">Signup Bonus:</strong> 100,000 free coins immediately.</p>
-                    </div>
-                </div>
-                <div class="p-6 pt-4">
-                    <a href="/go/americanluck?subid=card_americanluck" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors">
-                        Play Now at AmericanLuck
-                    </a>
-                </div>
-            </article>
-
-            <article class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden shadow-xl flex flex-col justify-between hover:border-slate-600 transition-all">
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-white">Win Bonanza</h3>
-                        <span class="bg-rose-500/10 text-rose-400 text-xs font-semibold px-2.5 py-1 rounded border border-rose-500/20">High Multipliers</span>
-                    </div>
-                    <p class="text-sm text-slate-400 mb-4">A fast-growing sweepstakes platform featuring high-volatility slots, rapid redemption processing, and daily bonus drops.</p>
-                    <div class="bg-slate-900/50 p-3 rounded-lg text-xs text-slate-400 border border-slate-800 mb-4">
-                        <div class="flex items-center justify-between gap-2 mb-1">
-                            <span class="text-amber-500 font-bold block text-sm">🎁 Highlight Offer</span>
-                            <span class="inline-flex items-center gap-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded border border-emerald-500/20">Referral Bonus Active</span>
-                        </div>
-                        <span>Claim exclusive welcome Gold Coins and Sweeps Coins upon initial registration.</span>
-                    </div>
-                    <div class="text-xs text-slate-400 space-y-1">
-                        <p><strong class="text-slate-200">Bonus Terms:</strong> 18+ US residents (excl. restricted states).</p>
-                        <p><strong class="text-slate-200">Redemption:</strong> Secure prize redemption options available.</p>
-                        <p><strong class="text-slate-200">Game Variety:</strong> 400+ titles with progressive prizes.</p>
-                    </div>
-                </div>
-                <div class="p-6 pt-0 space-y-3">
-                    <a href="winbonanza-review.html" class="text-blue-400 font-semibold text-xs hover:underline block">Read Full Review →</a>
-                    <a href="/go/win-bonanza?subid=card_winbonanza" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-colors">
-                        Play Now at Win Bonanza
-                    </a>
-                </div>
-            </article>
-        </div>
-    </main>
-
-    <!-- Review Submission Form -->
-    <section id="review-submission-box" class="max-w-xl mx-auto px-6 py-8 bg-slate-800/40 border border-slate-700/60 rounded-xl my-12 shadow-2xl" aria-labelledby="review-form-heading">
-        <h2 id="review-form-heading" class="text-xl font-bold text-white mb-2 flex items-center gap-2">
-            <span class="text-amber-500" aria-hidden="true">✍️</span> Share Your Platform Experience
-        </h2>
-        <p class="text-xs text-slate-400 mb-6 leading-relaxed">
-            Help keep our ecosystem transparent. Submit your objective evaluation of verification timelines and entry experiences. Submissions undergo compliance screening before publishing.
-        </p>
-
-        <div id="form-success" class="hidden bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4 text-xs text-emerald-400 mb-4" aria-live="polite">
-            🎉 <strong>Submission Logged Successfully!</strong> Your review has been routed to our compliance queue and will display once verified.
-        </div>
-        <div id="form-error" class="hidden bg-red-500/10 border border-red-500/30 rounded-lg p-4 text-xs text-red-400 mb-4" aria-live="assertive">
-            ⚠️ <strong>Unable to send review.</strong> Please check the form and try again.
-        </div>
-
-        <form id="publicReviewForm" novalidate class="space-y-4 text-xs" aria-label="Submit a public review">
-            <div>
-                <label class="block font-semibold text-slate-300 mb-1" for="userEmail">Associated Email Address</label>
-                <input type="email" id="userEmail" name="userEmail" required autocomplete="email" class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-slate-100 focus:outline-none focus:border-blue-500 transition-colors">
-            </div>
-            <div>
-                <label class="block font-semibold text-slate-300 mb-1" for="brandName">Target Social Gaming Platform</label>
-                <select id="brandName" name="brandName" required class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-slate-100 focus:outline-none focus:border-blue-500 transition-colors">
-                    <option value="">Select Brand</option>
-                    <option value="Sportzino">Sportzino</option>
-                    <option value="Fortune Coins">Fortune Coins</option>
-                    <option value="Zula Casino">Zula Casino</option>
-                    <option value="LuckParty">LuckParty</option>
-                    <option value="AmericanLuck">AmericanLuck</option>
-                </select>
-            </div>
-            <div>
-                <label class="block font-semibold text-slate-300 mb-1" for="reviewText">Objective Commentary</label>
-                <textarea id="reviewText" name="reviewText" required rows="4" minlength="25" maxlength="600" class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-slate-100 focus:outline-none focus:border-blue-500 transition-colors"></textarea>
-            </div>
-            <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 px-4 rounded-lg transition-all shadow-lg shadow-blue-600/20 active:scale-[0.99] disabled:opacity-70 disabled:cursor-not-allowed">
-                Submit to Compliance Queue
-            </button>
-        </form>
-    </section>
-
-    <!-- Verified Reviews Section -->
-    <section id="approved-reviews-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-slate-800">
-        <h2 class="text-2xl font-bold text-white mb-6 border-l-4 border-emerald-500 pl-3">Verified Player Reviews</h2>
-        <div id="publicReviewsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <p class="text-slate-400 text-xs col-span-full">Loading verified reviews...</p>
-        </div>
-    </section>
-
-    <!-- Transactional Keyword & Search Intent Content Section -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-slate-800">
-        <h2 class="text-2xl font-bold text-white mb-6 border-l-4 border-amber-500 pl-3">
-            Top Sweepstakes Casino Bonuses & No Purchase Necessary Rules (2026)
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-300 leading-relaxed">
-            <div class="bg-slate-800/40 p-5 rounded-xl border border-slate-800">
-                <h3 class="font-bold text-amber-400 text-sm mb-2">How Sweepstakes Casino Promo Codes Work</h3>
-                <p>Most modern <strong>No Purchase Necessary sweepstakes platforms</strong> do not require manual bonus coupon entries during registration. Clicking a verified partner claim link automatically attaches the signup offer.</p>
-            </div>
-            <div class="bg-slate-800/40 p-5 rounded-xl border border-slate-800">
-                <h3 class="font-bold text-amber-400 text-sm mb-2">No Purchase Necessary Legal Guarantee</h3>
-                <p>Under US promotional sweepstakes law, top-rated platforms must offer genuine free entry alternatives (AMOE). Players can earn real prize-redeemable Sweeps Coins via daily login streaks and social engagement.</p>
-            </div>
-            <div class="bg-slate-800/40 p-5 rounded-xl border border-slate-800">
-                <h3 class="font-bold text-amber-400 text-sm mb-2">Maximizing 2026 Signup Offers</h3>
-                <p>To maximize your initial Sweeps Coin balance, complete all optional account setup steps—including SMS verification and daily login wheel spins—immediately after signing up. Combining free-entry methods often increases your long-term reward profile.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="responsible-gaming" class="bg-slate-950 border-t border-slate-800 py-12 text-slate-500 text-xs">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-            <div class="bg-red-500/10 border border-red-500/30 p-6 rounded-lg">
-                <p class="max-w-3xl mx-auto leading-relaxed text-sm text-slate-300 mb-4">
-                    <strong>⚠️ Responsible Gaming Notice:</strong> Social casinos are built strictly for entertainment purposes only. Always track your gameplay hours and keep interactions casual, balanced, and in check.
-                </p>
-                <p class="text-xs text-slate-400">Remember: You can only play responsibly if you stay in control. Set limits. Take breaks. Seek help if needed.</p>
-            </div>
-            <div class="border-t border-slate-800 pt-6 text-center">
-                <p class="text-slate-500 text-xs">&copy; 2026 Sweeps Review Hub. All rights reserved.</p>
-                <p class="text-slate-600 text-xs mt-2">
-                    <a href="compliance.html" class="text-blue-400 hover:text-blue-300 underline">Compliance & Legal</a> • <a href="admin.html" class="text-blue-400 hover:text-blue-300 underline">Admin Portal</a> • <a href="#" class="text-blue-400 hover:text-blue-300 underline">Privacy Policy</a> • <a href="#" class="text-blue-400 hover:text-blue-300 underline">Terms of Service</a>
-                </p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Cookie Consent Modal -->
     <div id="cookieConsent" class="fixed bottom-4 right-4 bg-slate-800 border border-slate-700 rounded-lg shadow-2xl p-6 max-w-sm z-50 hidden" role="dialog" aria-labelledby="cookieTitle">
         <div class="flex justify-between items-start mb-3">
             <h3 id="cookieTitle" class="font-bold text-white text-sm">Cookie & Privacy Notice</h3>
             <button id="cookieClose" class="text-slate-400 hover:text-white text-lg leading-none" aria-label="Close cookie consent">&times;</button>
         </div>
-        <p class="text-xs text-slate-400 mb-4">
-            We use cookies to enhance your experience, analyze site traffic, and serve personalized content.
-        </p>
+        <p class="text-xs text-slate-400 mb-4">We use cookies to enhance your experience, analyze site traffic, and serve personalized content.</p>
         <div class="flex gap-3 mb-3">
             <button id="cookieAccept" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-medium py-2 px-3 rounded text-xs transition-colors">Accept All</button>
             <button id="cookieDecline" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-medium py-2 px-3 rounded text-xs transition-colors">Decline</button>
