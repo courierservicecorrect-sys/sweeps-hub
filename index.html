@@ -668,94 +668,77 @@
         }
 
         async function handleReviewSubmit(event) {
-            event.preventDefault();
+  event.preventDefault();
 
-            if (!_supabase) {
-                setNotice('error', '⚠️ Reviews are temporarily unavailable. The database client could not initialize.');
-                return;
-            }
+  if (!validateReviewForm()) return;
 
-            if (!validateReviewForm()) return;
+  const submitBtn = document.getElementById('submitBtn');
+  const form = document.getElementById('publicReviewForm');
+  if (!submitBtn || !form) return;
 
-            const submitBtn = document.getElementById('submitBtn');
-            const form = document.getElementById('publicReviewForm');
-            if (!submitBtn || !form) return;
+  const lastSubmission = Number(safeStorageGet('local', 'sh_last_review_submit') || '0');
+  if (Date.now() - lastSubmission < 30000) {
+    setNotice('error', '⚠️ Please wait a moment before submitting another review.');
+    announceValidation('Rate limit reached. Please wait 30 seconds before resubmitting.');
+    return;
+  }
 
-            const lastSubmission = Number(safeStorageGet('local', 'sh_last_review_submit') || '0');
-            if (Date.now() - lastSubmission < 30000) {
-                setNotice('error', '⚠️ Please wait a moment before submitting another review.');
-                announceValidation('Rate limit reached. Please wait 30 seconds before resubmitting.');
-                return;
-            }
+  submitBtn.disabled = true;
+  submitBtn.innerText = 'Sending...';
+  setNotice('error', '');
 
-            submitBtn.disabled = true;
-            submitBtn.innerText = 'Sending...';
-            setNotice('error', '');
+  const email = document.getElementById('userEmail').value.trim();
+  const brand = document.getElementById('brandName').value.trim();
+  const comment = document.getElementById('reviewText').value.trim();
 
-            const email = document.getElementById('userEmail').value.trim();
-            const brand = document.getElementById('brandName').value.trim();
-            const comment = document.getElementById('reviewText').value.trim();
+  try {
+    const response = await fetch('/api/reviews', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email,
+        brand,
+        comment
+      })
+    });
 
-            try {
-                const payload = {
-                    brand_name: brand,
-                    user_email: email,
-                    review_text: comment,
-                    status: 'pending'
-                };
+    const result = await response.json();
 
-                const { error } = await _supabase
-                    .from('public_reviews')
-                    .insert([{ ...payload }])
-                    .select();
+    if (!response.ok) {
+      throw new Error(result.error || 'Unable to submit review.');
+    }
 
-                if (error) {
-                    const message = (error.message || '').toLowerCase();
-                    const code = String(error.code || '');
+    safeStorageSet('local', 'sh_last_review_submit', String(Date.now()));
+    form.reset();
+    clearFieldState();
+    setNotice('success', '🎉 Submission Logged Successfully! Your review has been routed to our compliance queue and will display once verified.');
+    announceValidation('Review submitted successfully and queued for moderation.');
+    if (window.gtag) {
+      window.gtag('event', 'review_submission', {
+        brand_name: brand,
+        status: 'queued'
+      });
+    }
+    submitBtn.innerText = 'Submission Logged';
+    setTimeout(() => {
+      submitBtn.disabled = false;
+      submitBtn.innerText = 'Submit to Compliance Queue';
+    }, 3000);
+  } catch (error) {
+    console.error('Review submit error:', error);
+    const message = (error && error.message ? error.message : '').toLowerCase();
+    const friendlyMessage = message.includes('duplicate')
+      ? '⚠️ Duplicate submission detected. Please wait a moment before trying again.'
+      : '⚠️ Unable to send your review. Please check your connection and try again.';
 
-                    if (message.includes('does not exist') || message.includes('relation') || message.includes('not found') || message.includes('table') || code === '42P01' || code === '42703') {
-                        throw new Error('Review queue unavailable');
-                    }
-
-                    if (message.includes('duplicate') || message.includes('already exists') || code === '23505') {
-                        throw new Error('Duplicate review submission');
-                    }
-
-                    throw error;
-                }
-
-                safeStorageSet('local', 'sh_last_review_submit', String(Date.now()));
-                form.reset();
-                clearFieldState();
-                setNotice('success', '🎉 Submission Logged Successfully! Your review has been routed to our compliance queue and will display once verified.');
-                announceValidation('Review submitted successfully and queued for moderation.');
-                if (window.gtag) {
-                    window.gtag('event', 'review_submission', {
-                        brand_name: brand,
-                        status: 'queued'
-                    });
-                }
-                submitBtn.innerText = 'Submission Logged';
-                setTimeout(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = 'Submit to Compliance Queue';
-                }, 3000);
-            } catch (error) {
-                console.error('Supabase Error:', error);
-                const message = (error && error.message ? error.message : '').toLowerCase();
-                const friendlyMessage = message.includes('review queue unavailable')
-                    ? '⚠️ The review queue is temporarily unavailable. Please try again in a few minutes.'
-                    : message.includes('duplicate') || message.includes('already exists') || message.includes('duplicate review submission')
-                        ? '⚠️ Duplicate submission detected. Please wait a moment before trying again.'
-                        : '⚠️ Unable to send your review. Please check your connection and try again.';
-
-                setNotice('error', friendlyMessage);
-                announceValidation(friendlyMessage);
-                submitBtn.disabled = false;
-                submitBtn.innerText = 'Submit to Compliance Queue';
-            }
-        }
-
+    setNotice('error', friendlyMessage);
+    announceValidation(friendlyMessage);
+    submitBtn.disabled = false;
+    submitBtn.innerText = 'Submit to Compliance Queue';
+  }
+}
         function escapeHtml(str) {
             return (str || '').replace(/[&<>"']/g, match => ({
                 '&': '&amp;',
