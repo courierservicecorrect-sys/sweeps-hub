@@ -827,18 +827,20 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            loadApprovedReviews();
-            const form = document.getElementById('publicReviewForm');
-            if (form) {
-                form.addEventListener('submit', handleReviewSubmit);
-                form.addEventListener('input', function () {
-                    if (document.getElementById('review-form-errors')?.textContent.trim()) {
-                        clearFieldState();
-                    }
-                });
-            }
-        });
+          document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('publicReviewForm');
+    if (form) {
+      form.addEventListener('submit', handleReviewSubmit);
+      form.addEventListener('input', function () {
+        if (document.getElementById('review-form-errors')?.textContent.trim()) {
+          clearFieldState();
+        }
+      });
+    }
+
+    loadApprovedReviews();
+  });
+
 
         // SubID Tracking & Link Cloaking Parameter Handler
         (function () {
