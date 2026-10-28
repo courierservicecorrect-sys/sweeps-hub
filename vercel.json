@@ -49,6 +49,18 @@
       "destination": "/zula-review.html"
     },
     {
+      "source": "/winbonanza-review",
+      "destination": "/winbonanza-review.html"
+    },
+    {
+      "source": "/luckparty-review",
+      "destination": "/luckparty-review.html"
+    },
+    {
+      "source": "/americanluck-review",
+      "destination": "/americanluck-review.html"
+    },
+    {
       "source": "/compliance",
       "destination": "/compliance.html"
     },
