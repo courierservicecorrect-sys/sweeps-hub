@@ -5,14 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Review Moderation - Sweeps Review Hub</title>
     
-    <!-- Google Analytics GA4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J9D9QXHKQ0"></script>
+    <!-- Google Tag Manager -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-J9D9QXHKQ0');
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:''; j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WK6R8454');
     </script>
+    <!-- End Google Tag Manager -->
 
     <!-- Tailwind CSS & Supabase JS v2 -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -50,46 +47,3 @@
 
         <!-- Moderation Queue (Shown when authenticated) -->
         <div id="dashboardSection" class="hidden space-y-6">
-            <div class="flex justify-between items-center">
-                <h2 class="text-xl font-semibold text-white">Pending Submissions Queue</h2>
-                <button onclick="fetchPendingReviews()" class="bg-blue-600/20 text-blue-400 hover:bg-blue-600/30 text-xs py-1.5 px-3 rounded border border-blue-500/30 transition-colors">
-                    ↻ Refresh Queue
-                </button>
-            </div>
-
-            <div id="reviewsContainer" class="space-y-4">
-                <p class="text-slate-400 text-xs">Loading queue...</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Application Script Logic -->
-    <script>
-  function showDashboard() {
-    document.getElementById('authSection').classList.add('hidden');
-    document.getElementById('dashboardSection').classList.remove('hidden');
-    document.getElementById('logoutBtn').classList.remove('hidden');
-    fetchPendingReviews();
-  }
-
-  function displayAuthMessage(msg, isError) {
-    const authMessage = document.getElementById('authMessage');
-    if (!msg) {
-      authMessage.classList.add('hidden');
-      return;
-    }
-    authMessage.innerText = msg;
-    authMessage.className = `text-xs mt-3 block ${isError ? 'text-red-400' : 'text-emerald-400'}`;
-  }
-
-  function escapeHtml(str) {
-    return (str || '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
-  }
-</script>
-</body>
-</html>
