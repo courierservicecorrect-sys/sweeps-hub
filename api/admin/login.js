@@ -3,12 +3,13 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed.' });
   }
 
-  const email = String(req.body?.email || '').trim();
-  const password = String(req.body?.password || '');
+  const body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
+  const email = String(body.email || '').trim();
+  const password = String(body.password || '');
 
   const expectedEmail = process.env.ADMIN_EMAIL;
   const expectedPassword = process.env.ADMIN_PASSWORD;
-
+  
   if (!expectedEmail || !expectedPassword) {
     return res.status(503).json({ error: 'Admin login is not configured.' });
   }
