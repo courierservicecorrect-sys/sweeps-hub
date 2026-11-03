@@ -1,5 +1,17 @@
 const { createClient } = require('@supabase/supabase-js');
 
+function parseRequestBody(body) {
+  if (typeof body === 'string') {
+    return JSON.parse(body || '{}');
+  }
+
+  if (Buffer.isBuffer(body)) {
+    return JSON.parse(body.toString('utf8') || '{}');
+  }
+
+  return body || {};
+}
+
 function parseCookies(header) {
   if (!header) return {};
   return Object.fromEntries(
@@ -19,12 +31,22 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed.' });
   }
 
+  let payload;
+  try {
+    payload = parseRequestBody(req.body);
+  } catch {
+    return res.status(400).json({ error: 'Invalid request body.' });
+  }
+
+  if (typeof payload !== 'object' || Array.isArray(payload)) {
+    return res.status(400).json({ error: 'Invalid request body.' });
+  }
+
   const cookies = parseCookies(req.headers.cookie || '');
   if (cookies.admin_session !== 'authenticated') {
     return res.status(401).json({ error: 'Unauthorized.' });
   }
 
-  const payload = req.body || {};
   const action = String(payload.action || '').trim();
 
   if (action === 'list') {
