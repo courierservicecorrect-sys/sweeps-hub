@@ -5,7 +5,10 @@ const allowedBrands = new Set([
   'Fortune Coins',
   'Zula Casino',
   'LuckParty',
-  'AmericanLuck'
+  'AmericanLuck',
+  'Fortune Wins',
+  'Win Bonanza',
+  'YayCasino'
 ]);
 
 function send(res, statusCode, payload) {
