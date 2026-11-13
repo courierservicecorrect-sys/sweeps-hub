@@ -1,4 +1,5 @@
 const { createClient } = require('@supabase/supabase-js');
+const { isSessionSecretConfigured, isValidSessionToken } = require('./session');
 
 function parseRequestBody(body) {
   if (typeof body === 'string') {
@@ -20,9 +21,12 @@ function parseCookies(header) {
       .map(part => part.trim())
       .filter(Boolean)
       .map(part => {
-        const [key, ...valueParts] = part.split('=');
-        return [key, decodeURIComponent(valueParts.join('='))];
+        const separator = part.indexOf('=');
+        return separator < 0
+          ? null
+          : [part.slice(0, separator), part.slice(separator + 1)];
       })
+      .filter(Boolean)
   );
 }
 
@@ -42,8 +46,13 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid request body.' });
   }
 
+  const sessionSecret = process.env.ADMIN_SESSION_SECRET;
+  if (!isSessionSecretConfigured(sessionSecret)) {
+    return res.status(503).json({ error: 'Admin authentication is not configured.' });
+  }
+
   const cookies = parseCookies(req.headers.cookie || '');
-  if (cookies.admin_session !== 'authenticated') {
+  if (!isValidSessionToken(cookies.admin_session, sessionSecret)) {
     return res.status(401).json({ error: 'Unauthorized.' });
   }
 

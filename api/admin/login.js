@@ -1,3 +1,9 @@
+const {
+  SESSION_TTL_SECONDS,
+  createSessionToken,
+  isSessionSecretConfigured
+} = require('./session');
+
 function parseRequestBody(body) {
   if (typeof body === 'string') {
     return JSON.parse(body || '{}');
@@ -31,8 +37,9 @@ module.exports = async function handler(req, res) {
 
   const expectedEmail = process.env.ADMIN_EMAIL;
   const expectedPassword = process.env.ADMIN_PASSWORD;
+  const sessionSecret = process.env.ADMIN_SESSION_SECRET;
 
-  if (!expectedEmail || !expectedPassword) {
+  if (!expectedEmail || !expectedPassword || !isSessionSecretConfigured(sessionSecret)) {
     return res.status(503).json({ error: 'Admin login is not configured.' });
   }
 
@@ -42,7 +49,7 @@ module.exports = async function handler(req, res) {
 
   res.setHeader(
     'Set-Cookie',
-    'admin_session=authenticated; Path=/; HttpOnly; SameSite=Lax; Secure; Max-Age=3600'
+    `admin_session=${createSessionToken(sessionSecret)}; Path=/; HttpOnly; SameSite=Lax; Secure; Max-Age=${SESSION_TTL_SECONDS}`
   );
 
   return res.status(200).json({ success: true });
