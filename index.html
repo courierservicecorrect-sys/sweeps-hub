@@ -424,10 +424,11 @@
                 <select id="brandName" required aria-invalid="false" aria-describedby="brandNameHelp" class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-slate-100 focus:outline-none focus:border-blue-500">
                     <option value="">Select Brand</option>
                     <option value="Sportzino">Sportzino</option>
-                    <option value="Fortune Coins">Fortune Coins</option>
+                    <option value="Fortune Wins">Fortune Wins</option>
                     <option value="Zula Casino">Zula Casino</option>
-                    <option value="LuckParty">LuckParty</option>
+                    <option value="Win Bonanza">Win Bonanza</option>
                     <option value="AmericanLuck">AmericanLuck</option>
+                    <option value="LuckParty">LuckParty</option>
                 </select>
                 <p id="brandNameHelp" class="mt-1 text-[10px] text-slate-400">Choose a supported brand from the list.</p>
             </div>
@@ -452,7 +453,7 @@
     </section>
 
     <!-- Transactional Keyword & Search Intent Content Section -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-slate-800">
+    ​<section id="how-it-works" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-slate-800">
         <h2 class="text-2xl font-bold text-white mb-6 border-l-4 border-amber-500 pl-3">
             Top Sweepstakes Casino Bonuses & No Purchase Necessary Rules (2026)
         </h2>
@@ -489,45 +490,185 @@
             </div>
         </div>
     </footer>
-
+        <!-- Cookie Consent Modal -->
+    <div id="cookieConsent" class="fixed bottom-4 right-4 bg-slate-800 border border-slate-700 rounded-lg shadow-2xl p-6 max-w-sm z-50 hidden" role="dialog" aria-labelledby="cookieTitle">
+        <div class="flex justify-between items-start mb-3">
+            <h3 id="cookieTitle" class="font-bold text-white text-sm">Cookie & Privacy Notice</h3>
+            <button id="cookieClose" class="text-slate-400 hover:text-white text-lg leading-none" aria-label="Close cookie consent">&times;</button>
+        </div>
+        <p class="text-xs text-slate-400 mb-4">
+            We use cookies to enhance your experience, analyze site traffic, and serve personalized content. By continuing to browse, you agree to our cookie use and privacy practices.
+        </p>
+        <div class="flex gap-3 mb-3">
+            <button id="cookieAccept" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-medium py-2 px-3 rounded text-xs transition-colors">Accept All</button>
+            <button id="cookieDecline" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-medium py-2 px-3 rounded text-xs transition-colors">Decline</button>
+        </div>
+        <p class="text-xs text-slate-500 text-center">
+            <a href="compliance.html" class="text-blue-400 hover:text-blue-300 underline">Privacy & Cookie Policy</a>
+        </p>
+    </div>
     <script src="cookie-tracker.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <script>
-        document.getElementById('mobileMenuBtn')?.addEventListener('click', function () {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const isExpanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', !isExpanded);
-            mobileMenu?.classList.toggle('hidden');
-        });
+    // 1. Mobile Navigation Toggle
+    document.getElementById('mobileMenuBtn')?.addEventListener('click', function () {
+        const mobileMenu = document.getElementById('mobileMenu');
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
+        mobileMenu?.classList.toggle('hidden');
+    });
 
-        (function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            const trafficSource = urlParams.get('utm_source') || urlParams.get('ref') || (document.referrer ? new URL(document.referrer).hostname : 'direct');
-            if (!sessionStorage.getItem('sh_source')) {
-                sessionStorage.setItem('sh_source', trafficSource.replace(/[^a-zA-Z0-9_-]/g, ''));
-            }
-            const savedSource = sessionStorage.getItem('sh_source') || 'direct';
-            document.addEventListener('DOMContentLoaded', function () {
-                document.querySelectorAll('a[href^="/go/"]').forEach(function (link) {
-                    const linkUrl = new URL(link.getAttribute('href'), window.location.origin);
-                    const currentSubId = linkUrl.searchParams.get('subid') || 'general';
-                    const finalSubId = `${currentSubId}_${savedSource}`;
-                    linkUrl.searchParams.set('subid', finalSubId);
-                    link.setAttribute('href', linkUrl.pathname + linkUrl.search);
-                    link.addEventListener('click', function () {
-                        window.dataLayer = window.dataLayer || [];
-                        window.dataLayer.push({
-                            event: 'affiliate_click',
-                            affiliate_url: linkUrl.href,
-                            affiliate_platform: 'affiliate',
-                            affiliate_subid: finalSubId,
-                            affiliate_label: link.textContent.trim()
-                        });
-                    }, { passive: true });
-                });
+    // 2. Supabase Initialization (Verify full untruncated anon key)
+    const SUPABASE_URL = "https://ssspyccbehzzvwqgjpkh.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzc3B5Y2NiZWh6enZ3cWdqcGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMDgwMzcsImV4cCI6MjEwNTg4NDAzN30.3dQor84oyf4HR65ZRPSGz13RpESvHNzHVPUM7gh2M6I";
+    const _supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    // 3. Review Form Submission Handler
+    document.getElementById('publicReviewForm')?.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        const submitBtn = document.getElementById('submitBtn');
+        const successAlert = document.getElementById('form-success');
+        const errorAlert = document.getElementById('form-error');
+
+        successAlert.classList.add('hidden');
+        errorAlert.classList.add('hidden');
+
+        const email = document.getElementById('userEmail').value.trim();
+        const brand = document.getElementById('brandName').value.trim();
+        const comment = document.getElementById('reviewText').value.trim();
+
+        if (!email || !brand || comment.length < 25) {
+            errorAlert.innerHTML = '⚠️ <strong>Validation Error:</strong> Please enter a valid email, select a brand, and write at least 25 characters.';
+            errorAlert.classList.remove('hidden');
+            return;
+        }
+
+        if (!_supabase) {
+            errorAlert.innerHTML = '⚠️ <strong>Connection Error:</strong> Database client not initialized.';
+            errorAlert.classList.remove('hidden');
+            return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Sending...";
+
+        const { error } = await _supabase
+            .from('public_reviews')
+            .insert([{ brand_name: brand, user_email: email, review_text: comment, status: 'pending' }]);
+
+        if (error) {
+            console.error("Supabase Error:", error.message);
+            errorAlert.innerHTML = '⚠️ <strong>Submission Failed:</strong> Unable to dispatch payload. Please try again.';
+            errorAlert.classList.remove('hidden');
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Submit to Compliance Queue";
+        } else {
+            successAlert.innerHTML = '🎉 <strong>Submission Logged Successfully!</strong> Your review has been routed to our compliance queue and will display once verified.';
+            successAlert.classList.remove('hidden');
+            this.reset();
+            submitBtn.innerText = "Submission Logged";
+            setTimeout(() => {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Submit to Compliance Queue";
+            }, 3000);
+        }
+    });
+
+    // 4. Load Approved Public Reviews
+    async function loadApprovedReviews() {
+        const container = document.getElementById('publicReviewsContainer');
+        if (!container) return;
+        if (!_supabase) {
+            container.innerHTML = '<p class="text-slate-400 text-xs col-span-full">Database connection error.</p>';
+            return;
+        }
+
+        const { data: reviews, error } = await _supabase
+            .from('public_reviews')
+            .select('brand_name, user_email, review_text, created_at')
+            .eq('status', 'approved')
+            .order('created_at', { ascending: false });
+
+        if (error) {
+            console.error('Error fetching approved reviews:', error.message);
+            container.innerHTML = '<p class="text-slate-400 text-xs col-span-full">Unable to load community reviews at this time.</p>';
+            return;
+        }
+
+        if (!reviews || reviews.length === 0) {
+            container.innerHTML = '<p class="text-slate-400 text-xs col-span-full">No verified community reviews published yet.</p>';
+            return;
+        }
+
+        container.innerHTML = reviews.map(review => {
+            const emailStr = review.user_email || 'user@example.com';
+            const parts = emailStr.split('@');
+            const username = parts[0] || 'u';
+            const domain = parts[1] || 'domain.com';
+            const obfuscatedEmail = username.charAt(0) + '***' + (username.length > 1 ? username.slice(-1) : '') + '@' + domain;
+            const formattedDate = review.created_at ? new Date(review.created_at).toLocaleDateString() : 'Recent';
+
+            return `
+                <div class="bg-slate-800/60 p-5 rounded-xl border border-slate-700/80 shadow-lg flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="font-bold text-white text-sm">${escapeHtml(review.brand_name)}</span>
+                            <span class="bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded border border-emerald-500/20">Verified Player</span>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed mb-4">${escapeHtml(review.review_text)}</p>
+                    </div>
+                    <div class="text-[10px] text-slate-400 border-t border-slate-700/50 pt-2 flex justify-between">
+                        <span>${obfuscatedEmail}</span>
+                        <span>${formattedDate}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    // 5. SubID Tracking & GTM Click Event Handler
+    (function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const trafficSource = urlParams.get('utm_source') || urlParams.get('ref') || (document.referrer ? new URL(document.referrer).hostname : 'direct');
+        if (!sessionStorage.getItem('sh_source')) {
+            sessionStorage.setItem('sh_source', trafficSource.replace(/[^a-zA-Z0-9_-]/g, ''));
+        }
+        const savedSource = sessionStorage.getItem('sh_source') || 'direct';
+
+        document.addEventListener('DOMContentLoaded', function () {
+            loadApprovedReviews();
+
+            document.querySelectorAll('a[href^="/go/"]').forEach(function (link) {
+                const linkUrl = new URL(link.getAttribute('href'), window.location.origin);
+                const currentSubId = linkUrl.searchParams.get('subid') || 'general';
+                const finalSubId = `${currentSubId}_${savedSource}`;
+                linkUrl.searchParams.set('subid', finalSubId);
+                link.setAttribute('href', linkUrl.pathname + linkUrl.search);
+
+                link.addEventListener('click', function () {
+                    window.dataLayer = window.dataLayer || [];
+                    window.dataLayer.push({
+                        event: 'affiliate_click',
+                        affiliate_url: linkUrl.href,
+                        affiliate_platform: 'affiliate',
+                        affiliate_subid: finalSubId,
+                        affiliate_label: link.textContent.trim()
+                    });
+                }, { passive: true });
             });
-        })();
-    </script>
+        });
+    })();
+</script>
 </body>
 </html>
