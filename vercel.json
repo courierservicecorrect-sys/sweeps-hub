@@ -38,35 +38,35 @@
   "rewrites": [
     {
       "source": "/sportzino-review",
-      "destination": "/sportzino-review.html"
+      "destination": "/sportzino-review"
     },
     {
       "source": "/fortunewins-review",
-      "destination": "/fortunewins-review.html"
+      "destination": "/fortunewins-review"
     },
     {
       "source": "/zula-review",
-      "destination": "/zula-review.html"
+      "destination": "/zula-review"
     },
     {
       "source": "/winbonanza-review",
-      "destination": "/winbonanza-review.html"
+      "destination": "/winbonanza-review"
     },
     {
       "source": "/luckparty-review",
-      "destination": "/luckparty-review.html"
+      "destination": "/luckparty-review"
     },
     {
       "source": "/americanluck-review",
-      "destination": "/americanluck-review.html"
+      "destination": "/americanluck-review"
     },
     {
       "source": "/compliance",
-      "destination": "/compliance.html"
+      "destination": "/compliance"
     },
     {
       "source": "/admin",
-      "destination": "/admin.html"
+      "destination": "/admin"
     }
   ],
   "headers": [
