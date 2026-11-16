@@ -29,11 +29,11 @@ module.exports = async function handler(req, res) {
   let payload;
   try {
     payload = parseRequestBody(req.body);
-  } catch {
+  } catch (error) {
     return res.status(400).json({ error: 'Invalid request body.' });
   }
 
-  if (typeof payload !== 'object' || Array.isArray(payload)) {
+  if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
     return res.status(400).json({ error: 'Invalid request body.' });
   }
 
@@ -44,24 +44,22 @@ module.exports = async function handler(req, res) {
 
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  const adminEmail = (process.env.ADMIN_EMAIL || '').trim().toLowerCase();
+  const rawAdminEmail = process.env.ADMIN_EMAIL;
+  const adminEmail = (rawAdminEmail || '').trim().toLowerCase();
+  if (!adminEmail) { return res.status(503).json({ error: 'Admin email is not configured.' }); }
 
   if (!supabaseUrl || !supabaseKey) {
     return res.status(503).json({ error: 'Database is not configured.' });
   }
 
-  if (!adminEmail) {
-    return res.status(503).json({ error: 'Admin email is not configured.' });
-  }
-
   const supabase = createClient(supabaseUrl, supabaseKey);
 
-  const { data: { user }, error: authError } = await supabase.auth.getUser(jwt);
-  if (authError || !user || !user.email) {
+  const { data: authData, error: authError } = await supabase.auth.getUser(jwt);
+  if (authError || !authData?.user || !authData.user.email) {
     return res.status(401).json({ error: 'Unauthorized.' });
   }
 
-  if (user.email.toLowerCase() !== adminEmail) {
+  if (authData.user.email.toLowerCase() !== adminEmail) {
     return res.status(403).json({ error: 'Forbidden.' });
   }
 
@@ -89,13 +87,18 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'A valid review ID and status are required.' });
     }
 
-    const { error } = await supabase
+    const { error, data } = await supabase
       .from('public_reviews')
       .update({ status })
-      .eq('id', id);
+      .eq('id', id)
+      .select();
 
     if (error) {
       return res.status(500).json({ error: error.message || 'Unable to update review status.' });
+    }
+
+    if (!data || data.length === 0) {
+      return res.status(404).json({ error: 'Review not found.' });
     }
 
     return res.status(200).json({ success: true });
