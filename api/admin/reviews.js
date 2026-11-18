@@ -1,4 +1,5 @@
 const { createClient } = require('@supabase/supabase-js');
+const { isValidAdminSessionToken } = require('../../lib/admin-session');
 
 function parseCookies(header) {
   if (!header) return {};
@@ -20,7 +21,7 @@ module.exports = async function handler(req, res) {
   }
 
   const cookies = parseCookies(req.headers.cookie || '');
-  if (cookies.admin_session !== 'authenticated') {
+  if (!isValidAdminSessionToken(cookies.admin_session)) {
     return res.status(401).json({ error: 'Unauthorized.' });
   }
 

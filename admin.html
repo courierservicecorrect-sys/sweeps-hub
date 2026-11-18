@@ -4,27 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Review Moderation - Sweeps Review Hub</title>
-    
-    <!-- Google Analytics GA4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J9D9QXHKQ0"></script>
+    <!-- Google Tag Manager -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-J9D9QXHKQ0');
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:''; j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i; f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WK6R8454');
     </script>
+    <!-- End Google Tag Manager -->
 
     <!-- Tailwind CSS & Supabase JS v2 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen p-6">
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WK6R8454" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="max-w-5xl mx-auto">
         <!-- Header -->
         <header class="flex justify-between items-center border-b border-slate-800 pb-4 mb-8">
             <h1 class="text-2xl font-bold text-white">Review Moderation Dashboard</h1>
-            <button id="logoutBtn" onclick="handleLogout()" class="hidden bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 py-2 px-4 rounded border border-slate-700 transition-colors">
+            <button id="logoutBtn" type="button" class="hidden bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 py-2 px-4 rounded border border-slate-700 transition-colors">
                 Log Out
             </button>
         </header>
@@ -32,19 +29,20 @@
         <!-- Auth Form (Shown when logged out) -->
         <div id="authSection" class="max-w-md mx-auto bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl">
             <h2 class="text-lg font-bold text-white mb-4">Admin Authentication</h2>
+            <form id="adminLoginForm" class="space-y-4">
                 <div>
                     <label class="block text-xs font-semibold text-slate-300 mb-1" for="adminEmail">Admin Email</label>
-                    <input type="email" id="adminEmail" required class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500">
+                    <input type="email" id="adminEmail" name="email" autocomplete="username" required class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-slate-300 mb-1" for="adminPassword">Password</label>
-                    <input type="password" id="adminPassword" required class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500">
+                    <input type="password" id="adminPassword" name="password" autocomplete="current-password" required class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500">
                 </div>
                 <button type="submit" id="loginBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 px-4 rounded text-xs transition-colors">Log In</button>
                 <div class="text-right mt-2">
-                    <button type="button" onclick="handlePasswordReset()" class="text-[11px] text-blue-400 hover:underline focus:outline-none">Forgot Password?</button>
+                    <button type="button" id="passwordResetBtn" class="text-[11px] text-blue-400 hover:underline focus:outline-none">Forgot Password?</button>
                 </div>
-                <p id="authMessage" class="text-xs mt-3 hidden"></p>
+                <p id="authMessage" class="text-xs mt-3 hidden" aria-live="polite"></p>
             </form>
         </div>  
 
@@ -52,11 +50,12 @@
         <div id="dashboardSection" class="hidden space-y-6">
             <div class="flex justify-between items-center">
                 <h2 class="text-xl font-semibold text-white">Pending Submissions Queue</h2>
-                <button onclick="fetchPendingReviews()" class="bg-blue-600/20 text-blue-400 hover:bg-blue-600/30 text-xs py-1.5 px-3 rounded border border-blue-500/30 transition-colors">
+                <button id="refreshReviewsBtn" type="button" class="bg-blue-600/20 text-blue-400 hover:bg-blue-600/30 text-xs py-1.5 px-3 rounded border border-blue-500/30 transition-colors">
                     ↻ Refresh Queue
                 </button>
             </div>
 
+            <p id="queueMessage" class="hidden text-xs" role="status" aria-live="polite"></p>
             <div id="reviewsContainer" class="space-y-4">
                 <p class="text-slate-400 text-xs">Loading queue...</p>
             </div>
@@ -65,31 +64,232 @@
 
     <!-- Application Script Logic -->
     <script>
-  function showDashboard() {
-    document.getElementById('authSection').classList.add('hidden');
-    document.getElementById('dashboardSection').classList.remove('hidden');
-    document.getElementById('logoutBtn').classList.remove('hidden');
-    fetchPendingReviews();
-  }
+        const adminLoginForm = document.getElementById('adminLoginForm');
+        const loginBtn = document.getElementById('loginBtn');
+        const authMessage = document.getElementById('authMessage');
+        const queueMessage = document.getElementById('queueMessage');
+        const reviewsContainer = document.getElementById('reviewsContainer');
+        const refreshReviewsBtn = document.getElementById('refreshReviewsBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
 
-  function displayAuthMessage(msg, isError) {
-    const authMessage = document.getElementById('authMessage');
-    if (!msg) {
-      authMessage.classList.add('hidden');
-      return;
-    }
-    authMessage.innerText = msg;
-    authMessage.className = `text-xs mt-3 block ${isError ? 'text-red-400' : 'text-emerald-400'}`;
-  }
+        function displayAuthMessage(message, type = 'error') {
+            if (!message) {
+                authMessage.textContent = '';
+                authMessage.classList.add('hidden');
+                return;
+            }
 
-  function escapeHtml(str) {
-    return (str || '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
-  }
+            const textColor = type === 'error' ? 'text-red-400' : 'text-blue-400';
+            authMessage.textContent = message;
+            authMessage.className = `text-xs mt-3 block ${textColor}`;
+        }
+
+        function displayQueueMessage(message, type = 'error') {
+            if (!message) {
+                queueMessage.textContent = '';
+                queueMessage.classList.add('hidden');
+                return;
+            }
+
+            queueMessage.textContent = message;
+            queueMessage.className = `text-xs ${type === 'error' ? 'text-red-400' : 'text-blue-400'}`;
+        }
+
+        function showLogin() {
+            document.getElementById('authSection').classList.remove('hidden');
+            document.getElementById('dashboardSection').classList.add('hidden');
+            logoutBtn.classList.add('hidden');
+        }
+
+        function showDashboard() {
+            document.getElementById('authSection').classList.add('hidden');
+            document.getElementById('dashboardSection').classList.remove('hidden');
+            logoutBtn.classList.remove('hidden');
+            displayAuthMessage('');
+        }
+
+        async function adminRequest(path, payload) {
+            const response = await fetch(path, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'same-origin',
+                body: JSON.stringify(payload)
+            });
+            const result = await response.json();
+
+            if (!response.ok) {
+                const error = new Error(result.error || 'The admin request failed.');
+                error.status = response.status;
+                throw error;
+            }
+
+            return result;
+        }
+
+        function renderPendingReviews(reviews) {
+            if (reviews.length === 0) {
+                const emptyMessage = document.createElement('p');
+                emptyMessage.className = 'text-slate-400 text-xs';
+                emptyMessage.textContent = 'There are no pending reviews.';
+                reviewsContainer.replaceChildren(emptyMessage);
+                return;
+            }
+
+            const reviewCards = reviews.map((review) => {
+                const card = document.createElement('article');
+                card.dataset.reviewCard = '';
+                card.className = 'rounded-lg border border-slate-700 bg-slate-800 p-5 space-y-3';
+
+                const heading = document.createElement('div');
+                heading.className = 'flex flex-wrap items-center justify-between gap-2';
+
+                const brand = document.createElement('h3');
+                brand.className = 'font-semibold text-white';
+                brand.textContent = review.brand_name || 'Unspecified platform';
+
+                const submitted = document.createElement('p');
+                submitted.className = 'text-xs text-slate-400';
+                submitted.textContent = `${review.user_email || 'No email provided'} · ${review.created_at ? new Date(review.created_at).toLocaleString() : 'Date unavailable'}`;
+                heading.append(brand, submitted);
+
+                const reviewText = document.createElement('p');
+                reviewText.className = 'whitespace-pre-wrap break-words text-sm text-slate-300';
+                reviewText.textContent = review.review_text || '';
+
+                const actions = document.createElement('div');
+                actions.className = 'flex gap-2';
+                [
+                    { status: 'approved', label: 'Approve', style: 'bg-emerald-700 hover:bg-emerald-600' },
+                    { status: 'rejected', label: 'Reject', style: 'bg-red-700 hover:bg-red-600' }
+                ].forEach(({ status, label, style }) => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.dataset.reviewId = String(review.id);
+                    button.dataset.reviewStatus = status;
+                    button.className = `${style} rounded px-3 py-2 text-xs font-semibold text-white disabled:cursor-wait disabled:opacity-50`;
+                    button.textContent = label;
+                    actions.append(button);
+                });
+
+                card.append(heading, reviewText, actions);
+                return card;
+            });
+
+            reviewsContainer.replaceChildren(...reviewCards);
+        }
+
+        async function fetchPendingReviews() {
+            refreshReviewsBtn.disabled = true;
+            displayQueueMessage('');
+            const loadingMessage = document.createElement('p');
+            loadingMessage.className = 'text-slate-400 text-xs';
+            loadingMessage.textContent = 'Loading queue...';
+            reviewsContainer.replaceChildren(loadingMessage);
+
+            try {
+                const { reviews } = await adminRequest('/api/admin/reviews', { action: 'list' });
+                renderPendingReviews(reviews || []);
+            } catch (error) {
+                if (error.status === 401) {
+                    showLogin();
+                    displayAuthMessage('Your admin session has expired. Please sign in again.');
+                    return;
+                }
+                displayQueueMessage(error.message || 'Unable to load pending reviews.');
+                reviewsContainer.replaceChildren();
+            } finally {
+                refreshReviewsBtn.disabled = false;
+            }
+        }
+
+        async function handleLogin(event) {
+            event.preventDefault();
+            if (!adminLoginForm.reportValidity()) return;
+
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Signing in...';
+            displayAuthMessage('');
+
+            try {
+                const email = document.getElementById('adminEmail').value.trim();
+                const password = document.getElementById('adminPassword').value;
+                await adminRequest('/api/admin/login', { email, password });
+                adminLoginForm.reset();
+                showDashboard();
+                await fetchPendingReviews();
+            } catch (error) {
+                displayAuthMessage(error.message || 'Unable to sign in.');
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Log In';
+            }
+        }
+
+        async function handleLogout() {
+            logoutBtn.disabled = true;
+            try {
+                await adminRequest('/api/admin/logout', {});
+                showLogin();
+                adminLoginForm.reset();
+                displayAuthMessage('You have been signed out.', 'info');
+            } catch (error) {
+                displayQueueMessage(error.message || 'Unable to sign out.');
+            } finally {
+                logoutBtn.disabled = false;
+            }
+        }
+
+        function handlePasswordReset() {
+            displayAuthMessage('Password resets are managed by the site administrator. Contact them for help.', 'info');
+        }
+
+        async function handleReviewAction(event) {
+            const button = event.target.closest('button[data-review-id]');
+            if (!button || !reviewsContainer.contains(button)) return;
+
+            const { reviewId, reviewStatus } = button.dataset;
+            if (!reviewId || !['approved', 'rejected'].includes(reviewStatus)) return;
+
+            const actionButtons = button.closest('[data-review-card]').querySelectorAll('button');
+            actionButtons.forEach((actionButton) => {
+                actionButton.disabled = true;
+            });
+            displayQueueMessage('');
+
+            try {
+                await adminRequest('/api/admin/reviews', {
+                    action: 'update',
+                    id: reviewId,
+                    status: reviewStatus
+                });
+                await fetchPendingReviews();
+            } catch (error) {
+                displayQueueMessage(error.message || 'Unable to update the review.');
+                actionButtons.forEach((actionButton) => {
+                    actionButton.disabled = false;
+                });
+            }
+        }
+
+        async function restoreAdminSession() {
+            try {
+                const { reviews } = await adminRequest('/api/admin/reviews', { action: 'list' });
+                showDashboard();
+                renderPendingReviews(reviews || []);
+            } catch (error) {
+                showLogin();
+                if (error.status !== 401) {
+                    displayAuthMessage(error.message || 'Unable to verify the admin session.');
+                }
+            }
+        }
+
+        adminLoginForm.addEventListener('submit', handleLogin);
+        document.getElementById('passwordResetBtn').addEventListener('click', handlePasswordReset);
+        logoutBtn.addEventListener('click', handleLogout);
+        refreshReviewsBtn.addEventListener('click', fetchPendingReviews);
+        reviewsContainer.addEventListener('click', handleReviewAction);
+        restoreAdminSession();
 </script>
 </body>
 </html>
